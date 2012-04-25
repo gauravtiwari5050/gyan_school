@@ -34,4 +34,8 @@ GyanSchool::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  #app config
+  config.landing_page = 'http://lvh.me:3000'
+  config.url_suffix = '.lvh.me:3000'
 end
