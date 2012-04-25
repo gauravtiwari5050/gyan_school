@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
+	<title>CleanDream</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+	
+	
+	<!--[if lte IE 8]>
+		<script type="text/javascript" src="js/excanvas.min.js"></script>
+	<![endif]-->
+	
+</head>
+
+<body>
+
+<div class="container">   
+  
+	<div class="logo-labels">
+		<h1>CLOUDCLASS</h1>
+	</div>
+	
+	
+  <%=yield%>	
+	
+	
+	
+  
+	<div class="footer">
+		<div class="split">&#169; Copyright <a href="#">website.com</a></div> 
+		<div class="split right">Powered by <a href="http://themeforest.net/item/cleandream/490140" target="_blank">CleanDream</a></div> 
+	</div>
+</div>
+</body>
+
+</html> 
