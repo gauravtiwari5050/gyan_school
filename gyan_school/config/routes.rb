@@ -5,5 +5,7 @@ GyanSchool::Application.routes.draw do
   match 'login' => 'login#login'
   match 'login/school' => 'login#login_employee' ,:via => :post
   match 'login/student' => 'login#login_student' ,:via => :post
+  match 'home' => 'home#home'
+  match 'session/new' => 'home#session_new'
 
 end

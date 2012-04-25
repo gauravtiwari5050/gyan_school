@@ -1,0 +1,37 @@
+
+      #user_options {
+      padding:0px;
+      margin:0px;
+       margin-top:15px;
+      }
+    #user_options .option_buttons {
+        display:block;
+        float:left;
+        height:125px;width:125px;
+        margin-left:10px;
+        margin-top:20px;
+        outline:none;
+        text-align: center;
+        background-color: #F2F9FE;
+    border-color: #DCDFE3 #D0D4D8 #D0D4D8 #DCDFE3;
+    border-style: solid;
+    border-width: 1px;
+    color: #666666;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    }
+    #users_button {background:url(image_path('home-users.png')) 0 0 no-repeat;}
+    #settings_button {background: url(image_path('home-settings.png')) 0 0 no-repeat;}
+    #calendar_button {background: url(image_path('home-calendar.png')) 0 0 no-repeat;}
+    #reports_button {background: url(image_path('home-reports.png')) 0 0 no-repeat;}
+    #announcements_button {background:url(image_path('home-activity.png')) 0 0 no-repeat;}
+    #courses_button {background:url(image_path('home-courses.png')) 0 0 no-repeat;}
+    #departments_button {background:url(image_path('home-users.png')) 0 0 no-repeat;}
+
+      .button-box{
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        width: 140px;
+      }
+
