@@ -12,5 +12,6 @@ GyanSchool::Application.routes.draw do
   match 'session/:session_id/delete' => 'home#session_delete'
   match 'sessions/index' => 'home#session_index'
   match 'session/create' => 'home#session_create' ,:via => :post
+  match 'batch/new' => 'home#batch_create'
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502054042) do
+ActiveRecord::Schema.define(:version => 20120502140040) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_1"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(:version => 20120502054042) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "batches", :force => true do |t|
+    t.integer  "institute_id"
+    t.string   "name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "institute_sessions", :force => true do |t|
     t.integer  "institute_id"
     t.date     "start"
@@ -46,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20120502054042) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "sections", :force => true do |t|
+    t.integer  "batch_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "middle_name"
@@ -58,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20120502054042) do
     t.datetime "updated_at",     :null => false
     t.integer  "institute_id"
     t.string   "one_time_login"
+    t.string   "type"
   end
 
 end

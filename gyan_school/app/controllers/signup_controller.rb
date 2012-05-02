@@ -21,7 +21,7 @@ class SignupController < ApplicationController
         logger.error msg
         raise msg
       else
-        employee = User.new
+        employee = Admin.new
         employee.first_name = params[:first_name]
         employee.last_name = params[:last_name]
         employee.email = params[:contact_email]
