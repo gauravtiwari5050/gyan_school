@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  institute_id: 1
+  start: 2012-04-25
+  end: 2012-04-25
+  current: false
+
+two:
+  institute_id: 1
+  start: 2012-04-25
+  end: 2012-04-25
+  current: false

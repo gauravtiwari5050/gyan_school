@@ -1,0 +1,31 @@
+<div section="section">
+  <div class="full">
+    <div class="box">
+      <div class="title">
+        <h2> Create new Session for the institute</h2>
+      </div>
+
+      <div class="content forms">
+        <%= form_for(@institute_session,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+            <div class="line" style="border-top-style: none; border-top-width: initial; border-top-color: initial; ">
+              <%= f.label 'Session Starts' ,"Session Starts" %>
+              <%= f.text_field 'start',:class => "datepicker"  %>
+            </div>
+            <div class="line" style="border-top-style: none; border-top-width: initial; border-top-color: initial; ">
+              <%= f.label 'Session Ends' ,"Session End" %>
+              <%= f.text_field 'end',:class => "datepicker"  %>
+            </div>
+            <div class="line" style="border-top-style: none; border-top-width: initial; border-top-color: initial; ">
+              <button type="submit" class="green big" style="opacity: 0.7; "><span>Sumbit</span></button>
+              <%= f.label 'current' ,"Make this the current session" %>
+              <%= f.check_box 'current' %>
+            </div>
+           
+        <% end -%>
+        
+      </div>
+    </div>
+    
+  </div>
+  
+</div>

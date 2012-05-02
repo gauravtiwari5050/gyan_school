@@ -253,7 +253,7 @@ $(document).ready(function() {
     });
 	
 	$("input.datepicker").datepicker({
-		dateFormat: 'mm.dd.yy'
+		dateFormat: 'yy-mm-dd'
 	});
 	
 	$("input.timepicker").datetimepicker({});
