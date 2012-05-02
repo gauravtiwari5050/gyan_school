@@ -14,10 +14,14 @@
 			</div>
 			<div class="topMiddle">
 				<div class="topMiddleLinks">
-					<ul id="menu" class="menu">
-						<li class="backbg"><a href="#" title="Courses"><span>Courses</span></a>
-           </li>
             <% if current_user.user_type == 'ADMIN' %>
+					  <ul id="menu" class="menu">
+            <li class="backbg"><a href="#" title="Create"><span>Create</span></a>
+              <ul>
+                <li><span><a href="/session/new" class="headingsubmenu">Sessions</a></span></li>
+              </ul>
+            </li>
+            </li>
             <% end %>
             <% if current_user.user_type == 'TEACHER' %>
             <% end %>

@@ -1,31 +1,45 @@
-<div section="section">
-  <div class="full">
-    <div class="box">
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
       <div class="title">
         <h2> All sessions for your institute </h2>
       </div>
+      
+       <table class="table striped">
+        <thead>
+          <tr>
+            <th> Session Starts</th>
+            <th> Session Ends</th>
+            <th> Status</th>
+            <th> Edit</th>
+            <th> Delete</th>
 
-      <div class="content">
-       <table cellspacing="0" cellpadding="0" border="0" class="all">
-            <thead>
-              <tr>
-                <th>Session Starts</th>
-                <th>Session Ends</th>
-                <th>Current Session</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Published 123 123 123</td>
-                <td>26th August 2011</td>
-                <td>First, Lastname</td>
-              </tr>
-            </tbody>
+          </tr>
+          <tbody>
+           <% for session in @institute.institute_sessions -%>
+             
+            <tr>
+                <td><%= session.start.strftime("%B %d, %Y") %></td>
+                <td><%= session.end.strftime("%B %d, %Y") %></td>
+                <% if session.current == true %>
+                  <td>Current Session</td>
+                <%else%>
+                  <td></td>
+                <% end %>
+                <td> <%= link_to "Edit", "/session/"+session.id.to_s+"/edit",:class=>"btn btn-small btn-warning" %></td>
+                <td> <%= link_to "Delete", "/session/"+session.id.to_s+"/delete",:class=>"btn btn-small btn-danger" %></td>
+            </tr>
+           <% end -%>
+          </tbody>
+        </thead>
        </table>
-        
-      </div>
-    </div>
-    
-  </div>
+
   
-</div>
+<% end -%>

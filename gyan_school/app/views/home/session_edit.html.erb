@@ -13,7 +13,7 @@
       </div>
       <div class="content forms">
   <%= render :template => "shared/form-errors",:locals => {:form => @institute_session} %>
-        <%= form_for(@institute_session,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+        <%= form_for(@institute_session,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
           <fieldset>
             <div class="control-group">
               <%= f.label 'Session Starts' ,"Session Starts" ,:class=>"control-label" %>
