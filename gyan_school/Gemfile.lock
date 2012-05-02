@@ -4,6 +4,12 @@ GIT
   specs:
     impressionist (1.0.1)
 
+GIT
+  remote: https://github.com/ryanb/nested_form.git
+  revision: 63dcbcc6c6dbe07b3761ae8cc0cd04cc2a45024a
+  specs:
+    nested_form (0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -181,6 +187,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-themes (~> 0.0.4)
   mysql2 (~> 0.3.11)
+  nested_form!
   rails (= 3.2.1)
   recaptcha
   rscribd

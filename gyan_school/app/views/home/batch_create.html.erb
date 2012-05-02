@@ -1,0 +1,26 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+        <%= nested_form_for(@batch,:html =>{:class => 'form-vertical',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+         <fieldset> 
+            <div class="control-group">
+              <%= f.label 'Class Name' ,"Class Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'name' %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <p><%= f.link_to_add "Add a section", :sections %></p>
+            </div>
+          
+         </fieldset> 
+        <% end -%>
+<% end -%>

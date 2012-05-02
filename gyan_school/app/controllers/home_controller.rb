@@ -68,5 +68,9 @@ class HomeController < ApplicationController
 
     
   end
+
+  def batch_create
+    @batch = Batch.new
+  end
   
 end
