@@ -23,6 +23,22 @@ end
 
 gem 'jquery-rails'
 gem 'uuidtools'
+gem 'carrierwave'
+gem 'rscribd'
+gem "recaptcha", :require => "recaptcha/rails"
+gem "daemons"
+gem 'delayed_job_active_record'
+gem 'impressionist' ,:git => 'git://github.com/gauravtiwari5050/impressionist.git'
+gem 'execjs'
+gem 'therubyracer'
+gem 'fog'
+gem 'spreadsheet'
+gem "validates_existence", ">= 0.4"
+gem 'exception_notification'
+gem 'tinymce-rails'
+gem "jquery-ui-themes", "~> 0.0.4"
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425160456) do
+ActiveRecord::Schema.define(:version => 20120502054042) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_1"
@@ -30,20 +30,6 @@ ActiveRecord::Schema.define(:version => 20120425160456) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "employees", :force => true do |t|
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "emp_type"
-    t.string   "username"
-    t.string   "pass_hash"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-    t.integer  "institute_id"
-    t.string   "one_time_login"
-  end
-
   create_table "institute_sessions", :force => true do |t|
     t.integer  "institute_id"
     t.date     "start"
@@ -58,6 +44,20 @@ ActiveRecord::Schema.define(:version => 20120425160456) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "pass_hash"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "institute_id"
+    t.string   "one_time_login"
   end
 
 end

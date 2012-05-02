@@ -8,9 +8,9 @@ class LoginController < ApplicationController
     logger.info params.inspect
     pass_hash = md5_hash(params[:password])
     username_or_email = params[:user_name]
-    employee = Employee.find(:first,:conditions => {:institute_id => get_institute_id,:email => username_or_email,:pass_hash => pass_hash})
+    employee = User.find(:first,:conditions => {:institute_id => get_institute_id,:email => username_or_email,:pass_hash => pass_hash})
     if employee.nil?
-      employee = Employee.find(:first,:conditions => {:institute_id => get_institute_id,:username => username_or_email,:pass_hash => pass_hash})
+      employee = User.find(:first,:conditions => {:institute_id => get_institute_id,:username => username_or_email,:pass_hash => pass_hash})
       
     end
     respond_to do |format|

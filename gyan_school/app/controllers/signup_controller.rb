@@ -12,7 +12,7 @@ class SignupController < ApplicationController
    msg = ''
    institute = Institute.new
    begin
-    Employee.transaction do
+    User.transaction do
       institute.name = params[:institute_name]
       institute.url = params[:institute_url]
       persist_success = institute.save
@@ -21,11 +21,11 @@ class SignupController < ApplicationController
         logger.error msg
         raise msg
       else
-        employee = Employee.new
+        employee = User.new
         employee.first_name = params[:first_name]
         employee.last_name = params[:last_name]
         employee.email = params[:contact_email]
-        employee.emp_type = 'ADMIN'
+        employee.user_type = 'ADMIN'
         #employee.username = generate_user_name(params[:first_name],'',params[:last_name])
         employee.username = 'admin'
         employee.pass_hash = md5_hash(params[:password])
@@ -44,11 +44,15 @@ class SignupController < ApplicationController
     rescue Exception => e
         persist_success = false
         logger.error e.message
+        msg = e.message
     end
     respond_to do|format|
       if persist_success
+        #TODO change this
+        
         format.html {redirect_to('http://'+institute.url.to_s+'.lvh.me:3000/login')}
       else
+        flash[:error] = msg
         format.html {render :action => "signup"}
       end
     end

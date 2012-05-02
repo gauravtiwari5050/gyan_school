@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CloudClass</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+  <%= stylesheet_link_tag "signup" %>
+  <style type="text/css">
+   input, textarea, select, .uneditable-input { 
+    height: 26px;
+    width: 400px;
+   }
+   label, input, button, select, textarea {
+    font-size: 22px;
+   }
+   .signup-form {
+    padding-left: 73px;
+    padding-top: 20px; 
+   } 
+    h2 {
+    font-size: 30px; 
+   }
+   .login {
+    padding-left:10px;
+    margin-right:10px;
+    background-color:#F5F5F5;
+    border-radius: 6px 6px 6px 6px;
+    padding-top:10px;
+   }
+   .title {
+    border-bottom:2px solid;
+   }
+
+  </style>   
+  <%= javascript_include_tag "application" %>
+<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  <%= csrf_meta_tag %>
+
+  </head>
+
+  <body>
+	<div class="wrapper">
+		<!--top section starts -->
+		<div class="topWrapper">
+			   <div class="topSec">
+				<div class="topLeft">
+					<a href="/" class="homelogo" title="cloudclass"><img src=<%= asset_path 'home-logo.jpg' %> alt="cloudclass" /></a> 
+				</div>
+				<div class="topRight">
+					<ul class="topHomeLinks">
+					</ul>
+					<div class="spacer"></div>
+				</div>
+				<div class="spacer"></div>
+			</div>
+		</div>
+		<!--top section ends -->
+		<!--body content wrapper starts -->
+		<div class="mainWrapper" style="padding-top:50px;">
+      <div class="container" style="padding-top:20px;border-radius: 6px 6px 6px 6px;">
+        <div class="row">
+          <div class="span6">
+            <div class="login">
+              <%= yield :admin_login%>
+            </div>
+          </div>
+          <div class="span6">
+            <div class="login">
+              <%= yield :student_login%>
+            </div>
+            
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  </body>
+</html>

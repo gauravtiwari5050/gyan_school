@@ -1,0 +1,34 @@
+		<div class="topSec">
+			<div class="topLeft">
+				<a href="<%=get_home_for_user%>" class="logo" title="cloudclass"><img src=<%= asset_path "cloudclass-logo.png" %> alt="cloudclass" /></a>
+			</div>
+			<div class="topRight">
+				<div class="topRgtCont">
+					<p>Welcome <%= session[:user_name] %></p>
+					<ul class="topRgtLinks">
+						<li class="frist"><a href="<%= '/users/'+current_user.id.to_s+'/profile'%>" title="Profile">Profile</a></li>
+						<li><a href="/inbox" title="Inbox">Inbox</a></li>
+						<li><a href="/logout" title="Logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="topMiddle">
+				<div class="topMiddleLinks">
+					<ul id="menu" class="menu">
+						<li class="backbg"><a href="#" title="Courses"><span>Courses</span></a>
+           </li>
+            <% if current_user.user_type == 'ADMIN' %>
+            <% end %>
+            <% if current_user.user_type == 'TEACHER' %>
+            <% end %>
+            <% if current_user.user_type == 'STUDENT' %>
+            <% end %>
+
+						<li><a href="/calendar" title="Grades" class="grades">Calendar</a></li>
+						<li><a href="/library" title="Grades" class="grades">Library</a></li>
+                        
+					</ul>
+				</div>
+			</div>
+			<div class="spacer"></div>
+		</div>

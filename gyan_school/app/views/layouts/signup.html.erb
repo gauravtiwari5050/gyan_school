@@ -1,40 +1,70 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CloudClass</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<head>
-	
-	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
-	<title>CleanDream</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+  <%= stylesheet_link_tag "signup" %>
+  <style type="text/css">
+   input, textarea, select, .uneditable-input { 
+    height: 26px;
+    width: 510px;
+   }
+   label, input, button, select, textarea {
+    font-size: 22px;
+   }
+   .signup-form {
+    padding-left: 73px;
+    padding-top: 20px; 
+   } 
+    h2 {
+    font-size: 30px; 
+   }
+  </style>   
   <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-	
-	
-	<!--[if lte IE 8]>
-		<script type="text/javascript" src="js/excanvas.min.js"></script>
-	<![endif]-->
-	
-</head>
+<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  <%= csrf_meta_tag %>
 
-<body>
+  </head>
 
-<div class="container">   
-  
-	<div class="logo-labels">
-		<h1>CLOUDCLASS</h1>
-	</div>
-	
-	
-  <%=yield%>	
-	
-	
-	
-  
-	<div class="footer">
-		<div class="split">&#169; Copyright <a href="#">website.com</a></div> 
-		<div class="split right">Powered by <a href="http://themeforest.net/item/cleandream/490140" target="_blank">CleanDream</a></div> 
-	</div>
-</div>
-</body>
-
-</html> 
+  <body>
+	<div class="wrapper">
+		<!--top section starts -->
+		<div class="topWrapper">
+			   <div class="topSec">
+				<div class="topLeft">
+					<a href="/" class="homelogo" title="cloudclass"><img src=<%= asset_path 'home-logo.jpg' %> alt="cloudclass" /></a> 
+				</div>
+				<div class="topRight">
+					<ul class="topHomeLinks">
+					</ul>
+					<div class="spacer"></div>
+				</div>
+				<div class="spacer"></div>
+			</div>
+		</div>
+		<!--top section ends -->
+		<!--body content wrapper starts -->
+		<div class="mainWrapper">
+      <div class="container">
+        <h2>Get Started with CloudClass for your institution</h2>
+        <div class="hero-unit">
+          <div class="signup-form">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  </body>
+</html>
