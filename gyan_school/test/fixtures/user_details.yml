@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gender: MyString
+  blood_group: MyString
+  birth_place: MyString
+  nationality: MyString
+  mother_tongue: MyString
+  category: MyString
+  religion: MyString
+
+two:
+  gender: MyString
+  blood_group: MyString
+  birth_place: MyString
+  nationality: MyString
+  mother_tongue: MyString
+  category: MyString
+  religion: MyString

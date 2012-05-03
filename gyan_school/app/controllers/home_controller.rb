@@ -1,3 +1,4 @@
+include Util
 class HomeController < ApplicationController
   def home
   end
@@ -117,6 +118,43 @@ class HomeController < ApplicationController
     @institute = Institute.find_by_id(get_institute_id)
     @student = Student.new
     @student.build_admission_detail
+    @student.build_user_detail
+    @student.build_address
+    @student.build_parent_detail
+  end
+
+  def student_create
+    @institute = Institute.find_by_id(get_institute_id)
+    logger.info params.inspect
+    @student = Student.new(params[:student])
+    @student.institute_id = @institute.id
+    @student.user_type = "CURRENT"
+    @student.username = create_user_name(@student.first_name,@student.middle_name,@student.last_name)
+    @student.pass_hash = md5_hash(@student.dob.to_s)
+    persist_success = @student.save
+    respond_to do |format|
+      if persist_success
+        format.html{redirect_to('/student/'+@student.id.to_s+'/edit')}
+      else
+        format.html{render :action => "student_new"}
+      end
+    end
+    
+  end
+
+  def student_edit
+    @student = Student.find_by_id(params[:student_id])
+  end
+  def student_update
+    @student = Student.find_by_id(params[:student_id])
+    respond_to do |format|
+      if @student.update_attributes(params[:student])
+        format.html{redirect_to('/student/'+@student.id.to_s+'/edit')}
+      else
+        format.html {render :action => "student_edit"}
+      end
+    end
+    
   end
 
   def sections_for_batch

@@ -9,7 +9,7 @@
 <% end -%>
 <% content_for :main_content do -%>
       <div class="title">
-        <h2> Add a new student</h2>
+        <h2> Edit student Details</h2>
       </div>
       <div class="content forms">
   <%= render :template => "shared/form-errors",:locals => {:form => @student} %>
@@ -41,8 +41,19 @@
               </div>
             </div>
             <h3 style="padding-top:15px"> Admission Details </h3>
+            <div id="batch_original">
+              
+              <div class="control-group">
+                <%= f.label 'Class' ,"Current Class" ,:class=>"control-label" %>
+                <%= f.label 'Class' ,@student.section.batch.name + '-' + @student.section.name  %> &#160;&#160;&#160;
+                <%= link_to_function "Edit Class", "edit_class()",:class=> 'btb btn-primary' %>
+              </div>
+            </div>
+
+            <div id="batch_selection" style="display:none">
+              
             <div class="control-group">
-              <%= f.label 'Class' ,"Class" ,:class=>"control-label" %>
+              <%= f.label 'Class' ,"New Class" ,:class=>"control-label" %>
               <div class="controls">
                 <%=collection_select(:batch,:batch_id,get_batches_for_institute,:id,:name,{:prompt => 'Select a Class'},{:onchange => "select_section(this)"})%>
               </div>
@@ -52,6 +63,7 @@
               <div class="controls">
                 <%=f.select :section_id,options_for_select([])%>
               </div>
+            </div>
             </div>
             <%= f.fields_for :admission_detail do |ad| %>
             <div class="control-group">
@@ -235,7 +247,10 @@
 
   );
   }
-  
+ 
+ function edit_class() {
+  $('#batch_selection').show();
+ }
 
 </script>
   

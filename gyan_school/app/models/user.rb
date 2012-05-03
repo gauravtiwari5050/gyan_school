@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
-  USR_TYPE_OPTIONS = %w(ADMIN OFFICE ACCOUNTS TEACHER SUPPORT STUDENT)
+  USR_TYPE_OPTIONS = %w(CURRENT PREVIOUS PENDING)
   has_one :address,:as => :addressable,:dependent => :destroy
   has_one :admission_detail
+  has_one :user_detail
+  has_one :parent_detail
   belongs_to :institute
   belongs_to :section
   validates :first_name,:presence => :true
@@ -12,4 +14,7 @@ class User < ActiveRecord::Base
   validates :pass_hash,:presence => :true
   validates :institute_id,:presence => :true
   accepts_nested_attributes_for :admission_detail
+  accepts_nested_attributes_for :user_detail
+  accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :parent_detail
 end
