@@ -1,0 +1,37 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> All Classes for your institute </h2>
+      </div>
+      
+       <table class="table striped">
+        <thead>
+          <tr>
+            <th> Class</th>
+            <th> Edit</th>
+            <th> Delete</th>
+
+          </tr>
+          <tbody>
+           <% for batch in @institute.batches -%>
+             
+            <tr>
+                <td><%=batch.name%></td>
+                <td> <%= link_to "Edit", "/batch/"+batch.id.to_s+"/edit",:class=>"btn btn-small btn-warning" %></td>
+                <td> <%= link_to "Delete", "/batch/"+batch.id.to_s+"/delete",:class=>"btn btn-small btn-danger" %></td>
+            </tr>
+           <% end -%>
+          </tbody>
+        </thead>
+       </table>
+
+  
+<% end -%>
