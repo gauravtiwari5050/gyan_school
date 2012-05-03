@@ -1,6 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video
+  before_filter :correct_safari_and_ie_accept_headers
+  after_filter :set_xhr_flash
+  def set_xhr_flash
+    flash.discard if request.xhr?
+  end
+
+  def correct_safari_and_ie_accept_headers
+    ajax_request_types = ['text/javascript', 'application/json', 'text/xml']
+    request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
+  end
+
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute
   def login_employee_user(user)
     session[:user_institute_id] = user.institute_id
     session[:user_name] = user.username
@@ -46,7 +57,10 @@ class ApplicationController < ActionController::Base
     return session[:user_type]
   end
   
-
+  def get_batches_for_institute
+    @institute = Institute.find_by_id(get_institute_id)
+    return @institute.batches
+  end
 
 
 end

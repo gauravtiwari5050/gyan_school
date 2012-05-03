@@ -112,6 +112,20 @@ class HomeController < ApplicationController
       end
     end
   end
+
+  def student_new
+    @institute = Institute.find_by_id(get_institute_id)
+    @student = Student.new
+    @student.build_admission_detail
+  end
+
+  def sections_for_batch
+    @batch = Batch.find_by_id(params[:batch_id])
+    @sections = @batch.sections
+    respond_to do |format|
+      format.js {render :json => @sections.to_json}
+    end
+  end
  
 
 end

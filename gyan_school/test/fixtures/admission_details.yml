@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  admit_number: MyString
+  admit_date: 2012-05-03
+  user_id: 1
+
+two:
+  admit_number: MyString
+  admit_date: 2012-05-03
+  user_id: 1

@@ -1,0 +1,101 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> Add a new student</h2>
+      </div>
+      <div class="content forms">
+  <%= render :template => "shared/form-errors",:locals => {:form => @student} %>
+        <%= form_for(@student,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+          <fieldset>
+            <div class="control-group">
+              <%= f.label 'First Name' ,"First Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'first_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Middle Name' ,"Middle Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'middle_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Last Name' ,"Last Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'first_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Email' ,"Email" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'email'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Class' ,"Class" ,:class=>"control-label" %>
+              <div class="controls">
+                <%=collection_select(:batch,:batch_id,get_batches_for_institute,:id,:name,{:prompt => 'Select a Class'},{:onchange => "select_section(this)"})%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Section' ,"Section" ,:class=>"control-label" %>
+              <div class="controls">
+                <%=f.select :section_id,options_for_select([])%>
+              </div>
+            </div>
+            <%= f.fields_for :admission_detail do |ad| %>
+            <div class="control-group">
+              <%= ad.label 'Admission Number' ,"Admission Number" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ad.text_field :admit_number%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= ad.label 'Admission Date' ,"Admission Date" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ad.text_field :admit_date,:class=> "datepicker"%>
+              </div>
+            </div>
+              
+            <% end -%>
+            
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+          </fieldset>
+           
+        <% end -%>
+        
+      </div>
+
+<script type="text/javascript"> 
+  $(document).ready(function(){
+    $( ".datepicker" ).datepicker({dateFormat:'dd-mm-yy'});
+  });
+  function select_section(obj) {
+          var element = document.getElementById("student_section_id");
+          element.options.length=0;
+  $.read(
+        '/batch/sections/{batch_id}',
+        {batch_id:obj.options[obj.selectedIndex].value},
+        function(response) {
+          for(i=0;i<response.length;i++) {
+            element.options[element.options.length] = new Option(response[i].name, response[i].id); 
+          }
+        }
+
+  );
+  }
+  
+
+</script>
+  
+<% end -%>
