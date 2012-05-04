@@ -24,7 +24,7 @@
            <% for batch in @institute.batches -%>
              
             <tr>
-                <td><%=batch.name%></td>
+                <td><%= link_to batch.name, '/batch/'+batch.id.to_s+'/show' %></td>
                 <td> <%= link_to "Edit", "/batch/"+batch.id.to_s+"/edit",:class=>"btn btn-small btn-warning" %></td>
                 <td> <%= link_to "Delete", "/batch/"+batch.id.to_s+"/delete",:class=>"btn btn-small btn-danger" %></td>
             </tr>

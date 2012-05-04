@@ -17,4 +17,17 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_detail
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :parent_detail
+  def fullname
+    fullname = ''
+    fullname += self.first_name
+    if !self.middle_name.nil?
+      fullname += ' ' + self.middle_name
+    end
+    fullname += self.last_name
+    if !self.email.nil?
+      fullname += '(' + self.email + ')'
+    end
+
+
+  end
 end

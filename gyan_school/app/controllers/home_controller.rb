@@ -97,6 +97,11 @@ class HomeController < ApplicationController
     end
   end
 
+  def batch_show
+    @institute = Institute.find_by_id(get_institute_id)
+    @batch = Batch.find_by_id(params[:batch_id])
+  end
+
   def batch_index
     @institute = Institute.find_by_id(get_institute_id)
   end
@@ -223,6 +228,18 @@ class HomeController < ApplicationController
       end
     end
     
+  end
+
+  def section_update_teacher
+    @section = Section.find_by_id(params[:section_id])
+    @teacher = Teacher.find_by_id(params[:teacher_id])
+    respond_to do |format|
+     if @teacher.update_attribute(:section_id, @section.id)
+      format.js {render :json => @teacher}
+     else
+      raise 'Error updating teacher'
+     end
+    end
   end
 
 end

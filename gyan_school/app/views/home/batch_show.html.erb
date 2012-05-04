@@ -1,0 +1,54 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> <%=@batch.name%></h2>
+      </div>
+      
+       <table class="table striped">
+        <thead>
+          <tr>
+            <th> Section</th>
+            <th> Class Teacher</th>
+            <th> Assign Teacher</th>
+
+          </tr>
+          <tbody>
+           <% for section in @batch.sections -%>
+             
+            <tr>
+                <td><%= link_to "Secton " + section.name, '/section/'+section.id.to_s+'/show' %></td>
+                <% if section.teacher.nil? %>
+                  <td> Not Assigned</td>
+                <% else %>
+                  <td> <%= section.teacher.first_name + " "  + section.teacher.last_name %></td>
+                <% end %>
+                <td><%=collection_select(:teacher,:teacher_id,@institute.teachers,:id,:fullname,{:prompt => 'Select a Teacher'},{:onchange => "update_teacher(this,"+section.id.to_s+")"})%>
+                </td>
+            </tr>
+           <% end -%>
+          </tbody>
+        </thead>
+       </table>
+
+       <script type="text/javascript">
+        function update_teacher(obj,sec_id) {
+          $.update(
+            '/section/{section_id}/update_teacher/{teacher_id}',
+            {section_id:sec_id,teacher_id:obj.options[obj.selectedIndex].value},
+            function(response) {
+              window.location.reload(true);
+            }
+          );
+        }
+       </script>
+
+  
+<% end -%>
