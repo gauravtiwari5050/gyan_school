@@ -22,5 +22,9 @@ GyanSchool::Application.routes.draw do
   match 'student/:student_id/edit' => 'home#student_edit'
   match 'student/:student_id/create' => 'home#student_update' ,:via => :post
   match 'student/create' => 'home#student_create' ,:via => :post
+  match 'teacher/new' => 'home#teacher_new'
+  match 'teacher/:teacher_id/edit' => 'home#teacher_edit'
+  match 'teacher/:teacher_id/create' => 'home#teacher_update'
+  match 'teacher/create' => 'home#teacher_create' ,:via => :post
 
 end

@@ -1,0 +1,15 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> Add a new teacher</h2>
+      </div>
+      <%=render 'teacher_form'%> 
+<% end -%>

@@ -1,0 +1,117 @@
+
+      <div class="content forms">
+  <%= render :template => "shared/form-errors",:locals => {:form => @teacher} %>
+        <%= form_for(@teacher,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+          <fieldset>
+          <h3 style="padding-top:15px"> Basic Details </h3>
+            <div class="control-group">
+              <%= f.label 'First Name' ,"First Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'first_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Middle Name' ,"Middle Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'middle_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Last Name' ,"Last Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'last_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Email' ,"Email" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'email'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Date of Birth' ,"Date of birth" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field :dob,:class=> "datepicker"%>
+              </div>
+            </div>
+            <h3 style="padding-top:15px"> Address </h3>
+            <%= f.fields_for :address do |add| %>
+            <div class="control-group">
+              <%= add.label 'Address 1' ,"Address 1" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :address_1%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Address 2' ,"Address 2" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :address_2%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Address 3' ,"Address 3" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :address_2%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'City' ,"City" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :city%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'State' ,"State" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :state%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'District' ,"District" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :district%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Pincode' ,"Pincode" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :pincode%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Landmark' ,"Landmark" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :landmark%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Phone' ,"Landline" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :phone%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Mobile' ,"Mobile" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :mobile%>
+              </div>
+            </div>
+              
+            <% end -%>
+
+            
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+          </fieldset>
+           
+        <% end -%>
+        
+      </div>
+
+<script type="text/javascript"> 
+  $(document).ready(function(){
+    $( ".datepicker" ).datepicker({dateFormat:'dd-mm-yy'});
+  });
+
+</script>

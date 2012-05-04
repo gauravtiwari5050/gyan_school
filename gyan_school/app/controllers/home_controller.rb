@@ -164,6 +164,45 @@ class HomeController < ApplicationController
       format.js {render :json => @sections.to_json}
     end
   end
- 
+
+  def teacher_new
+    @teacher = Teacher.new
+    @teacher.build_address
+  end
+
+  def teacher_create
+    @institute = Institute.find_by_id(get_institute_id)
+    logger.info params.inspect
+    @teacher = Teacher.new(params[:teacher])
+    @teacher.institute_id = @institute.id
+    @teacher.user_type = "CURRENT"
+    @teacher.username = create_user_name(@teacher.first_name,@teacher.middle_name,@teacher.last_name)
+    @teacher.pass_hash = md5_hash(@teacher.dob.to_s)
+    persist_success = @teacher.save
+    respond_to do |format|
+      if persist_success
+        format.html{redirect_to('/teacher/'+@teacher.id.to_s+'/edit')}
+      else
+        format.html{render :action => "teacher_new"}
+      end
+    end
+  end
+
+  def teacher_edit
+    @teacher  = Teacher.find_by_id(params[:teacher_id])
+  end
+
+  def teacher_update
+    @teacher  = Teacher.find_by_id(params[:teacher_id])
+    respond_to do |format|
+      if @teacher.update_attributes(params[:teacher])
+        format.html{redirect_to('/teacher/'+@teacher.id.to_s+'/edit')}
+      else
+        format.html {render :action => "teacher_edit"}
+        
+      end
+    end
+    
+  end
 
 end
