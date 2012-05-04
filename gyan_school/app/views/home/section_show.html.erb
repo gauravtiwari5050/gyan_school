@@ -1,0 +1,37 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> <%=@section.batch.name + "-" +  @section.name %></h2>
+      </div>
+      
+       <table class="table striped">
+        <thead>
+          <tr>
+            <th> Name</th>
+            <th> Edit</th>
+            <th> Reporting</th>
+
+          </tr>
+          <tbody>
+           <% for student in @section.students -%>
+             
+            <tr>
+                <td><%= link_to student.fullname, '/student/'+student.id.to_s+'/show' %></td>
+                <td> <%= link_to "Edit", "/student/"+student.id.to_s+"/edit",:class=>"btn btn-small btn-warning" %></td>
+                <td> <%= link_to "Generate Report", "/student/"+student.id.to_s+"/delete",:class=>"btn btn-small btn-primary" %></td>
+            </tr>
+           <% end -%>
+          </tbody>
+        </thead>
+       </table>
+
+  
+<% end -%>

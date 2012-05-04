@@ -27,4 +27,10 @@ class LoginController < ApplicationController
   def login_student
 
   end
+  def destroy
+    logout_user
+    respond_to do |format|
+     format.html {redirect_to('/login')}
+    end
+  end
 end

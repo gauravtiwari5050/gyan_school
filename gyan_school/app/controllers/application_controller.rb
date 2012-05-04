@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name,:get_section_description
   def login_employee_user(user)
     session[:user_institute_id] = user.institute_id
     session[:user_name] = user.username
@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
     session[:user_name] = nil
     session[:user_type] = nil
     session[:is_logged_in] = false
+    session[:user_id] = nil
   end
   def get_institute_id
     institute_id = session[:institute_id]
@@ -63,6 +64,11 @@ class ApplicationController < ActionController::Base
   end
   def create_user_name(first,middle,last)
     return 'dummy'
+  end
+
+  def get_section_description(section_id)
+    section = Section.find_by_id(section_id)
+    return section.batch.name + "-" + section.name
   end
 
 

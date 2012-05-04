@@ -3,6 +3,7 @@ GyanSchool::Application.routes.draw do
   match '/signup' => 'signup#signup'
   match '/institute/create' => 'signup#register' ,:via => :post
   match 'login' => 'login#login'
+  match 'logout' => 'login#destroy'
   match 'login/school' => 'login#login_employee' ,:via => :post
   match 'login/student' => 'login#login_student' ,:via => :post
   match 'home' => 'home#home'
@@ -32,6 +33,7 @@ GyanSchool::Application.routes.draw do
   match 'subjects/create' => 'home#subjects_create'
 
   match 'section/:section_id/update_teacher/:teacher_id' => 'home#section_update_teacher',:via => :put
+  match 'section/:section_id/show' => 'home#section_show'
 
 
 end

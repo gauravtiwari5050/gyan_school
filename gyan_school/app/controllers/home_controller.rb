@@ -242,4 +242,8 @@ class HomeController < ApplicationController
     end
   end
 
+  def section_show
+    @section = Section.find_by_id(params[:section_id])
+  end
+
 end

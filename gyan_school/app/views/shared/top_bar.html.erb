@@ -14,8 +14,8 @@
 			</div>
 			<div class="topMiddle">
 				<div class="topMiddleLinks">
-            <% if current_user.user_type == 'ADMIN' %>
 					  <ul id="menu" class="menu">
+            <% if current_user.type == 'Admin' %>
             <li class="backbg"><a href="#" title="Create"><span>Create</span></a>
               <ul>
                 <li><span><a href="/session/new" class="headingsubmenu">Sessions</a></span></li>
@@ -31,7 +31,20 @@
               </ul>
             </li>
             <% end %>
-            <% if current_user.user_type == 'TEACHER' %>
+            <% if current_user.type == 'Teacher' %>
+            <li class="backbg"><a href="#" title="Create"><span>Create</span></a>
+              <ul>
+                <li><span><a href="/student/new" class="headingsubmenu">Student</a></span></li>
+              </ul>
+            </li>
+            <li class="backbg"><a href="#" title="Create"><span>Classes</span></a>
+              <ul>
+                <% if !current_user.section_id.nil? && current_user.section_id != 0 %>
+                  
+                  <li><span><a href="/section/<%=current_user.section_id.to_s%>/show" class="headingsubmenu">My Class (<%=get_section_description(current_user.section_id)%>)</a></span></li>
+                <% end %>
+              </ul>
+            </li>
             <% end %>
             <% if current_user.user_type == 'STUDENT' %>
             <% end %>
