@@ -9,7 +9,9 @@
 <% end -%>
 <% content_for :main_content do -%>
       <div class="title">
-        <h2> <%=@section.batch.name + "-" +  @section.name %></h2>
+        <h2> <%=@section.batch.name + "-" +  @section.name %>
+        <%= link_to "Mark Attendance",'/section/'+@section.id.to_s+'/attendance',:class => 'btn btn-primary' %>
+        </h2>
       </div>
       
        <table class="table striped">

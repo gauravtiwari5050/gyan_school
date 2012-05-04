@@ -34,6 +34,10 @@ GyanSchool::Application.routes.draw do
 
   match 'section/:section_id/update_teacher/:teacher_id' => 'home#section_update_teacher',:via => :put
   match 'section/:section_id/show' => 'home#section_show'
+  match 'section/:section_id/attendance' => 'home#section_attendance_home'
+  match 'section/:section_id/mark_attendance/:date' => 'home#section_mark_attendance'
+  match 'section/:section_id/mark_attendance/:date/update' => 'home#section_mark_attendance_update' ,:via => :post
+
 
 
 end

@@ -1,0 +1,48 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <h3>
+    <%= link_to "Mark Today's attendance", '/section/' + @section.id.to_s + '/mark_attendance/' + Date.today.to_s %>
+  </h3>
+  <div id='calendar'></div>
+  <script type="text/javascript">
+$(document).ready(drawCalendar);
+function drawCalendar() {
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+	$('#calendar').fullCalendar({
+		editable: true,        
+        defaultView: 'month',
+        slotMinutes: 15,
+        
+        loading: function(bool){
+            if (bool) 
+                $('#loading').show();
+            else 
+                $('#loading').hide();
+        },
+        
+        timeFormat: 'h:mm t{ - h:mm t} ',
+        dragOpacity: "0.5",
+        
+        dayClick: function(date, allDay, jsEvent, view) {
+          window.open('/section/<%=@section.id%>/mark_attendance/'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+          return false;
+
+        }
+
+
+	});
+}
+
+  </script>
+<% end -%>

@@ -70,6 +70,14 @@ class ApplicationController < ActionController::Base
     section = Section.find_by_id(section_id)
     return section.batch.name + "-" + section.name
   end
+  def is_student_present (student_id,section_id,date)
+    attendance = SectionAttendance.find(:first,:conditions => {:user_id => student_id,:section_id => section_id,:date=>date})
+    if attendance.nil?
+      return false
+    else
+      return true
+    end
+  end
 
 
 end

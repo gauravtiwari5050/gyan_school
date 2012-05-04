@@ -246,4 +246,44 @@ class HomeController < ApplicationController
     @section = Section.find_by_id(params[:section_id])
   end
 
+  def section_attendance_home
+    @section = Section.find_by_id(params[:section_id])
+  end
+
+  def section_mark_attendance
+    @section = Section.find_by_id(params[:section_id])
+    @date = Date.strptime(params[:date],"%Y-%m-%d")
+  end
+
+  def section_mark_attendance_update
+    @section = Section.find_by_id(params[:section_id])
+    @date = Date.strptime(params[:date],"%Y-%m-%d")
+
+    for student in @section.students
+      if params.has_key?(student.id.to_s) 
+         section_attendance  = SectionAttendance.find(:first,:conditions => {:date => params[:date],:section_id => @section.id,:user_id => student.id})
+         if section_attendance.nil?
+           section_attendance = SectionAttendance.new
+           section_attendance.section_id = @section.id
+           section_attendance.user_id = student.id
+           section_attendance.date = params[:date]
+           section_attendance.save #TODO failure check
+         end
+      else
+         section_attendance  = SectionAttendance.find(:first,:conditions => {:date => params[:date],:section_id => @section.id,:user_id => student.id})
+         if !section_attendance.nil?
+          section_attendance.destroy #failure check
+         end
+      end
+
+    end
+    respond_to do |format|
+        format.html { redirect_to('/section/' + @section.id.to_s + '/mark_attendance/'+params[:date], :notice => 'Attendance updated') }
+    end
+    
+  end
+
+
+  
+
 end
