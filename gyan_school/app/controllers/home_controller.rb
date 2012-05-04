@@ -205,4 +205,24 @@ class HomeController < ApplicationController
     
   end
 
+  def subjects_show
+    @institute = Institute.find_by_id(get_institute_id)
+    if @institute.courses.size == 0
+      logger.info 'building new courses'
+      3.times{@institute.courses.build} 
+    end
+  end
+
+  def subjects_create
+    @institute = Institute.find_by_id(get_institute_id)
+    respond_to do |format|
+      if @institute.update_attributes(params[:institute])
+        format.html {redirect_to('/subjects/show')}
+      else
+        format.html {render :action => "subjects_show"}
+      end
+    end
+    
+  end
+
 end

@@ -1,0 +1,34 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> Addd remove subjects for your institute </h2>
+      </div>
+        <%= nested_form_for(@institute,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @institute} %>
+         <fieldset> 
+            <div class="control-group">
+              <div class="controls">
+
+            <%= f.fields_for :courses do |builder| -%>
+              <%= render 'courses_fields',:f=>builder %>
+            <% end -%>
+              <p><%= f.link_to_add "Add a course", :courses,:class=>"btn btn-primary" %></p>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+          
+         </fieldset> 
+        <% end -%>
+<% end -%>

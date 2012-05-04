@@ -27,4 +27,8 @@ GyanSchool::Application.routes.draw do
   match 'teacher/:teacher_id/create' => 'home#teacher_update'
   match 'teacher/create' => 'home#teacher_create' ,:via => :post
 
+  match 'subjects/show' => 'home#subjects_show'
+  match 'subjects/create' => 'home#subjects_create'
+
+
 end
