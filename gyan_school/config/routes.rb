@@ -38,6 +38,14 @@ GyanSchool::Application.routes.draw do
   match 'section/:section_id/mark_attendance/:date' => 'home#section_mark_attendance'
   match 'section/:section_id/mark_attendance/:date/update' => 'home#section_mark_attendance_update' ,:via => :post
 
+  match 'fees/schedule_index' => 'home#fees_schedule_index'
+  match 'fees/schedule/:fee_event_id/edit' => 'home#fees_schedule_edit'
+  match 'fees/schedule/:fee_event_id/create' => 'home#fees_schedule_update'
+  match 'fees/schedule/new' => 'home#fees_schedule_new'
+  match 'fees/schedule/create' => 'home#fees_schedule_create' ,:via => :post
+  match 'fees/collect' => 'home#fees_collect' 
+  match 'search/students' => 'home#search_students' 
+
 
 
 end

@@ -1,0 +1,30 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+
+<% content_for :main_content do -%>
+      <div class="title">
+        <h3> Type a few characters of the student name </h3>
+      </div>
+<form class="well form-search">
+  <table>
+   <tr>
+   <td> <input type="text" class="input-large search-query user-search"> </td>
+   <td>
+  <div class="loading-image" style="display:none">
+    <img src="<%=asset_path "ajax-loader.gif"%>"/>
+  </div>
+  </td>
+  </table>
+</form>
+
+<div id="user-search-results">
+  
+</div>
+<% end -%>

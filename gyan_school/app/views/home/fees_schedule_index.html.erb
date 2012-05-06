@@ -1,0 +1,47 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+      <div class="title">
+        <table class='table'>
+        <tbody>
+        <tr>
+        <td>     <h3> Fee Collection Schedule      </h3>    </td>
+        <td>         <%= link_to "Create new Fees collection Date", '/fees/schedule/new' ,:class => 'btn btn-primary' %>   </td>
+        </tr>
+        </tbody>
+        </table>
+      </div>
+      
+       <table class="table striped">
+        <thead>
+          <tr>
+            <th> Collection Month /Type</th>
+            <th> Due Date</th>
+            <th> Edit</th>
+            <th> Reporting</th>
+
+          </tr>
+          <tbody>
+           <% for event in @institute.fee_collection_events -%>
+             
+            <tr>
+                <td><%= event.name %></td>
+                <td><%= event.due_date.strftime("%B %d, %Y") %></td>
+                <td>  <%= link_to "Edit", '/fees/schedule/' + event.id.to_s  + '/edit',:class => 'btn btn-warning' %> </td>
+                <td>  <%= link_to "Fees Collection Report", '/fees/schedule/' + event.id.to_s  + '/report',:class => 'btn btn-primary' %> </td>
+
+            </tr>
+           <% end -%>
+          </tbody>
+        </thead>
+       </table>
+
+  
+<% end -%>

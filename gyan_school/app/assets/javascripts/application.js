@@ -29,21 +29,25 @@ jQuery.ajaxSetup({
 jQuery(document).ready(function() {
     // put all your jQuery goodness in here.
   jQuery(".user-search").keyup(function() {
+    $(".loading-image").show(); 
     jQuery.read(
-     '/search/users',
+     '/search/students',
     {username:jQuery(this).val()},
     function (response) {
       var html = '<h3> No users found with that name </h3>';
       if(response.length != 0) {
-         html = '<table>';
-         html += '<tr><th>User Name</th> <th>email</th> </tr>';
+         html = '<table class=\'table table-striped\'>';
+         html += '<tr><th>User Name</th> <th>Collect Fees</th> </tr>';
         for(var i = 0;i<response.length;i++) {
-         var link_to_user = '<a href="/users/'+ response[i].user.id +'/profile">' + response[i].user.username  +' </a>'
-         html += '<tr><td>' + link_to_user + '</td> <td>' + response[i].user.email + '</td> </tr>';
+         var link_to_user = '<a href="/users/'+ response[i].id +'/profile">' + response[i].first_name +' ' + response[i].middle_name + response[i].last_name + '(' + response[i].email + ')' + ' </a>';
+         html += '<td>' + link_to_user+ '</td>';
+         var collect_fees_link = '<a class=\'btn btn-primary\' href="/fees/collect/'+ response[i].id +'">' + 'Collect Fees'  +' </a>';
+         html += '<td>' + collect_fees_link+ '</td> </tr>';
         }
          html += '</table>';
       }
     jQuery("#user-search-results").html(html);
+    $(".loading-image").hide(); 
 
     }
 

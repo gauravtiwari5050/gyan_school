@@ -283,6 +283,66 @@ class HomeController < ApplicationController
     
   end
 
+  def fees_schedule_index
+    @institute = Institute.find_by_id(get_institute_id)
+    
+  end
+
+  def fees_schedule_new
+    @institute = Institute.find_by_id(get_institute_id)
+    @fee_collection_event  = FeeCollectionEvent.new
+    
+  end
+
+  def fees_schedule_create
+    @institute = Institute.find_by_id(get_institute_id)
+    @fee_collection_event  = FeeCollectionEvent.new(params[:fee_collection_event])
+    @fee_collection_event.institute_id = @institute.id
+    respond_to do |format|
+      if @fee_collection_event.save 
+        format.html {redirect_to('/fees/schedule_index')}
+      else
+       format.html {render :action => 'fees_schedule_new'}
+      end
+
+    end
+    
+  end
+  def fees_schedule_update
+    @institute = Institute.find_by_id(get_institute_id)
+    @fee_collection_event  = FeeCollectionEvent.find_by_id(params[:fee_event_id])
+    respond_to do |format|
+      if @fee_collection_event.update_attributes(params[:fee_collection_event]) 
+        format.html {redirect_to('/fees/schedule_index')}
+      else
+       format.html {render :action => 'fees_schedule_edit'}
+      end
+
+    end
+    
+  end
+
+
+  def fees_schedule_edit
+    @institute = Institute.find_by_id(get_institute_id)
+    @fee_collection_event  = FeeCollectionEvent.find_by_id(params[:fee_event_id])
+  end
+
+  def fees_collect
+    @institute = Institute.find_by_id(get_institute_id)
+
+  end
+
+  def search_students
+    @users = []
+    if !(params[:username].nil? || params[:username].size == 0)
+      @users = Student.find(:all,:conditions =>['first_name like ? and institute_id = ?' , params[:username]+'%',get_institute_id])
+    end
+    respond_to do |format|
+      format.js  { render :json => @users.to_json }
+    end
+  end
+
 
   
 

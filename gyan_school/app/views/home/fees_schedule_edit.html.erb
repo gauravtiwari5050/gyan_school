@@ -1,0 +1,16 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> Edit fees schedule </h2>
+      </div>
+      <%=render 'fee_collection_event_form'%>
+<% end -%>
