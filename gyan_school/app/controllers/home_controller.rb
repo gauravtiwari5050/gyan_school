@@ -343,6 +343,36 @@ class HomeController < ApplicationController
     end
   end
 
+  def fees_collect_student
+    @institute = Institute.find_by_id(get_institute_id)
+    @student = Student.find_by_id(params[:student_id])
+  end
+
+  def fees_collect_student_update
+    @institute = Institute.find_by_id(get_institute_id)
+    @student = Student.find_by_id(params[:student_id])
+    logger.info params[:inspect]
+    for event in @institute.fee_collection_events
+        fee_collection = FeeCollection.find(:first,:conditions => {:user_id=>@student.id,:fee_collection_event_id=>event.id} )
+      if params.has_key?(event.id.to_s) && fee_collection.nil?
+        fee_collection =  FeeCollection.new
+        fee_collection.user_id = @student.id
+        fee_collection.fee_collection_event_id = event.id
+        if !fee_collection.save
+          raise 'Error saving fee collection while updating fees details'
+        end
+      elsif !params.has_key?(event.id.to_s) && !fee_collection.nil?
+        if !fee_collection.destroy
+          raise 'Error saving fee collection while updating fees details'
+        end
+      end
+      
+    end
+
+    respond_to do |format|
+        format.html { redirect_to('/fees/collect/' + @student.id.to_s, :notice => 'Fees record updated') }
+    end
+  end
 
   
 

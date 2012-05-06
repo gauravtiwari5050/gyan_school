@@ -45,7 +45,8 @@ GyanSchool::Application.routes.draw do
   match 'fees/schedule/create' => 'home#fees_schedule_create' ,:via => :post
   match 'fees/collect' => 'home#fees_collect' 
   match 'search/students' => 'home#search_students' 
-
+  match 'fees/collect/:student_id' => 'home#fees_collect_student'
+  match 'fees/collect/:student_id/update' => 'home#fees_collect_student_update' ,:via => :post
 
 
 end

@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name,:get_section_description
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name,:get_section_description,:is_fee_paid
   def login_employee_user(user)
     session[:user_institute_id] = user.institute_id
     session[:user_name] = user.username
@@ -77,6 +77,12 @@ class ApplicationController < ActionController::Base
     else
       return true
     end
+  end
+
+  def is_fee_paid(student_id,event_id)
+        fee_collection = FeeCollection.find(:first,:conditions => {:user_id=>student_id,:fee_collection_event_id=>event_id} )
+        return !fee_collection.nil?
+    
   end
 
 

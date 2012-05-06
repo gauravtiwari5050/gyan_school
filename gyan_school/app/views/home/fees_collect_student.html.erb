@@ -1,0 +1,40 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <h3> Mark fee collection for student <%= @student.fullname  %></h3>
+
+  <%= form_tag(params[:student_id] + '/update',:method => :post) do -%>
+    <%= render :template => 'shared/notices'%> 
+      <table class="table table-bordered">
+         <thead>
+          <tr>
+            <th>Description</th>
+            <th>Check if paid</th>
+          </tr> 
+         </thead>
+         <tbody>
+    <% for event in @institute.fee_collection_events -%>
+          <tr>
+            <td><%= event.name %></td>   
+            <% if  is_fee_paid(@student.id,event.id)%>
+              <td><%=check_box_tag event.id ,event.id,true %></td>
+            <% else %>
+              <td><%=check_box_tag event.id%></td>
+            <% end %>
+          </tr> 
+    <% end -%>   
+         </tbody>
+       </table>
+  <div class="actions">
+    <%= submit_tag nil,:class => 'btn  btn-primary'%>
+  </div>
+  <% end -%>
+  
+<% end -%>
