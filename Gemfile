@@ -39,7 +39,7 @@ gem 'tinymce-rails'
 gem "jquery-ui-themes", "~> 0.0.4"
 gem 'sunspot_rails'
 gem 'sunspot_solr'
-gem "nested_form", :git => 'https://github.com/ryanb/nested_form.git'
+gem "nested_form"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
