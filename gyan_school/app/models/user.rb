@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_one :user_detail
   has_one :parent_detail
   has_many :fee_collections
+  has_many :exam_results
   belongs_to :institute
   belongs_to :section
   validates :first_name,:presence => :true

@@ -39,9 +39,6 @@ GyanSchool::Application.routes.draw do
   match 'section/:section_id/mark_attendance/:date/update' => 'home#section_mark_attendance_update' ,:via => :post
   match 'section/:section_id/create_exam' => 'home#section_exams_create' ,:via => :post
   match 'section/:section_id/exams' => 'home#section_exams_index'
-  match 'section/:section_id/exams/:exam_id/subjects' => 'home#section_exam_subjects'
-  match 'section/:section_id/exams/:exam_id/subjects/:course_id/show' => 'home#section_exam_subject_marks'
-  match 'section/:section_id/exams/:exam_id/subjects/:course_id/update' => 'home#section_exam_subject_marks_update'
 
   match 'fees/schedule_index' => 'home#fees_schedule_index'
   match 'fees/schedule/:fee_event_id/edit' => 'home#fees_schedule_edit'

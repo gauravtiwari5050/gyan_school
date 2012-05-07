@@ -374,6 +374,77 @@ class HomeController < ApplicationController
     end
   end
 
+  def section_exams_index
+    @section = Section.find_by_id(params[:section_id])
+    @exam = Exam.new
+    
+  end
+
+  def section_exams_create
+    @section = Section.find_by_id(params[:section_id])
+    @exam = Exam.new(params[:exam])
+    @exam.examable_type = 'Section'
+    @exam.examable_id = @section.id
+    persist_success = @exam.save
+    respond_to do |format|
+      if persist_success
+        format.html {redirect_to('/section/' + @section.id.to_s  + '/exams' )}
+      else
+        format.html {render :action => "section_exams_index"}
+      end
+    end
+    
+  end
+
+  def section_exam_subjects
+    @institute = Institute.find_by_id(get_institute_id)
+    @section = Section.find_by_id(params[:section_id])
+    @exam = Exam.find_by_id(params[:exam_id])
+    
+  end
+
+  def section_exam_subject_marks
+    @institute = Institute.find_by_id(get_institute_id)
+    @section = Section.find_by_id(params[:section_id])
+    @exam = Exam.find_by_id(params[:exam_id])
+    @subject = Course.find_by_id(params[:course_id])
+  end
+
+  def section_exam_subject_marks_update
+    #TODO 1 check for exam result update/save failure and report error in meesage for specific students
+    @institute = Institute.find_by_id(get_institute_id)
+    @section = Section.find_by_id(params[:section_id])
+    @exam = Exam.find_by_id(params[:exam_id])
+    @subject = Course.find_by_id(params[:course_id])
+    logger.info params.inspect
+    for student in @section.students
+      exam_result = get_score(@section.id,student.id,@exam.id,@subject.id)
+      if params.has_key?(student.id.to_s) && params[student.id.to_s].size  > 0
+        logger.info  params[student.id.to_s]
+        if exam_result.nil?
+          exam_result = ExamResult.new
+          exam_result.section_id = @section.id
+          exam_result.user_id = student.id
+          exam_result.exam_id = @exam.id
+          exam_result.course_id = @subject.id
+          exam_result.score = params[student.id.to_s]
+          exam_result.save #TODO check for failure 
+        else
+          exam_result.update_attribute(:score,params[student.id.to_s])
+        end
+      elsif params.has_key?(student.id.to_s) && params[student.id.to_s].size  == 0
+        if !exam_result.nil?
+          exam_result.destroy #check for failure
+        end
+      end
+    end
+
+    respond_to do |format|
+     format.html {redirect_to('/section/' + @section.id.to_s + '/exams/' + @exam.id.to_s + '/subjects/' + @subject.id.to_s + '/show')} 
+    end
+
+  end
+
   
 
 end

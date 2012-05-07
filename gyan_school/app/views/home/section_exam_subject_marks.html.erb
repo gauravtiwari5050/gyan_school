@@ -1,0 +1,40 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <h3> Marks/Results for <%= @section.batch.name + '-' + @section.name  + ' for ' + @exam.name + '-' + @subject.name %></h3>
+
+  <%= form_tag( 'update',:method => :post) do -%>
+      <table class="table table-bordered">
+         <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Score </th>
+          </tr> 
+         </thead>
+         <tbody>
+    <% for student in @section.students -%>
+          <tr>
+            <td><%= student.fullname%></td>  
+             <% exam_result = get_score(@section.id,student.id,@exam.id,@subject.id) %> 
+            <% if !exam_result.nil?%>
+              <td><%=text_field_tag student.id ,exam_result.score %></td>
+            <% else %>
+              <td><%=text_field_tag student.id %></td>
+            <% end %>
+          </tr> 
+    <% end -%>   
+         </tbody>
+       </table>
+  <div class="actions">
+    <%= submit_tag nil,:class => 'btn  btn-primary'%>
+  </div>
+  <% end -%>
+  
+<% end -%>
