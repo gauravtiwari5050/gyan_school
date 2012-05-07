@@ -4,5 +4,5 @@ log/*.log
 tmp/
 public/uploads/*
 .sass-cache/
-vendor/bundle/
+vendor/*
 solr/
