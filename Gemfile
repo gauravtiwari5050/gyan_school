@@ -29,7 +29,6 @@ gem 'rscribd'
 gem "recaptcha", :require => "recaptcha/rails"
 gem "daemons"
 gem 'delayed_job_active_record'
-gem 'impressionist' ,:git => 'git://github.com/gauravtiwari5050/impressionist.git'
 gem 'execjs'
 gem 'therubyracer'
 gem 'fog'
