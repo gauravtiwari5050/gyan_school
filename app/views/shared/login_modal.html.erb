@@ -1,0 +1,47 @@
+
+
+            <div id="<%=id%>" title="<%= title %>" style="display:none"  >
+
+                <div class="validateTips"><%= title %> </div>
+                <div class="loading-image" style="display:none">
+                  <img src="<%=asset_path "ajax-loader.gif"%>"/>
+                </div>
+
+              <form>
+                <fieldset>
+                <label for="title">UserId/Email</label>
+                <input type="text" name="userid" id="modal-userid-<%=id%>" class="text ui-widget-content ui-corner-all" />
+                <label for="description">Password</label>
+                <input type="password" name="userid" id="modal-password-<%=id%>" class="text ui-widget-content ui-corner-all" />
+                </fieldset>
+            </form>
+            </div>
+            <script type="text/javascript">
+  $(function() {
+    $( "#<%=id%>" ).dialog({
+      
+      autoOpen: false,
+      modal: true,
+      resizable:false,
+      width:'auto',
+      height:'auto',
+      buttons: {
+        "Signin": function() {
+            $(".loading-image").show();
+            $('.validateTips').text('Logging in');
+            var username = $("#modal-userid-<%=id%>");
+            var pass = $("#modal-password-<%=id%>");
+            var login_success = login_user('<%=id%>',username.val(),pass.val());
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        $("#modal-username-<%=id%>").val("");
+        $("#modal-password-<%=id%>").val("");
+      }
+    });
+    });
+            </script>
+

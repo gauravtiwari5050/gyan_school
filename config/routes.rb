@@ -3,6 +3,7 @@ GyanSchool::Application.routes.draw do
   match '/signup' => 'signup#signup'
   match '/institute/create' => 'signup#register' ,:via => :post
   match 'login' => 'login#login'
+  match 'ajax_login/:user_type/:user_name/:password' => 'login#ajax_login'
   match 'logout' => 'login#destroy'
   match 'login/school' => 'login#login_employee' ,:via => :post
   match 'login/student' => 'login#login_student' ,:via => :post

@@ -34,6 +34,7 @@
     background-color:#F5F5F5;
     border-radius: 6px 6px 6px 6px;
     padding-top:10px;
+    min-height:200px;
    }
    .title {
     border-bottom:2px solid;
@@ -68,14 +69,10 @@
       <div class="container" style="padding-top:20px;border-radius: 6px 6px 6px 6px;">
         <div class="row">
           <div class="span6">
-            <div class="login">
               <%= yield :admin_login%>
-            </div>
           </div>
           <div class="span6">
-            <div class="login">
-              <%= yield :student_login%>
-            </div>
+              <%= yield :teacher_login%>
             
           </div>
           
@@ -84,6 +81,41 @@
       
     </div>
     
+      <div class="container" style="padding-top:20px;border-radius: 6px 6px 6px 6px;">
+        <div class="row">
+          <div class="span6">
+              <%= yield :student_login%>
+          </div>
+          <div class="span6">
+              <%= yield :parent_login%>
+            
+          </div>
+          
+        </div>
+      </div>
+      
   </div>
   </body>
 </html>
+      <script type='text/javascript'>
+      function launch_login_dialog(object_id) {
+        $( "#"+object_id ).dialog( "open" );
+        
+      }
+      function login_user(user_type,userid,pass) {
+        //TODO clean input before using
+        $.read(
+        '/ajax_login/{user_type}/{user_name}/{password}',
+        {user_type:user_type,user_name:userid,password:pass},
+        function(response) {
+        window.location.href = 'home'  
+        },
+        function(response) {
+          $('.validateTips').text('Unable to Login. Please check username password and try again');
+          $('.loading-image').hide();
+
+        }
+        );
+        
+      }
+      </script>

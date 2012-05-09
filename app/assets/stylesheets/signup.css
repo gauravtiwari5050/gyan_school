@@ -4,5 +4,6 @@
 *= require dashboard 
 *= require fullcalendar 
 *= require style  
+*= require jquery-ui
 
 */  
