@@ -1,5 +1,6 @@
 include Util
 class HomeController < ApplicationController
+  before_filter :setup_redirect
   def home
   end
   def session_new
@@ -443,6 +444,22 @@ class HomeController < ApplicationController
      format.html {redirect_to('/section/' + @section.id.to_s + '/exams/' + @exam.id.to_s + '/subjects/' + @subject.id.to_s + '/show')} 
     end
 
+  end
+
+  def setup_redirect
+    if current_user.type == 'Admin'
+      
+      institute = Institute.find_by_id(get_institute_id)
+      logger.info 'setup_status is' + institute.setup_info.status
+      
+      if institute.setup_info.status.start_with? 'CREATING_STRUCTURE'
+        redirect_to( '/getting_started/school_information/edit')
+      elsif institute.setup_info.status.start_with? 'ASSIGN_TEACHERS'
+        redirect_to ('/getting_started/assign_teachers/edit')
+      elsif institute.setup_info.status.start_with? 'ASSIGN_SUBJECTS'
+        redirect_to( '/getting_started/assign_subjects/edit')
+      end
+    end
   end
 
   

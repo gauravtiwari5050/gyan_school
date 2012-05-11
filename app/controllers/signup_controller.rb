@@ -25,7 +25,7 @@ class SignupController < ApplicationController
         employee.first_name = params[:first_name]
         employee.last_name = params[:last_name]
         employee.email = params[:contact_email]
-        employee.user_type = 'ADMIN'
+        employee.user_type = 'CURRENT'
         #employee.username = generate_user_name(params[:first_name],'',params[:last_name])
         employee.username = 'admin'
         employee.pass_hash = md5_hash(params[:password])
@@ -38,6 +38,18 @@ class SignupController < ApplicationController
           logger.error employee.errors.inspect
           raise msg
         end
+        setup_info = SetupInfo.new
+        setup_info.institute_id = institute.id
+        setup_info.status = 'CREATING_STRUCTURE'
+        persist_success = setup_info.save
+
+        if persist_success == false
+          msg = 'Something went wrong. Please try again'
+          logger.error msg
+          logger.error setup_info.errors.inspect
+          raise msg
+        end
+
       end
     end
 

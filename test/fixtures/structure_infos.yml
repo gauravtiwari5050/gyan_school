@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  address: MyText
+  logo: MyString
+  start_class: 1
+  end_class: 1
+  max_section: 1
+  teachers_list: MyString
+  students_list: MyString
+
+two:
+  name: MyString
+  address: MyText
+  logo: MyString
+  start_class: 1
+  end_class: 1
+  max_section: 1
+  teachers_list: MyString
+  students_list: MyString

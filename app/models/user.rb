@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   belongs_to :section
   validates :first_name,:presence => :true
   validates :last_name,:presence => :true
-  validates :email,:presence => :true,:uniqueness =>:true
   validates :user_type ,:presence => true,:inclusion => {:in => USR_TYPE_OPTIONS}
   validates :username,:presence => :true
   validates :pass_hash,:presence => :true

@@ -55,6 +55,12 @@ GyanSchool::Application.routes.draw do
   match 'fees/collect/:student_id/update' => 'home#fees_collect_student_update' ,:via => :post
 
 
+  match 'getting_started/school_information/edit' => 'getting_started#school_info_edit'
+  match 'getting_started/school_information/update' => 'getting_started#school_info_update'
+  match 'getting_started/school_information/processing' => 'getting_started#school_info_process'
+  match 'setup_info' => 'getting_started#setup_info'
+
+
 
 
 end

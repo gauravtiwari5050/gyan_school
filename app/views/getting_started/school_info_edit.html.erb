@@ -1,0 +1,69 @@
+
+        <%= form_for(@structure_info,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
+        <%= render :template => "shared/form-errors",:locals => {:form => @structure_info} %>
+        <% if !@institute.setup_info.comment.nil? %>
+          <%= render :template => "shared/display_message" ,:locals => {:message_type => 'ERROR',:message_content => @institute.setup_info.comment}%> 
+        <% end %>
+          <fieldset>
+            <div class="control-group">
+              <%= f.label 'Official School Name' ,"Official School Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'name'  %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'School Address' ,"School Address" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_area 'address' ,:rows => 3  %> 
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'School Logo' ,"School Logo" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.file_field 'logo'  %> 
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <%= f.label 'Starting Class Level' ,"Starting Class Level" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.select 'start_class' ,options_for_select([["Pre Nursery","-3"],["Nursery","-2"],["Lower KG","-1"],["Upper KG","0"],["Standard I","1"],["Standard II","2"],["Standard III","3"],["Standard IV","4"],["Standard V","5"],["Standard VI","6"],["Standard VII","7"],["Standard VIII","8"],["Standard IX","9"],["Standard X","10"],["Standard XI","11"],["Standard XII","12"]]),{ :include_blank => false,:prompt => 'Beginning class' }%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Ending Class Level' ,"Ending Class Level" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.select 'end_class' ,options_for_select([["Pre Nursery","-3"],["Nursery","-2"],["Lower KG","-1"],["Upper KG","0"],["Standard I","1"],["Standard II","2"],["Standard III","3"],["Standard IV","4"],["Standard V","5"],["Standard VI","6"],["Standard VII","7"],["Standard VIII","8"],["Standard IX","9"],["Standard X","10"],["Standard XI","11"],["Standard XII","12"]]),{ :include_blank => false,:prompt => 'Beginning class' }%>
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <%= f.label 'Maximum Sections Upto' ,"Maximum Sections Upto" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.select 'max_section' ,options_for_select([["A","1"],["B","2"],["C","3"],["D","4"],["E","5"],["F","6"],["G","7"],["H","8"]]),{ :include_blank => true }%>
+              
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <%= f.label 'Teachers List' ,"Teachers List" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.file_field 'teachers_list'  %> 
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <%= f.label 'Students List' ,"Students List" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.file_field 'students_list'  %> 
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Next" ,:class => 'btn btn-primary'%>
+            </div>
+            
+          </fieldset>
+          
+        <% end -%>

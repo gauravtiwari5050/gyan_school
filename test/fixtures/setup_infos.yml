@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  institute_id: 1
+  status: MyString
+  comment: MyString
+
+two:
+  institute_id: 1
+  status: MyString
+  comment: MyString

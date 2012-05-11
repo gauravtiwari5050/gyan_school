@@ -1,0 +1,32 @@
+      <h3> Setting Up School Structure ...</h3>
+      <div class="logo_image" align="center">
+        <img src=<%= asset_path 'loading_big.gif' %> />
+      </div>
+      <script type='text/javascript'>
+        $(function(){
+           readAndChangeSetupStatus(); 
+         
+        });
+
+        function readAndChangeSetupStatus() {
+          console.log('testing');
+          
+         $.read(
+          '/setup_info',
+          {},
+          function(response) {
+            if(response != null) {
+              if(response.status == 'CREATING_STRUCTURE') {
+                window.location = '/getting_started/school_information/edit';
+              } else if (response.status == 'ASSIGN_TEACHERS') {
+                window.location = '/getting_started/assign_teachers/edit';
+              } else {
+               setTimeout("readAndChangeSetupStatus()",500);
+              }
+            }
+          }
+         );
+        }
+
+        
+      </script>
