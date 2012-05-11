@@ -31,4 +31,7 @@ class User < ActiveRecord::Base
 
 
   end
+  def print_name
+    return self.first_name + ' ' + self.last_name
+  end
 end

@@ -231,17 +231,6 @@ class HomeController < ApplicationController
     
   end
 
-  def section_update_teacher
-    @section = Section.find_by_id(params[:section_id])
-    @teacher = Teacher.find_by_id(params[:teacher_id])
-    respond_to do |format|
-     if @teacher.update_attribute(:section_id, @section.id)
-      format.js {render :json => @teacher}
-     else
-      raise 'Error updating teacher'
-     end
-    end
-  end
 
   def section_show
     @section = Section.find_by_id(params[:section_id])

@@ -33,7 +33,7 @@ GyanSchool::Application.routes.draw do
   match 'subjects/show' => 'home#subjects_show'
   match 'subjects/create' => 'home#subjects_create'
 
-  match 'section/:section_id/update_teacher/:teacher_id' => 'home#section_update_teacher',:via => :put
+  match 'section/:section_id/update_teacher/:teacher_id' => 'ajax#section_update_teacher' ,:via => :put
   match 'section/:section_id/show' => 'home#section_show'
   match 'section/:section_id/attendance' => 'home#section_attendance_home'
   match 'section/:section_id/mark_attendance/:date' => 'home#section_mark_attendance'
@@ -58,8 +58,13 @@ GyanSchool::Application.routes.draw do
   match 'getting_started/school_information/edit' => 'getting_started#school_info_edit'
   match 'getting_started/school_information/update' => 'getting_started#school_info_update'
   match 'getting_started/school_information/processing' => 'getting_started#school_info_process'
-  match 'setup_info' => 'getting_started#setup_info'
+  match 'getting_started/assign_teachers/edit' => 'getting_started#assign_teachers_edit'
+  match 'getting_started/assign_teachers/processing' => 'getting_started#assign_teachers_processing'
+  match 'getting_started/assign_subjects/edit' => 'getting_started#assign_subjects_edit'
+  match 'getting_started/assign_subjects/update' => 'getting_started#assign_subjects_update'
 
+  match 'setup_info' => 'getting_started#setup_info'
+  match 'default_subjects' => 'ajax#default_subjects'
 
 
 

@@ -1,0 +1,46 @@
+      <h3> Assign Class Teachers for sections</h3>
+      <table class='table table-striped  table-bordered' >
+        <thead>
+          <th> Teacher name </th>
+          <% (1 .. @institute.structure_info.max_section).each do |section| %>
+            <th><%=(section + 64).chr%></th> 
+          <% end -%>
+
+        </thead>
+        <tbody>
+         <% for batch in @institute.batches -%>
+            <tr>
+              <td><%= batch.name %></td>
+              <% (1 .. @institute.structure_info.max_section).each do |index| %>
+              <% section = batch.sections.find(:first,:conditions =>{:name => '' + (index + 64).chr})%>
+              <% if section.nil?%>
+                <td>DNE</td> 
+              <%else%>
+                <td>
+                  <div id="<%='section_' + section.id.to_s%>">
+                      <%=collection_select(:teacher,:teacher_id,@institute.teachers,:id,:print_name,{:prompt => 'Select a Teacher'},{:onchange => "update_teacher(this,"+section.id.to_s+")"})%>
+                  </div>
+                </td>
+              <% end -%>
+              <% end -%>
+            </tr>
+         <% end -%>
+
+      </tbody>
+      </table>
+      <%= link_to "Next", '/getting_started/assign_teachers/processing' ,:class => 'btn btn-primary btn-large' %>
+      <script type='text/javascript'>
+        function update_teacher(obj,sec_id) {
+          $.update(
+            '/section/{section_id}/update_teacher/{teacher_id}',
+            {section_id:sec_id,teacher_id:obj.options[obj.selectedIndex].value},
+            function(response) {
+             $('#section_'+sec_id).html(obj.options[obj.selectedIndex].text);
+            },
+            function(response) {
+              alert(JSON.stringify(response));
+            }
+
+          );
+        }
+      </script>
