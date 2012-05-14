@@ -2,99 +2,98 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>CloudClass</title>
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
     <!-- Le styles -->
-  <%= stylesheet_link_tag "signup" %>
-  <style type="text/css">
-   input, textarea, select, .uneditable-input { 
-    height: 26px;
-    width: 400px;
-   }
-   label, input, button, select, textarea {
-    font-size: 22px;
-   }
-   .signup-form {
-    padding-left: 73px;
-    padding-top: 20px; 
-   } 
-    h2 {
-    font-size: 30px; 
-   }
-   .login {
-    padding-left:10px;
-    margin-right:10px;
-    background-color:#F5F5F5;
-    border-radius: 6px 6px 6px 6px;
-    padding-top:10px;
-    min-height:200px;
-   }
-   .title {
-    border-bottom:2px solid;
-   }
-
-  </style>   
+    <%= stylesheet_link_tag "login" %>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
   <%= javascript_include_tag "application" %>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
   <%= csrf_meta_tag %>
 
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
 
   <body>
-	<div class="wrapper">
-		<!--top section starts -->
-		<div class="topWrapper">
-			   <div class="topSec">
-				<div class="topLeft">
-					<a href="/" class="homelogo" title="cloudclass"><img src=<%= asset_path 'home-logo.jpg' %> alt="cloudclass" /></a> 
-				</div>
-				<div class="topRight">
-					<ul class="topHomeLinks">
-					</ul>
-					<div class="spacer"></div>
-				</div>
-				<div class="spacer"></div>
-			</div>
-		</div>
-		<!--top section ends -->
-		<!--body content wrapper starts -->
-		<div class="mainWrapper" style="padding-top:50px;">
-      <div class="container" style="padding-top:20px;border-radius: 6px 6px 6px 6px;">
-        <div class="row">
-          <div class="span6">
-              <%= yield :admin_login%>
-          </div>
-          <div class="span6">
-              <%= yield :teacher_login%>
-            
-          </div>
-          
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#"><img src="<%= asset_path 'cloudclass-logo.png' %>" /></a>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
-      
     </div>
     
-      <div class="container" style="padding-top:20px;border-radius: 6px 6px 6px 6px;">
+    <div class="main">
+       <div class="container" style="padding-top:30px">
         <div class="row">
-          <div class="span6">
-              <%= yield :student_login%>
+          <div class="span2">
+            </br>
           </div>
-          <div class="span6">
-              <%= yield :parent_login%>
-            
+          <div class="span4">
+            <%= yield :admin_login %>  
           </div>
+          <div class="span4">
+            <%=yield :student_login %>
+          </div>
+          <div class="span2">
+            </br>            
+          </div>
+
           
         </div>
-      </div>
-      
-  </div>
+         
+       </div>
+
+
+       <div class="container" style="padding-top:15px">
+        <div class="row">
+          <div class="span2">
+            </br>
+          </div>
+          <div class="span4">
+            <%=yield :teacher_login %>
+          </div>
+          <div class="span4">
+            <%=yield :parent_login %>
+          </div>
+          <div class="span2">
+            </br>            
+          </div>
+
+          
+        </div>
+         
+       </div>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
   </body>
 </html>
       <script type='text/javascript'>

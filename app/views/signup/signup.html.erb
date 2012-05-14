@@ -2,37 +2,51 @@
           <%= render :template => "shared/display_message",:locals => {:message_type => 'ERROR',:message_content => flash[:error]} %>
        <% end %>
        <div class="content forms">
-          <%= form_tag('/institute/create',:multipart => true,:method => :post) do -%>
-            <div class="field">
-              <%= label_tag 'institute_name' ,"Institute Name" %>
-              <%= text_field_tag 'institute_name',nil,:class => "medium"  %>
+          <%= form_tag('/institute/create',:class=> 'form-horizontal',:multipart => true,:method => :post) do -%>
+          <fieldset>  
+            <div class="control-group">
+              <%= label_tag 'institute_name' ,"Institute Name" ,:class=>"control-label" %>
+              <div class="controls">
+                <%= text_field_tag 'institute_name',nil,:class => "medium"  %>
+              </div>
             </div>
-            <div class="field">
-              <%= label_tag 'institute_url' ,"Choose URL" %>
+            <div class="control-group">
+              <%= label_tag 'institute_url' ,"Choose URL" ,:class=>"control-label" %>
+              <div class="controls">
               <%= text_field_tag 'institute_url',nil,:class => "medium"  %>
+              </div>
             </div>
             
-            <div class="field">
-              <%= label_tag 'first_name' ,"First Name" %>
+            <div class="control-group">
+              <%= label_tag 'first_name' ,"First Name" ,:class=>"control-label" %>
+              <div class="controls">
               <%= text_field_tag 'first_name',nil,:class => "medium"  %>
+              </div>
             </div>
-            <div class="field">
-              <%= label_tag 'last_name' ,"Last Name" %>
+            <div class="control-group">
+              <%= label_tag 'last_name' ,"Last Name" ,:class=>"control-label"%>
+              <div class="controls">
               <%= text_field_tag 'last_name',nil,:class => "medium"  %>
+              </div>
             </div>
-            <div class="field">
-              <%= label_tag 'contact_email' ,"Contact Email" %>
+            <div class="control-group">
+              <%= label_tag 'contact_email' ,"Contact Email",:class=>"control-label" %>
+              <div class="controls">
               <%= text_field_tag 'contact_email',nil,:class => "medium"  %>
+              </div>
             </div>
 
-            <div class="field">
-              <%= label_tag 'password' ,"Password" %>
+            <div class="control-group">
+              <%= label_tag 'password' ,"Password" ,:class=>"control-label"%>
+              <div class="controls">
               <%= password_field_tag 'password',nil,:class => "medium"  %>
+              </div>
             </div>
 
-            <div class="actions">
+            <div class="form-actions">
               <%= submit_tag "Submit" ,:class => 'btn btn-large btn-primary'%>
             </div>
-
+          
+          </fieldset>  
           <% end -%>
        </div>

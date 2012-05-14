@@ -1,7 +1,6 @@
 /* 
 *= require_self 
-*= require bootstrap 
-*= require login-top-style 
-*= require style 
-
+*= require jquery-ui
+*= require myboot 
+*= require colorbox 
 */  

@@ -1,47 +1,46 @@
 
 
-            <div id="<%=id%>" title="<%= title %>" style="display:none"  >
-
-                <div class="validateTips"><%= title %> </div>
+            <div id="<%=id%>" title="<%= title %>" style="padding:10px">
+                <h2> <%= title %></h2>
+                <div class="validateTips"> </div>
                 <div class="loading-image" style="display:none">
                   <img src="<%=asset_path "ajax-loader.gif"%>"/>
                 </div>
 
-              <form>
                 <fieldset>
-                <label for="title">UserId/Email</label>
-                <input type="text" name="userid" id="modal-userid-<%=id%>" class="text ui-widget-content ui-corner-all" />
-                <label for="description">Password</label>
-                <input type="password" name="userid" id="modal-password-<%=id%>" class="text ui-widget-content ui-corner-all" />
+                <div class="control-group">
+                  <label class="control-label" for="title">UserId/EmailId</label>
+                  <div class="controls">
+                    <input type="text" name="userid" id="modal-userid-<%=id%>" class="input-xlarge" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="description">Password</label>
+                  <div class="controls">
+                    <input type="password" name="userid" id="modal-password-<%=id%>" class="input-xlarge" />
+                  </div>
+                </div>
+                <div class="form-actions">
+                   <button type="submit" class="btn btn-primary" id="<%=id%>-button">Login</button>
+                   <button class="btn">Cancel</button>
+                 </div>
                 </fieldset>
-            </form>
             </div>
             <script type="text/javascript">
   $(function() {
-    $( "#<%=id%>" ).dialog({
-      
-      autoOpen: false,
-      modal: true,
-      resizable:false,
-      width:'auto',
-      height:'auto',
-      buttons: {
-        "Signin": function() {
+   $(".login").colorbox({ inline:true, 
+                          width:"400px",
+                          height:"400px",
+                          top:"200px",
+                          onOpen:function(){ $('.validateTips').text(''); }  
+                          });
+    });
+  $("#<%=id%>-button").click(function(){
             $(".loading-image").show();
             $('.validateTips').text('Logging in');
             var username = $("#modal-userid-<%=id%>");
             var pass = $("#modal-password-<%=id%>");
             var login_success = login_user('<%=id%>',username.val(),pass.val());
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-      close: function() {
-        $("#modal-username-<%=id%>").val("");
-        $("#modal-password-<%=id%>").val("");
-      }
-    });
-    });
+});
             </script>
 

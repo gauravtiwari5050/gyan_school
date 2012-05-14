@@ -1,48 +1,56 @@
       <% content_for :admin_login do -%>
-      <div class="login" onclick="launch_login_dialog('admin');">
+      <div class="login" href="#admin">
         
       <div class="title">
         <h3> Admin/Employee Login</h3>
       </div> 
-      <div class="logo_image" align="center">
+      <div class="login-image" align="center">
         <img src=<%= asset_path 'admin.png' %> />
       </div>
+       <div style="display:none">
           <%= render :template => "shared/login_modal",:locals => {:id => 'admin',:title => 'Admin Login'} %>
+       </div>
       </div>
       <% end -%>
       <% content_for :teacher_login do -%>
-      <div class="login" onclick="launch_login_dialog('teacher');">
+      <div class="login" href="#teacher">
 
       <div class="title">
         <h3> Teacher Login</h3>
       </div> 
-      <div class="logo_image" align="center">
+      <div class="login-image" align="center">
         <img src=<%= asset_path 'teacher.png' %> />
       </div>
+       <div style="display:none">
           <%= render :template => "shared/login_modal",:locals => {:id => 'teacher',:title => 'Teacher Login'} %>
+       </div>
       </div>  
       <% end -%>
        <% content_for :student_login do -%>
-      <div class="login" onclick="launch_login_dialog('student');">
+      <div class="login" href="#student">
       <div class="title">
         <h3> Student Login</h3>
       </div>  
-      <div class="logo_image" align="center">
+      <div class="login-image" align="center">
         <img src=<%= asset_path 'student.png' %> />
       </div>
+       <div style="display:none">
           <%= render :template => "shared/login_modal",:locals => {:id => 'student',:title => 'Student Login'} %>
+       </div>
          
       </div>
        <% end -%>
       <% content_for :parent_login do -%>
-      <div class="login" onclick="launch_login_dialog('parent');">
+      <div class="login" href="#parent">
       <div class="title">
         <h3> Parent Login</h3>
       </div> 
-      <div class="logo_image" align="center">
+      <div class="login-image" align="center">
         <img src=<%= asset_path 'parent.png' %> />
       </div>
+       <div style="display:none">
           <%= render :template => "shared/login_modal",:locals => {:id => 'parent',:title => 'Parent Login'} %>
+       </div>
       </div>
       <% end -%>
 

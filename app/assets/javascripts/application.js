@@ -2,6 +2,7 @@
 //= require jquery-ui  
 //= require jquery_ujs 
 //= require tinymce-jquery
+//= require jquery.colorbox-min
 //= require_self  
 //= require_tree .  
   

@@ -12,6 +12,6 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
-/tmp
+/tmp/*
 /vendor/*
 public/upload/*
