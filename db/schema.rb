@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511101905) do
+ActiveRecord::Schema.define(:version => 20120515123951) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_1"
@@ -109,6 +109,13 @@ ActiveRecord::Schema.define(:version => 20120511101905) do
     t.datetime "updated_at",              :null => false
   end
 
+  create_table "helper_files", :force => true do |t|
+    t.string   "name"
+    t.integer  "institute_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "institute_sessions", :force => true do |t|
     t.integer  "institute_id"
     t.date     "start"
@@ -171,6 +178,15 @@ ActiveRecord::Schema.define(:version => 20120511101905) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "institute_id"
+  end
+
+  create_table "tasks", :force => true do |t|
+    t.string   "task_type"
+    t.string   "status"
+    t.string   "comment"
+    t.integer  "institute_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "teacher_sections", :force => true do |t|

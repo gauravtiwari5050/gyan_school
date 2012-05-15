@@ -1,4 +1,4 @@
-  <%= render :template => 'shared/left_column' %>
+  <%= render :template => 'shared/left_column' ,:locals => {:active => 'dashboard'}%>
   <%= render :template => "shared/top_bar_new" %>
   <% content_for :main_content do -%>
       <%= render 'home_dashboard_new' %>

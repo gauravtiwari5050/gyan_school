@@ -1,0 +1,46 @@
+  <%= render :template => 'shared/left_column' ,:locals => {:active => 'students'}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/students">Students</a> <span class="divider">/</span>
+   <% end -%>
+  <%= render :template => "shared/top_bar_new" %>
+  <% content_for :main_content do -%>
+       <div class="container">
+        <div class="row">
+          <div class="span3">
+            <div class="btn-group">
+            <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Add Students
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/students/upload_file/new">Upload File</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Add Student</a></li>
+            </ul>
+          </div>
+            
+          </div>
+          <div class="span3">
+            <div class="btn-group">
+            <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-asterisk"></i> Options
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Sign Out</a></li>
+            </ul>
+          </div>
+          </div>
+
+          <div class="span4">
+            </br>
+          </div>
+          
+        </div>
+         
+       </div>
+
+        <%= render :template => 'shared/students_index',:locals => {:students => @students} %>
+  <% end -%>

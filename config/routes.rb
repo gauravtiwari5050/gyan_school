@@ -3,7 +3,6 @@ GyanSchool::Application.routes.draw do
   match '/signup' => 'signup#signup'
   match '/institute/create' => 'signup#register' ,:via => :post
   match 'login' => 'login#login'
-  match 'ajax_login/:user_type/:user_name/:password' => 'login#ajax_login'
   match 'logout' => 'login#destroy'
   match 'login/school' => 'login#login_employee' ,:via => :post
   match 'login/student' => 'login#login_student' ,:via => :post
@@ -65,6 +64,16 @@ GyanSchool::Application.routes.draw do
 
   match 'setup_info' => 'getting_started#setup_info'
   match 'default_subjects' => 'ajax#default_subjects'
+
+  ##dashboard urls
+  match 'students' => 'home#students_index'
+  match 'students/upload_file/new' => 'home#students_upload_file'
+  match 'students/upload_file/create' => 'home#students_upload_file_create' ,:via => :post
+
+  ##ajax urls
+  match 'ajax_login/:user_type/:user_name/:password' => 'login#ajax_login'
+  match 'ajax/task_status/:task_id' => 'ajax#task_status'
+
 
 
 

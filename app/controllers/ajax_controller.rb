@@ -32,4 +32,15 @@ class AjaxController < ApplicationController
       format.js {render :json => @default_subjects.to_json}
     end
   end
+
+  def task_status
+    @task = Task.find(:first,:conditions => {:id =>params[:task_id]}) 
+    if @task.nil?
+      @task = Task.new
+      @task.status = 'FAILURE'
+    end
+    respond_to do |format|
+      format.js {render :json => @task.to_json}
+    end
+  end
 end

@@ -114,3 +114,17 @@ function createMessage(subject,message,to_user,modal_dialog_obj) {
         $( ".validateTips" ).removeClass( "ui-state-highlight", 1500 );
       }, 500 );
     }
+    var task_status = 'PENDING';
+    function get_status(t_id) {
+      console.log(t_id);
+      $.read(
+        '/ajax/task_status/{task_id}',
+        {task_id:t_id},
+        function(response) {
+          task_status = response.status;
+        },
+        function() {}
+      );
+      
+      return task_status;
+    }

@@ -451,6 +451,65 @@ class HomeController < ApplicationController
     end
   end
 
+  ## dashboard urls
+  def students_index
+   @students = Institute.find_by_id(get_institute_id).students 
+  end
+
+  def students_upload_file
+    @helper_file =  HelperFile.new
+    @task = Task.find(:first,:conditions => {:institute_id => get_institute_id,:task_type => 'UPLOAD_FILE_STUDENTS'})
+    @success_message = ''
+    @failure_message = ''
+    if !@task.nil?
+      if @task.status == 'SUCCESS'
+        @success_message = @task.comment.to_s
+        @task.destroy
+        @task = nil
+      elsif @task.status == 'FAILURE'
+       logger.error 'Task failure message ' + @task.comment
+        @failure_message = @task.comment.to_s
+        @task.destroy
+        @task = nil
+      end
+    end
+  end
+
+  def students_upload_file_create
+    #TODO this needs to be moved to an s3 based service
+    @helper_file = HelperFile.new(params[:helper_file])
+    @helper_file.institute_id = get_institute_id
+    persist_success = @helper_file.save
+    if persist_success == true
+       task = Task.find(:first,:conditions => {:institute_id => get_institute_id,:task_type => 'UPLOAD_FILE_STUDENTS'})
+       if task.nil?
+         task  =  Task.new
+        task.task_type = 'UPLOAD_FILE_STUDENTS'
+        task.status = 'PENDING'
+        task.comment = ''
+        task.institute_id =  get_institute_id
+        persist_success = task.save
+        if !persist_success
+          raise 'Error saving task object'
+        end
+      else
+        persist_success = task.update_attributes(:status => 'PENDING',:comment => '')
+        if !persist_success
+          raise 'Error saving task object'
+        end
+      end
+
+    end
+    respond_to do |format|
+      if persist_success == true
+        Delayed::Job.enqueue(CreateStudentsFromFileJob.new(@helper_file.id,task.id))
+        format.html {redirect_to('/students/upload_file/new')}
+      else
+        format.html {render :action => 'students_upload_file'}
+      end
+    end
+  end
+
   
 
 end
