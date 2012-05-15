@@ -1,0 +1,21 @@
+<div class="students_index" style="padding-top:25px">
+  
+<table class="table table-bordered table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Progress</th>
+    <th>Attendance</th>
+    <th>Settings</th>
+  </thead>
+  <tbody>
+    <% for student in students -%>
+     <tr>
+     <td><%= link_to student.print_name, '/profiles/students/'+student.id.to_s %></td>
+     <td>Progress</td>
+     <td>Attendance</td>
+     <td><i class="icon-user"></i></td>
+     </tr>
+    <% end -%>
+  </tbody>
+</table>
+</div>
