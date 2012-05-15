@@ -1,0 +1,47 @@
+<% content_for :top_bar_new do -%>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#"><img src="<%= asset_path 'cloudclass-logo.png' %>" /></a>
+          <div class="nav-collapse">
+            <ul class="nav navbar-text">
+              
+            <% if current_user.type == 'Admin' %>
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/session/new">Sessions</a></li>
+                      <li><a href="/batch/new">Classes/Sections</a></li>
+                      <li><a href="/student/new">Student</a></li>
+                      <li><a href="/teacher/new">Teacher</a></li>
+                    </ul>
+               </li>
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/subjects/show">Subjects</a></li>
+                      <li><a href="/batch/index">Classes</a></li>
+                    </ul>
+               </li>
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fees <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/fees/schedule_index">Create Fee Collection Schedule</a></li>
+                      <li><a href="/fees/collect">Collect Fees</a></li>
+                    </ul>
+               </li>
+              
+              
+            <% end -%>
+            </ul>
+            <%=render :template => 'shared/user_status'%>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+<% end -%>
