@@ -33,8 +33,27 @@
 
   <body>
 
-    <%=yield :top_bar_new%>  
-    <%=yield :breadcrumb%>  
+    <%=yield :top_bar_new%> 
+
+    <!-- breadcrumb starts -->
+    <div class='subnav'>
+      
+    <div class="container">
+    <div class="row">
+      <div class="span2">
+       </br>
+      </div>
+      <div class="span10">
+        <a href="<%=get_home_for_user%>">Home</a> <span class="divider">/</span>
+        <%=yield :breadcrumb%>  
+      </div>
+      
+    </div>
+
+
+    </div> <!-- /container -->
+    </div>
+    <!-- breadcrum ends -->
     <div class="main">
       <div class="container">
         <div class="row">
