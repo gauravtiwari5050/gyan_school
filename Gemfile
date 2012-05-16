@@ -38,6 +38,7 @@ gem "jquery-ui-themes", "~> 0.0.4"
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem "nested_form"
+gem 'wicked_pdf'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

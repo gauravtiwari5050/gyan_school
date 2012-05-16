@@ -74,6 +74,9 @@ GyanSchool::Application.routes.draw do
   match 'ajax_login/:user_type/:user_name/:password' => 'login#ajax_login'
   match 'ajax/task_status/:task_id' => 'ajax#task_status'
 
+  ##print ursl
+  match 'print/details/students' => 'print#student_details'
+
 
 
 

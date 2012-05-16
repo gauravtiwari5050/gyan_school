@@ -1,0 +1,27 @@
+<html>
+<head>
+<%= wicked_pdf_stylesheet_link_tag "print" %>
+</head>
+<body>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <th> Name </th>
+    <th> Email </th>
+    <th> UserName </th>
+    <th> Password </th>
+  </thead>
+  <% for student in @students -%>
+  <tr>
+    <td><%= student.print_name %></td>
+    <td><%= student.email %></td>
+    <td><%= student.username %></td>
+    <td><%= student.dob %></td>
+  
+  </tr>
+  
+  <% end -%>
+</table>
+</body>
+
+</html>
