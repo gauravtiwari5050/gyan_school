@@ -160,6 +160,7 @@ GEM
       multi_json (>= 1.0.2)
     uuidtools (2.1.2)
     validates_existence (0.7.1)
+    wicked_pdf (0.7.9)
 
 PLATFORMS
   ruby
@@ -189,3 +190,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   uuidtools
   validates_existence (>= 0.4)
+  wicked_pdf
