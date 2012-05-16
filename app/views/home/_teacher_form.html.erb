@@ -3,6 +3,11 @@
   <%= render :template => "shared/form-errors",:locals => {:form => @teacher} %>
         <%= form_for(@teacher,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
           <fieldset>
+            <table class='table'>
+              <tbody>
+                <tr>
+                  <td>
+
           <h3 style="padding-top:15px"> Basic Details </h3>
             <div class="control-group">
               <%= f.label 'First Name' ,"First Name" ,:class=>"control-label" %>
@@ -34,6 +39,8 @@
               <%= f.text_field :dob,:class=> "datepicker"%>
               </div>
             </div>
+                  </td>
+                  <td>
             <h3 style="padding-top:15px"> Address </h3>
             <%= f.fields_for :address do |add| %>
             <div class="control-group">
@@ -98,6 +105,11 @@
             </div>
               
             <% end -%>
+                    
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
             
             <div class="form-actions">

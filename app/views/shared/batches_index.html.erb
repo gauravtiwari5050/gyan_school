@@ -1,0 +1,54 @@
+<div class="batches_index" style="padding-top:25px">
+  
+<table class="table">
+  <thead>
+    <th>Name</th>
+    <th>Sections|Class Teacher</th>
+  </thead>
+  <tbody>
+    <% for batch in batches -%>
+     <tr>
+     <td><%= link_to batch.name, '/batch/'+batch.id.to_s %></td>
+     <td>
+      <div class="">
+        <%= link_to_function "See Section Details", "toggle_sections(this)" ,:class=> 'btn'%>
+        
+        <table class="table table-striped toggle-section" style="display:none">
+          <% for section in batch.sections -%>
+          <tr>
+          <td>
+            <%=section.name %>
+          </td>
+          <td>
+            <% teacher = get_teacher_for_section(section)%>
+            <div id="section_<%=section.id%>">
+            <% if !teacher.nil? %>
+              
+              <%=teacher.print_name%>
+            <% else %>
+                      <%=collection_select(:teacher,:teacher_id,@institute.teachers,:id,:print_name,{:prompt => 'Select a Teacher'},{:onchange => "update_teacher(this,"+section.id.to_s+")"})%>
+            <% end %>
+            </div>
+
+          </td>
+          </tr>
+
+            
+          <% end -%>
+
+        </table>
+      </div>
+     </td>
+     </tr>
+    <% end -%>
+  </tbody>
+</table>
+</div>
+
+<script type="text/javascript">
+function toggle_sections(obj) {
+  $(".toggle-section").toggle(false);
+  $(obj).parent().find(".toggle-section").toggle(true);
+}
+  
+</script>

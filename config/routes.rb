@@ -15,7 +15,7 @@ GyanSchool::Application.routes.draw do
   match 'session/create' => 'home#session_create' ,:via => :post
   match 'batch/new' => 'home#batch_new'
   match 'batch/create' => 'home#batch_create',:via => :post
-  match 'batch/index' => 'home#batch_index'
+  match 'batch/index' => 'home#classes_index'
   match 'batch/:batch_id/edit' => 'home#batch_edit'
   match 'batch/:batch_id/show' => 'home#batch_show'
   match 'batch/:batch_id/create' => 'home#batch_update'
@@ -70,6 +70,14 @@ GyanSchool::Application.routes.draw do
   match 'students' => 'home#students_index'
   match 'students/upload_file/new' => 'home#students_upload_file'
   match 'students/upload_file/create' => 'home#students_upload_file_create' ,:via => :post
+  
+  match 'teachers' => 'home#teachers_index'
+  match 'teachers/upload_file/new' => 'home#teachers_upload_file'
+  match 'teachers/upload_file/create' => 'home#teachers_upload_file_create' ,:via => :post
+
+  match 'classes' => 'home#classes_index'
+
+
 
   ##ajax urls
   match 'ajax_login/:user_type/:user_name/:password' => 'login#ajax_login'
@@ -77,6 +85,7 @@ GyanSchool::Application.routes.draw do
 
   ##print ursl
   match 'print/details/students' => 'print#student_details'
+  match 'print/details/teachers' => 'print#teacher_details'
 
 
 

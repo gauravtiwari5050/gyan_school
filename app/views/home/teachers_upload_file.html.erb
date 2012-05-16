@@ -1,0 +1,96 @@
+  <%= render :template => 'shared/left_column' ,:locals => {:active => 'teachers'}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/teachers">Teachers</a> <span class="divider">/</span>
+   <% end -%>
+  <%= render :template => "shared/top_bar_new" %>
+  <% content_for :main_content do -%>
+    <div class="container">
+      <div class="row">
+        <div class="span5">
+        <% if @task.nil? %>
+        <% if  !@success_message.nil? && @success_message.size > 0 %>
+          <%=render :template => 'shared/display_message',:locals => {:message_type => 'SUCCESS',:message_content => @success_message}%>
+        <% end %>
+        <% if  !@failure_message.nil? && @failure_message.size > 0 %>
+          <%=render :template => 'shared/display_message',:locals => {:message_type => 'FAILURE',:message_content => @failure_message}%>
+        <% end %>
+        <%= form_for(@helper_file,:html =>{:class => 'form-vertical',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+          <%= render :template => "shared/form-errors",:locals => {:form => @helper_file} %>
+          <fieldset>
+            <div class="control-group">
+              
+              <%= f.label 'Teachers List' ,"Teachers List" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.file_field 'name'%> 
+              
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Upload file" ,:class => 'btn btn-medium'%>
+            </div>
+          </fieldset>
+
+        <% end -%>
+        <% else %>
+                          <h4>Uploading files</h4>
+                          <div class="login-image" align="center" style="padding-top:30px">
+                              <img src=<%= asset_path 'loading_medium.gif' %> />
+                          </div>
+                          <script type="text/javascript">
+                             $(function(){
+                                check_status_and_exit(); 
+                             });
+                             function check_status_and_exit() {
+                                task_status = get_status(<%=@task.id%>);
+                                console.log(task_status);
+                                if (task_status == null || task_status != 'PENDING' ) {
+                                  window.location.reload();
+                                } else {
+                                  setTimeout("check_status_and_exit()",500);
+                                }
+                             }
+                          </script>
+          
+        <% end %>
+
+        </div>
+        <div class="span5">
+          <div class="explanation">
+            Please make sure that the file you upload have the following fields(in given order)
+            <table class="table table-bordered">
+            <thead>
+            <th>Field</th>
+            <th>Details</th>
+            </thead>
+            <tbody>
+              <tr>
+              <td>Teacher Id</td>
+              <td>A unique id (made of letters or numbers or both) for the teacher</td>
+              </tr>
+              <tr>
+              <td>First Name</td>
+              <td>First name of the teacher</td>
+              </tr>
+              <tr>
+              <td>Last Name</td>
+              <td>Last name of the teacher</td>
+              </tr>
+              <tr>
+              <td>Email</td>
+              <td>Unique Email Id of the teacher</td>
+              </tr>
+              <tr>
+              <td>Parent Name</td>
+              <td>Name of teachers parents</td>
+              </tr>
+              <tr>
+              <td> Mobile Number</td>
+              <td>10 digit cell phone number of the teacher</td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  <% end -%>

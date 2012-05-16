@@ -29,18 +29,3 @@
       </tbody>
       </table>
       <%= link_to "Next", '/getting_started/assign_teachers/processing' ,:class => 'btn btn-primary btn-large' %>
-      <script type='text/javascript'>
-        function update_teacher(obj,sec_id) {
-          $.update(
-            '/section/{section_id}/update_teacher/{teacher_id}',
-            {section_id:sec_id,teacher_id:obj.options[obj.selectedIndex].value},
-            function(response) {
-             $('#section_'+sec_id).html(obj.options[obj.selectedIndex].text);
-            },
-            function(response) {
-              alert(JSON.stringify(response));
-            }
-
-          );
-        }
-      </script>

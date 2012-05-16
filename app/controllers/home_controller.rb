@@ -83,7 +83,7 @@ class HomeController < ApplicationController
     persist_success = @batch.save
     respond_to do |format|
     if persist_success
-      format.html {redirect_to("/batch/index")}
+      format.html {redirect_to("/classes")}
     else
       format.html {render :action => "batch_new"}
     end
@@ -460,9 +460,31 @@ class HomeController < ApplicationController
    @students = Institute.find_by_id(get_institute_id).students 
   end
 
+  def teachers_index
+   @teachers = Institute.find_by_id(get_institute_id).teachers 
+  end
+
   def students_upload_file
     @helper_file =  HelperFile.new
     @task = Task.find(:first,:conditions => {:institute_id => get_institute_id,:task_type => 'UPLOAD_FILE_STUDENTS'})
+    @success_message = ''
+    @failure_message = ''
+    if !@task.nil?
+      if @task.status == 'SUCCESS'
+        @success_message = @task.comment.to_s
+        @task.destroy
+        @task = nil
+      elsif @task.status == 'FAILURE'
+       logger.error 'Task failure message ' + @task.comment
+        @failure_message = @task.comment.to_s
+        @task.destroy
+        @task = nil
+      end
+    end
+  end
+  def teachers_upload_file
+    @helper_file =  HelperFile.new
+    @task = Task.find(:first,:conditions => {:institute_id => get_institute_id,:task_type => 'UPLOAD_FILE_TEACHERS'})
     @success_message = ''
     @failure_message = ''
     if !@task.nil?
@@ -512,6 +534,47 @@ class HomeController < ApplicationController
         format.html {render :action => 'students_upload_file'}
       end
     end
+  end
+
+
+  def teachers_upload_file_create
+    #TODO this needs to be moved to an s3 based service
+    @helper_file = HelperFile.new(params[:helper_file])
+    @helper_file.institute_id = get_institute_id
+    persist_success = @helper_file.save
+    if persist_success == true
+       task = Task.find(:first,:conditions => {:institute_id => get_institute_id,:task_type => 'UPLOAD_FILE_TEACHERS'})
+       if task.nil?
+         task  =  Task.new
+        task.task_type = 'UPLOAD_FILE_TEACHERS'
+        task.status = 'PENDING'
+        task.comment = ''
+        task.institute_id =  get_institute_id
+        persist_success = task.save
+        if !persist_success
+          raise 'Error saving task object'
+        end
+      else
+        persist_success = task.update_attributes(:status => 'PENDING',:comment => '')
+        if !persist_success
+          raise 'Error saving task object'
+        end
+      end
+
+    end
+    respond_to do |format|
+      if persist_success == true
+        Delayed::Job.enqueue(CreateTeachersFromFileJob.new(@helper_file.id,task.id))
+        format.html {redirect_to('/teachers/upload_file/new')}
+      else
+        format.html {render :action => 'teachers_upload_file'}
+      end
+    end
+  end
+
+  def classes_index
+    @institute = Institute.find_by_id(get_institute_id)
+    @batches = @institute.batches
   end
 
   

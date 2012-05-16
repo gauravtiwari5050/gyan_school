@@ -128,3 +128,18 @@ function createMessage(subject,message,to_user,modal_dialog_obj) {
       
       return task_status;
     }
+
+
+        function update_teacher(obj,sec_id) {
+          $.update(
+            '/section/{section_id}/update_teacher/{teacher_id}',
+            {section_id:sec_id,teacher_id:obj.options[obj.selectedIndex].value},
+            function(response) {
+             $('#section_'+sec_id).html(obj.options[obj.selectedIndex].text);
+            },
+            function(response) {
+              alert(JSON.stringify(response));
+            }
+
+          );
+        }

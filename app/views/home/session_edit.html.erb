@@ -1,15 +1,12 @@
-<% content_for :left_bar do -%>
-  <%= render 'left_bar' %>
-<% end -%>
-<% content_for :top_bar do -%>
-  <%= render :template => "shared/top_bar" %>
-<% end -%>
-<% content_for :right_bar do -%>
-  <%= render 'right_bar' %>
-<% end -%>
+
+  <%= render :template => 'shared/left_column' ,:locals => {:active => 'dashboard'}%>
+  <%= render :template => "shared/top_bar_new" %>
+   <% content_for :breadcrumb do -%>
+       <a href="/sessions/index">Institute Sessions</a> <span class="divider">/</span>
+   <% end -%>
 <% content_for :main_content do -%>
       <div class="title">
-        <h2> Create new Session for the institute</h2>
+        <h2> Edit Session dates</h2>
       </div>
       <div class="content forms">
   <%= render :template => "shared/form-errors",:locals => {:form => @institute_session} %>

@@ -1,5 +1,5 @@
 
-        <%= form_for(@fee_collection_event,:html =>{:class => 'form-vertical',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+        <%= form_for(@fee_collection_event,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
   <%= render :template => "shared/form-errors",:locals => {:form => @fee_collection_event} %>
          <fieldset> 
             <div class="control-group">

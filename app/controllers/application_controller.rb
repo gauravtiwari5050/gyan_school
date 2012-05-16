@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name,:get_section_description,:is_fee_paid,:get_score,:get_institute_id
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name,:get_section_description,:is_fee_paid,:get_score,:get_institute_id,:get_teacher_for_section
   def login_employee_user(user)
     session[:user_institute_id] = user.institute_id
     session[:user_name] = user.username
@@ -88,6 +88,17 @@ class ApplicationController < ActionController::Base
   def get_score(section_id,user_id,exam_id,course_id)
      exam_result = ExamResult.find(:first,:conditions=> {:section_id => section_id,:user_id => user_id,:exam_id => exam_id,:course_id => course_id})
      return exam_result
+  end
+
+  def get_teacher_for_section(section)
+    teacher = nil
+    if !section.nil?
+     teacher_section = TeacherSection.find(:first,:conditions=>{:institute_id => get_institute_id,:section_id => section.id}) 
+     if !teacher_section.nil?
+      teacher = teacher_section.user
+     end
+    end
+    return teacher
   end
 
 

@@ -1,0 +1,17 @@
+<div class="teachers_index" style="padding-top:25px">
+  
+<table class="table table-bordered table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Settings</th>
+  </thead>
+  <tbody>
+    <% for teacher in teachers -%>
+     <tr>
+     <td><%= link_to teacher.print_name, '/profiles/teachers/'+teacher.id.to_s %></td>
+     <td><i class="icon-user"></i></td>
+     </tr>
+    <% end -%>
+  </tbody>
+</table>
+</div>
