@@ -21,6 +21,7 @@ GyanSchool::Application.routes.draw do
   match 'batch/:batch_id/create' => 'home#batch_update'
   match 'batch/sections/:batch_id' => 'home#sections_for_batch'
   match 'student/new' => 'home#student_new'
+  match 'student/search' => 'home#student_search'
   match 'student/:student_id/edit' => 'home#student_edit'
   match 'student/:student_id/create' => 'home#student_update' ,:via => :post
   match 'student/create' => 'home#student_create' ,:via => :post

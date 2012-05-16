@@ -163,6 +163,10 @@ class HomeController < ApplicationController
     
   end
 
+  def student_search
+    
+  end
+
   def sections_for_batch
     @batch = Batch.find_by_id(params[:batch_id])
     @sections = @batch.sections
