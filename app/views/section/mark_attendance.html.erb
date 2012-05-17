@@ -1,12 +1,10 @@
-<% content_for :left_bar do -%>
-  <%= render 'left_bar' %>
-<% end -%>
-<% content_for :top_bar do -%>
-  <%= render :template => "shared/top_bar" %>
-<% end -%>
-<% content_for :right_bar do -%>
-  <%= render 'right_bar' %>
-<% end -%>
+  <%= render :template => "shared/top_bar_new" %>
+  <%= render :template => 'shared/left_column_section' ,:locals => {:active => 'attendance',:section => @section}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/batch/<%=@section.batch.id.to_s+'/show'%>"><%=@section.batch.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/show'%>"><%=@section.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/attendance'%>">Attendance</a> <span class="divider">/</span>
+   <% end -%>
 <% content_for :main_content do -%>
   <h3> Attendance for <%= @section.batch.name + '-' + @section.name + ' for ' + @date.strftime("%B %d, %Y")%></h3>
   <% if  !flash[:notice].nil?%>
@@ -30,7 +28,7 @@
          <tbody>
     <% for student in @section.students -%>
           <tr>
-            <td><%= student.fullname%></td>   
+            <td><%= student.print_name%></td>   
             <% if  is_student_present(student.id,@section.id,params[:date])%>
               <td><%=check_box_tag student.id ,student.id,true %></td>
               

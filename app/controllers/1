@@ -37,16 +37,12 @@ GyanSchool::Application.routes.draw do
   match 'section/:section_id/attendance' => 'section#attendance_home'
   match 'section/:section_id/mark_attendance/:date' => 'section#mark_attendance'
   match 'section/:section_id/mark_attendance/:date/update' => 'section#mark_attendance_update' ,:via => :post
-  match 'section/:section_id/exams/create' => 'section#exam_create' ,:via => :post
+  match 'section/:section_id/create_exam' => 'home#section_exams_create' ,:via => :post
   match 'section/:section_id/exams/new' => 'section#exam_new'
   match 'section/:section_id/exams' => 'section#exams_index'
-  match 'section/:section_id/exams/:exam_id/subjects' => 'section#exam_subjects'
-  match 'section/:section_id/exams/:exam_id/subjects/:course_id/show' => 'section#exam_subject_marks'
+  match 'section/:section_id/exams/:exam_id/subjects' => 'home#section_exam_subjects'
+  match 'section/:section_id/exams/:exam_id/subjects/:course_id/show' => 'home#section_exam_subject_marks'
   match 'section/:section_id/exams/:exam_id/subjects/:course_id/update' => 'home#section_exam_subject_marks_update'
-  
-  match 'section/:section_id/subjects/new' => 'section#subjects_new'
-  match 'section/:section_id/subjects/update' => 'section#subjects_update'
-  match 'section/:section_id/subjects' => 'section#subjects_index'
 
   match 'fees/schedule_index' => 'home#fees_schedule_index'
   match 'fees/schedule/:fee_event_id/edit' => 'home#fees_schedule_edit'

@@ -1,0 +1,9 @@
+  <%= render :template => "shared/top_bar_new" %>
+  <%= render :template => 'shared/left_column_section' ,:locals => {:active => 'home',:section => @section}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/batch/<%=@section.batch.id.to_s+'/show'%>"><%=@section.batch.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/show'%>"><%=@section.name%></a> <span class="divider">/</span>
+   <% end -%>
+  <% content_for :main_content do -%>
+      <%= render 'section_dashboard' %>
+  <% end -%>

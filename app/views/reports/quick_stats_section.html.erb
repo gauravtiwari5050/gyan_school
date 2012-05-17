@@ -1,0 +1,46 @@
+
+                  <div class="reporting-box">
+                    <div class="title">
+                      School Statistics
+                    </div>
+                    <div class="report-content">
+                      <div class="report-numbers">
+                        <div class="rowline">
+                          <div class="row">
+                            <div class="span3">
+                              <img src="<%= asset_path 'cciuser-group.png' %>" class="thumbpic-20"> Students
+                            </div>
+                            <div class="span1 bold" align="right">
+                               <%= @section.students.size%> 
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div class="rowline">
+                          <div class="row">
+                            <div class="span3">
+                              <img src="<%= asset_path 'cciuser-green.png' %>" class="thumbpic-20"> Class Teacher
+                            </div>
+                            <div class="span1" align="left" id="section_<%=@section.id.to_s%>">
+                              <% teacher = get_teacher_for_section(@section)%>
+                              <% if !teacher.nil? %>
+                                  <%=teacher.print_name%>
+                              <% else %>
+                                <%=collection_select(:teacher,:teacher_id,@section.batch.institute.teachers,:id,:print_name,{:prompt => 'Select a Teacher'},{:onchange => "update_teacher(this,"+@section.id.to_s+")",:style=>"width:100%"})%>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="rowline">
+                          <div class="row">
+                            <div class="span3">
+                              <img src="<%= asset_path 'ccipaste.png' %>" class="thumbpic-20"> Subjects
+                            </div>
+                            <div class="span1 bold" align="right">
+                               <%= @section.batch.courses.size%> 
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>

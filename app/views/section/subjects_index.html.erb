@@ -1,0 +1,59 @@
+
+  <%= render :template => "shared/top_bar_new" %>
+  <%= render :template => 'shared/left_column_section' ,:locals => {:active => 'subjects',:section => @section}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/batch/<%=@section.batch.id.to_s+'/show'%>"><%=@section.batch.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/show'%>"><%=@section.name%></a> <span class="divider">/</span>
+   <% end -%>
+<% content_for :main_content do -%>
+
+
+       <div class="container">
+        <div class="row">
+          <div class="span3">
+            <div class="btn-group">
+            <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Add Subject
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/section/<%=@section.id.to_s%>/subjects/new">Create more Subject</a></li>
+              <li class="divider"></li>
+            </ul>
+          </div>
+            
+          </div>
+          <div class="span3">
+          </div>
+
+          <div class="span4">
+            </br>
+          </div>
+          
+        </div>
+         
+       </div>
+
+
+
+      <div class="title" style="padding-top:25px">
+        <table class='table'>
+          <h3>  All subjects for <%= @section.batch.name + "-" +  @section.name %> </h3>
+        </table>
+      </div>
+      
+      <table class="table table-striped table-bordered">
+        <thead>
+          <th> Subject Name </th>
+        </thead>
+        <tbody>
+          <% @section.batch.courses.each do |subject|%>
+            <tr>
+              <td><%= subject.name %> </td>
+            </tr>
+          <% end -%>
+        </tbody>
+      </table>
+
+  
+<% end -%>

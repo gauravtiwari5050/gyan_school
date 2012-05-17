@@ -1,12 +1,12 @@
-<% content_for :left_bar do -%>
-  <%= render 'left_bar' %>
-<% end -%>
-<% content_for :top_bar do -%>
-  <%= render :template => "shared/top_bar" %>
-<% end -%>
-<% content_for :right_bar do -%>
-  <%= render 'right_bar' %>
-<% end -%>
+
+  <%= render :template => "shared/top_bar_new" %>
+  <%= render :template => 'shared/left_column_section' ,:locals => {:active => 'exams',:section => @section}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/batch/<%=@section.batch.id.to_s+'/show'%>"><%=@section.batch.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/show'%>"><%=@section.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/exams/'+@exam.id.to_s+'/subjects'%>"><%=@exam.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/exams/'+@exam.id.to_s+'/subjects/'+@subject.id.to_s+'/show'%>"><%=@subject.name%></a> <span class="divider">/</span>
+   <% end -%>
 <% content_for :main_content do -%>
   <h3> Marks/Results for <%= @section.batch.name + '-' + @section.name  + ' for ' + @exam.name + '-' + @subject.name %></h3>
 
@@ -21,7 +21,7 @@
          <tbody>
     <% for student in @section.students -%>
           <tr>
-            <td><%= student.fullname%></td>  
+            <td><%= student.print_name%></td>  
              <% exam_result = get_score(@section.id,student.id,@exam.id,@subject.id) %> 
             <% if !exam_result.nil?%>
               <td><%=text_field_tag student.id ,exam_result.score %></td>

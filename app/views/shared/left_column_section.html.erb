@@ -1,0 +1,80 @@
+<%= render :template => 'shared/sidepic' %>
+<% content_for :left_column do -%>
+  
+            <div class="leftcolumn">
+              <a href="/section/<%=section.id.to_s+'/show'%>">
+              <% if active == 'home' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccihome.png' %>" class="thumbpic-small">  Class Home
+              </div>
+              </a>
+
+              <a href="/section/<%=section.id.to_s+'/students'%>">
+              <% if active == 'students' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciuser-group.png' %>" class="thumbpic-small">  Students
+              </div>
+              </a>
+
+
+              <a href="/section/<%=section.id.to_s+'/subjects'%>">
+              <% if active == 'subjects' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccipaste.png' %>" class="thumbpic-small">  Subjects
+              </div>
+              </a>
+
+
+              <a href="/section/<%=section.id.to_s+'/attendance'%>">
+              <% if active == 'attendance' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccicontact.png' %>" class="thumbpic-small">  Attendance
+              </div>
+              </a>
+
+
+              <a href="/section/<%=section.id.to_s+'/exams'%>">
+              <% if active == 'exams' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciphoto-album.png' %>" class="thumbpic-small"> Exams/Tests
+              </div>
+              </a>
+              
+              
+              <a href="/section/<%=section.id.to_s+'/reports'%>">
+              <% if active == 'reports' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciprint.png' %>" class="thumbpic-small">  Print Reports
+              </div>
+              </a>
+
+              
+              <a href="/help">
+              <% if active == 'help' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccilight-bulb.png' %>" class="thumbpic-small">  Help
+              </div>
+              </a>
+            </div>
+<% end -%>

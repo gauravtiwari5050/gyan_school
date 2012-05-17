@@ -6,7 +6,7 @@
 
 <% content_for :main_content do -%>
       <div class="title">
-        <h2> Create new class/batch and sections </h2>
+        <h2> <%=@display_title%> </h2>
       </div>
         <%= nested_form_for(@batch,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
   <%= render :template => "shared/form-errors",:locals => {:form => @batch} %>

@@ -1,0 +1,68 @@
+
+  <%= render :template => "shared/top_bar_new" %>
+  <%= render :template => 'shared/left_column_section' ,:locals => {:active => 'subjects',:section => @section}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/batch/<%=@section.batch.id.to_s+'/show'%>"><%=@section.batch.name%></a> <span class="divider">/</span>
+       <a href="/section/<%=@section.id.to_s+'/show'%>"><%=@section.name%></a> <span class="divider">/</span>
+   <% end -%>
+<% content_for :main_content do -%>
+
+
+       <div class="container">
+        <div class="row">
+          <div class="span3">
+            <div class="btn-group">
+            <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Add Subject
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/section/<%=@section.id.to_s%>/subjects/new">Add more subjects</a></li>
+              <li class="divider"></li>
+            </ul>
+          </div>
+            
+          </div>
+          <div class="span3">
+          </div>
+
+          <div class="span4">
+            </br>
+          </div>
+          
+        </div>
+         
+       </div>
+
+
+
+      <div class="title" style="padding-top:25px">
+        <table class='table'>
+          <h3>  Create new subjects for <%= @section.batch.name + "-" +  @section.name %> </h3>
+        </table>
+      </div>
+        <%= nested_form_for(@batch,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
+         <%= render :template => 'shared/notices' %>
+        <%= render :template => "shared/form-errors",:locals => {:form => @batch} %>
+         <fieldset>
+            <div class="control-group">
+              <div class="controls">
+
+            <%= f.fields_for :courses do |builder| -%>
+              <%= render 'course_fields',:f=>builder %>
+            <% end -%>
+              <p><%= f.link_to_add "Add another subject", :sections,:class=>"btn btn-medium" %></p>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+
+         </fieldset> 
+          
+      <% end -%>
+
+
+
+  
+<% end -%>

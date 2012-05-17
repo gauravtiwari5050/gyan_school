@@ -8,7 +8,7 @@
   <tbody>
     <% for batch in batches -%>
      <tr>
-     <td><%= link_to batch.name, '/batch/'+batch.id.to_s %></td>
+     <td><%= link_to batch.name, '/batch/'+batch.id.to_s+'/show' %></td>
      <td>
       <div class="">
         <%= link_to_function "See Section Details", "toggle_sections(this)" ,:class=> 'btn'%>
