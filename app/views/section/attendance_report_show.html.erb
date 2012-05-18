@@ -34,42 +34,24 @@
          
        </div>
   
-  <h3 style="padding-top:25px"> Attendance for <%= @section.batch.name + '-' + @section.name + ' for ' + @date.strftime("%B %d, %Y")%></h3>
-  <% if  !flash[:notice].nil?%>
-     <div class="alert alert-success">
-      <a class="close">×</a>
-        <font color="black">
-        Attendance updated 
-        <%= link_to "Send SMS report to parents", '/section/'+@section.id.to_s+'/reports/attendance/'+params[:date],:class => 'btn btn-primary' %>
-        </font>
-      </div>
-  <% end -%>
+  <h3 style="padding-top:25px"> Attendance  report for <%= @section.batch.name + '-' + @section.name + ' for ' + params[:date]%></h3>
 
-  <%= form_tag(params[:date] + '/update',:method => :post) do -%>
-      <table class="table table-bordered">
-         <thead>
-          <tr>
-            <th>Student Name</th>
-            <th>Check if present</th>
-          </tr> 
-         </thead>
-         <tbody>
-    <% for student in @section.students -%>
-          <tr>
-            <td><%= student.print_name%></td>   
-            <% if  is_student_present(student.id,@section.id,params[:date])%>
-              <td><%=check_box_tag student.id ,student.id,true %></td>
-              
-            <% else %>
-              <td><%=check_box_tag student.id%></td>
-            <% end %>
-          </tr> 
-    <% end -%>   
-         </tbody>
-       </table>
-  <div class="actions">
-    <%= submit_tag nil,:class => 'btn  btn-primary'%>
-  </div>
-  <% end -%>
-  
+   
+   <div style="padding-top:25px">
+   The following students did not attend class on <%= params[:date]%>
+    <table class="table table-bordered table-striped" >
+      <tbody>
+        <%@absent_students.each do |student|%>
+          <tr><td>
+            <%=student.print_name%>
+          </td></tr>
+        <% end -%>
+      </tbody>
+    </table>
+     
+   </div>
+
+   <%= link_to "Go back and Remark Attendance", :back ,:class => 'btn btn-primary' %>
+   <%= link_to "Confirm and send SMS report", "/section/"+@section.id.to_s+"/reports/attendance/"+params[:date]+"/send" ,:class => 'btn btn-warning' ,:confirm => 'Are you sure ?'%>
+    
 <% end -%>

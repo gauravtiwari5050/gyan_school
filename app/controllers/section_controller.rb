@@ -103,4 +103,36 @@ class SectionController < ApplicationController
     @subject = Course.find_by_id(params[:course_id])
   end
 
+  def attendance_report_show
+    @section = Section.find_by_id(params[:section_id])
+    section_attendances = SectionAttendance.find(:all,:conditions => {:section_id => @section.id,:date => params[:date]}) 
+    user_ids = section_attendances.map(&:user_id)
+    @absent_students = []
+    @section.students.each do |student|
+      if !user_ids.include?(student.id)
+        @absent_students << student
+      end
+    end
+  end
+
+  def attendance_report_send
+   @section = Section.find_by_id(params[:section_id])
+   @task = Task.new
+   @task.task_type = "ATTENDANCE_REPORT"
+   @task.status = "PENDING"
+   @task.institute_id =  get_institute_id
+
+   if !@task.save
+    logger.error @task.errors.inspect
+    raise 'Error saving task '
+   end
+
+   Delayed::Job.enqueue(AttendanceReportJob.new(@section.id,params[:date],@task.id))
+   respond_to do |format|
+    format.html {redirect_to ('/section/'+@section.id.to_s+'/attendance')}
+   end
+
+    
+  end
+
 end

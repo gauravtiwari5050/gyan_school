@@ -1,6 +1,7 @@
 <% content_for :sidepic do -%>
-  
+            <a href="/profile/<%=current_user.id.to_s%>"> 
             <img src="<%= asset_path 'user_128.gif' %>" class="sidepic">
+            </a>
             </br>
             <div class="sidepic-spacer">
             </div>

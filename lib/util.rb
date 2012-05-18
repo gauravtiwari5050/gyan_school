@@ -1,5 +1,5 @@
+require 'net/http'
 module Util
-
 
   def unique_id(prefix)
   require 'uuidtools'
@@ -31,6 +31,34 @@ module Util
     h[11] = "Standard XI"; 
     h[12] = "Standard XII"; 
     return h[index]
+  end
+
+  def send_absent_sms(student,date)
+   if student.nil?
+    return
+   end
+
+
+    message = "Please note that your ward #{student.first_name} has not come to school on #{date}. Kindly call up the school ( Ph no: ) and inform us the reason."
+
+    send_sms(student.parent_detail.mobile,message)
+
+
+  end
+
+  def send_sms(mobile_number,message)
+    user = GyanSchool::Application.config.sms_user
+    pass = GyanSchool::Application.config.sms_pass
+    sender_id = GyanSchool::Application.config.sms_sender_id
+    
+    url = "http://203.122.58.168/prepaidgetbroadcast/PrepaidGetBroadcast?userid=#{user}&pwd=#{pass}&msgtype=s&ctype=1&sender=#{sender_id}&pno=91#{mobile_number}&msgtxt=#{message}&alert=1"
+    url = URI.escape(url)
+    Delayed::Worker.logger.info 'sending ' + url
+    req = Net::HTTP.get_response(URI.parse(url))
+    Delayed::Worker.logger.info 'response for message sending'
+    Delayed::Worker.logger.info 'REQ.status ' + req.inspect.to_s
+    Delayed::Worker.logger.info 'REQ.body ' + req.body.to_s
+    
   end
 
 end

@@ -15,3 +15,5 @@
 /tmp/*
 /vendor/*
 public/upload/*
+config/database.yml
+config/environments/
