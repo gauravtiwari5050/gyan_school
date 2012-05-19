@@ -1,5 +1,7 @@
-      <h3> Assign Class Teachers for sections</h3>
-      <table class='table table-striped  table-bordered' >
+     <div class="overflow">
+       
+     <h3> Assign Class Teachers for sections</h3>
+      <table class='table table-striped  table-bordered ' >
         <thead>
           <th> Teacher name </th>
           <% (1 .. @institute.structure_info.max_section).each do |section| %>
@@ -28,4 +30,9 @@
 
       </tbody>
       </table>
+     </div>
+
+     <div style="padding-top:25px">
+       
+     </div>
       <%= link_to "Next", '/getting_started/assign_teachers/processing' ,:class => 'btn btn-primary btn-large' %>

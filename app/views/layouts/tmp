@@ -1,83 +1,69 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <title>CloudClass</title>
     <meta name="description" content="">
     <meta name="author" content="">
-<%= stylesheet_link_tag "application" %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+  <%= stylesheet_link_tag "getting_started" %>
   <style type="text/css">
-   input, select, .uneditable-input { 
-    height: 26px;
-   }
-   textarea {
-    width: 80%;
-   }
    label, input, button, select, textarea {
-    font-size: 18px;
+    font-size: 22px;
    }
    .signup-form {
+    padding-left: 73px;
     padding-top: 20px; 
    } 
     h2 {
     font-size: 30px; 
    }
-   div.ui-datepicker{
-    font-size:14px;
-    }
+   select {
+    width:100px;
+   }
   </style>   
-<%= javascript_include_tag "application" %>
-<%= yield :task_status_check_javascript %>
-<%= yield :report_javascript %>
+  <%= javascript_include_tag "application" %>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
-<%= csrf_meta_tag %>
-</head>
+  <%= csrf_meta_tag %>
 
-<body>
-	<!--wrapper starts -->
+  </head>
+
+  <body>
 	<div class="wrapper">
-    <%=yield :top_bar%>
-		<!--body section starts -->
-		<div class="bodySec">
-			<!--right panel starts -->
-			<div class="bodyRight">
-        <%= yield :right_bar %>
-      </div>
-			<!--right panel ends -->
-			<!--left panel starts -->
-			<div class="bodyLeftMain">
-				<div class="bodyLeftPanel">
-          <%= yield :left_bar %>
-        </div>
-                
-                
-				<div class="bodyRgithPanel">
-                  <ul class="breadcrumb">        
-                    <li><a href="/home"> <i class="icon-home"></i>  Home</a> 
-                    <%= yield :breadcrumb  %>
-                  </ul>  
-                <div class="main-content">
-                  <%= yield :main_content %>
-                </div>
-			  </div>
-			<!--left panel ends -->
-			<div class="spacer"></div>
+		<!--top section starts -->
+		<div class="topWrapper">
+			   <div class="topSec">
+				<div class="topLeft">
+					<a href="/" class="homelogo" title="cloudclass"><img src=<%= asset_path 'home-logo.jpg' %> alt="cloudclass" /></a> 
+				</div>
+				<div class="topRight">
+					<ul class="topHomeLinks">
+					</ul>
+					<div class="spacer"></div>
+				</div>
+				<div class="spacer"></div>
+			</div>
 		</div>
-		<!--body section ends -->
-	</div>
-	<!--wrapper ends -->
-<%= yield :modal_dialog%>    
-<script type="text/javascript">
-	var menu=new menu.dd("menu");
-	menu.init("menu","menuhover");
-</script>
-		<!--footer section starts -->
-        <div class="footer">© Cloudclass 2012. All rights Reserved.</div>
-		<!--footer section ends -->
-</body>
+		<!--top section ends -->
+		<!--body content wrapper starts -->
+		<div class="mainWrapper">
+      <div class="container">
+        <h2>Get Started -- School Setup</h2>
+        <div class="hero-unit">
+          <div class="signup-form">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  </body>
 </html>
-<script type="text/javascript"> 
-  $(document).ready(function(){
-    $( ".datepicker" ).datepicker({dateFormat:'dd-mm-yy'});
-  });
-</script>

@@ -1,10 +1,5 @@
 /* 
 *= require_self 
-*= require bootstrap  
-*= require dashboard 
-*= require fullcalendar 
-*= require style  
-*= require jquery-ui
 *= require token-input
-
+*= require myboot 
 */  

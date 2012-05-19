@@ -14,6 +14,6 @@
 /log/*
 /tmp/*
 /vendor/*
-public/upload/*
+public/uploads/*
 config/database.yml
 config/environments/
