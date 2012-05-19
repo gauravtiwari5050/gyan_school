@@ -41,10 +41,12 @@ GyanSchool::Application.routes.draw do
   match 'section/:section_id/exams/new' => 'section#exam_new'
   match 'section/:section_id/exams' => 'section#exams_index'
   match 'section/:section_id/exams/:exam_id/subjects' => 'section#exam_subjects'
+  match 'section/:section_id/exams/:exam_id/subjects/:course_id/sms/send' => 'section#exam_subject_send_sms'
   match 'section/:section_id/exams/:exam_id/subjects/:course_id/show' => 'section#exam_subject_marks'
-  match 'section/:section_id/exams/:exam_id/subjects/:course_id/update' => 'home#section_exam_subject_marks_update'
+  match 'section/:section_id/exams/:exam_id/subjects/:course_id/update' => 'section#exam_subject_marks_update'
   match 'section/:section_id/reports/attendance/:date' => 'section#attendance_report_show'
   match 'section/:section_id/reports/attendance/:date/send' => 'section#attendance_report_send'
+  match 'section/:section_id/exams/:exam_id/reminder/send' => 'section#exam_reminder_send'
   
   match 'section/:section_id/subjects/new' => 'section#subjects_new'
   match 'section/:section_id/subjects/update' => 'section#subjects_update'

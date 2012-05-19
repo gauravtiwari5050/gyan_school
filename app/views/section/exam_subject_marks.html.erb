@@ -8,9 +8,38 @@
        <a href="/section/<%=@section.id.to_s+'/exams/'+@exam.id.to_s+'/subjects/'+@subject.id.to_s+'/show'%>"><%=@subject.name%></a> <span class="divider">/</span>
    <% end -%>
 <% content_for :main_content do -%>
-  <h3> Marks/Results for <%= @section.batch.name + '-' + @section.name  + ' for ' + @exam.name + '-' + @subject.name %></h3>
+       <div class="container">
+        <div class="row">
+          <div class="span3">
+            <div class="btn-group">
+            <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> Reports Options
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="/section/<%=@section.id.to_s+'/exams/'+@exam.id.to_s+'/subjects/'+@subject.id.to_s+'/sms/send'%>">Send SMS to Parents</a></li>
+              <li><a href="#">Print Score Details</a></li>
+              <li class="divider"></li>
+            </ul>
+          </div>
+            
+          </div>
+          <div class="span3">
+          </div>
+
+          <div class="span4">
+            </br>
+          </div>
+          
+        </div>
+         
+       </div>
+
+
+  <h3 style="padding-top:25px"> Marks/Results for <%= @section.batch.name + '-' + @section.name  + ' for ' + @exam.name + '-' + @subject.name %></h3>
 
   <%= form_tag( 'update',:method => :post) do -%>
+         <%= render :template => 'shared/notices' %>
       <table class="table table-bordered">
          <thead>
           <tr>

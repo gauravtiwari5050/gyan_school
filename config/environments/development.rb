@@ -38,7 +38,7 @@ GyanSchool::Application.configure do
   #app config
   config.landing_page = 'http://lvh.me:3000'
   config.url_suffix = '.lvh.me:3000'
-  config.sms_user = ''
-  config.sms_pass = ''
-  config.sms_sender_id = ''
+  config.sms_user = 'CCLASS'
+  config.sms_pass = '816Rbo92'
+  config.sms_sender_id = 'CCLASS'
 end

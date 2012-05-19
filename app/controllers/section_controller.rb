@@ -135,4 +135,85 @@ class SectionController < ApplicationController
     
   end
 
+  def exam_reminder_send
+   @section = Section.find_by_id(params[:section_id])
+   @exam = Exam.find_by_id(params[:exam_id])
+   @task = Task.new
+   @task.task_type = "EXAM_REMINDER"
+   @task.status = "PENDING"
+   @task.institute_id =  get_institute_id
+
+
+   if !@task.save
+    logger.error @task.errors.inspect
+    raise 'Error saving task '
+   end
+
+
+   Delayed::Job.enqueue(ExamReminderJob.new(@section.id,@exam.id,@task.id))
+   respond_to do |format|
+    flash[:notice] = "Exam reminder SMS is being sent to parents"
+    format.html {redirect_to ('/section/'+@section.id.to_s+'/exams')}
+   end
+
+    
+  end
+
+  def exam_subject_send_sms
+   @section = Section.find_by_id(params[:section_id])
+   @exam = Exam.find_by_id(params[:exam_id])
+   @subject = Course.find_by_id(params[:course_id])
+   @task = Task.new
+   @task.task_type = "EXAM_RESULT_NOTIFICATION"
+   @task.status = "PENDING"
+   @task.institute_id =  get_institute_id
+   if !@task.save
+    logger.error @task.errors.inspect
+    raise 'Error saving task '
+   end
+   
+   Delayed::Job.enqueue(ExamResultNotificationJob.new(@section.id,@exam.id,@subject.id,@task.id))
+   respond_to do |format|
+    flash[:notice] = "Exam result notification SMSs are being sent to parents"
+     format.html {redirect_to('/section/' + @section.id.to_s + '/exams/' + @exam.id.to_s + '/subjects/' + @subject.id.to_s + '/show')} 
+   end
+    
+  end
+
+
+  def exam_subject_marks_update
+    #TODO 1 check for exam result update/save failure and report error in meesage for specific students
+    @institute = Institute.find_by_id(get_institute_id)
+    @section = Section.find_by_id(params[:section_id])
+    @exam = Exam.find_by_id(params[:exam_id])
+    @subject = Course.find_by_id(params[:course_id])
+    logger.info params.inspect
+    for student in @section.students
+      exam_result = get_score(@section.id,student.id,@exam.id,@subject.id)
+      if params.has_key?(student.id.to_s) && params[student.id.to_s].size  > 0
+        logger.info  params[student.id.to_s]
+        if exam_result.nil?
+          exam_result = ExamResult.new
+          exam_result.section_id = @section.id
+          exam_result.user_id = student.id
+          exam_result.exam_id = @exam.id
+          exam_result.course_id = @subject.id
+          exam_result.score = params[student.id.to_s]
+          exam_result.save #TODO check for failure 
+        else
+          exam_result.update_attribute(:score,params[student.id.to_s])
+        end
+      elsif params.has_key?(student.id.to_s) && params[student.id.to_s].size  == 0
+        if !exam_result.nil?
+          exam_result.destroy #check for failure
+        end
+      end
+    end
+
+    respond_to do |format|
+     format.html {redirect_to('/section/' + @section.id.to_s + '/exams/' + @exam.id.to_s + '/subjects/' + @subject.id.to_s + '/show')} 
+    end
+
+  end
+
 end

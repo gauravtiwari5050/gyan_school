@@ -61,4 +61,21 @@ module Util
     
   end
 
+  def send_exam_reminder(student,exam)
+    if student.nil? || exam.nil?
+      return
+    end
+    message = "Please note that the  #{exam.name} for your ward are going to start from #{exam.start.strftime("%B %d, %Y")}"
+    send_sms(student.parent_detail.mobile,message)
+  end
+
+  def send_result_notification_sms(student,subject)
+    if student.nil? || subject.nil?
+      return
+    end
+   message = "Please note that the  answer papers  for #{subject.name} have been provided to the ward"  
+    send_sms(student.parent_detail.mobile,message)
+   
+  end
+
 end
