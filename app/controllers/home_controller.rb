@@ -476,6 +476,27 @@ class HomeController < ApplicationController
     @batches = @institute.batches
   end
 
+  def fees_reminder
+    @institute = Institute.find_by_id(get_institute_id)
+    @fee_collection_event  = FeeCollectionEvent.find_by_id(params[:fee_event_id])
+    @task = Task.new
+    @task.task_type = "FEES_REMINDER"
+    @task.status = "PENDING"
+    @task.institute_id =  get_institute_id
+    if !@task.save
+      logger.error @task.errors.inspect
+     raise 'Error saving task '
+    end
+   Delayed::Job.enqueue(FeesReminderJob.new(@fee_collection_event.id,@institute.id,@task.id))
+   
+   respond_to do |format|
+    flash[:notice] = "Fees Reminders are being sent to parents"
+    format.html {redirect_to('/fees/schedule_index')}
+   end
+    
+    
+  end
+
   
 
 end

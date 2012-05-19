@@ -53,6 +53,7 @@ GyanSchool::Application.routes.draw do
   match 'section/:section_id/subjects' => 'section#subjects_index'
 
   match 'fees/schedule_index' => 'home#fees_schedule_index'
+  match 'fees/schedule/:fee_event_id/reminder/send' => 'home#fees_reminder'
   match 'fees/schedule/:fee_event_id/edit' => 'home#fees_schedule_edit'
   match 'fees/schedule/:fee_event_id/create' => 'home#fees_schedule_update'
   match 'fees/schedule/new' => 'home#fees_schedule_new'

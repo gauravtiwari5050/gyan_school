@@ -78,4 +78,15 @@ module Util
    
   end
 
+  def send_fees_reminder(student,fee_collection_event)
+    if student.nil? || fee_collection_event.nil?
+      return
+    end
+
+    message = "Please note that a fee payment for your  ward #{student.first_name}   towards #{fee_collection_event.due_date.strftime('%B')} is pending"
+
+    send_sms(student.parent_detail.mobile,message)
+
+  end
+
 end

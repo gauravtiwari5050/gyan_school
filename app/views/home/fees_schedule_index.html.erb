@@ -16,12 +16,13 @@
         </table>
       </div>
       
+    <%= render :template => 'shared/notices'%> 
        <table class="table striped">
         <thead>
           <tr>
             <th> Collection Month /Type</th>
             <th> Due Date</th>
-            <th> Edit</th>
+            <th> SMS Report</th>
             <th> Reporting</th>
 
           </tr>
@@ -29,9 +30,9 @@
            <% for event in @institute.fee_collection_events -%>
              
             <tr>
-                <td><%= event.name %></td>
+                <td>  <%= link_to event.name, '/fees/schedule/' + event.id.to_s  + '/edit' %> </td>
                 <td><%= event.due_date.strftime("%B %d, %Y") %></td>
-                <td>  <%= link_to "Edit", '/fees/schedule/' + event.id.to_s  + '/edit',:class => 'btn btn-warning' %> </td>
+                <td>  <%= link_to "Send SMS", '/fees/schedule/' + event.id.to_s  + '/reminder/send',:class => 'btn btn-warning' %> </td>
                 <td>  <%= link_to "Fees Collection Report", '/fees/schedule/' + event.id.to_s  + '/report',:class => 'btn btn-primary' %> </td>
 
             </tr>
