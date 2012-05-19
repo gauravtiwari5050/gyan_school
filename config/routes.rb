@@ -1,5 +1,8 @@
 GyanSchool::Application.routes.draw do
-  match '/' => 'static#land'
+  match "/" => 'static#welcome'
+  match "demo" => 'static#demo'
+  match "terms" => 'static#terms'
+  match "privacy" => 'static#privacy'
   match '/signup' => 'signup#signup'
   match '/institute/create' => 'signup#register' ,:via => :post
   match 'login' => 'login#login'

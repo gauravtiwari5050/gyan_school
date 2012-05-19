@@ -1,4 +1,10 @@
 class StaticController < ApplicationController
-  def land
+  def welcome
+  end
+  def demo
+  end
+  def terms
+  end
+  def privacy
   end
 end
