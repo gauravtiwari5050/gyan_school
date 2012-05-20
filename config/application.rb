@@ -56,5 +56,7 @@ module GyanSchool
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.assets.precompile += ['signup.css','login.css' ,'home.css' ,'getting_started.css','welcome.css']
+    config.time_zone = 'Chennai'
   end
 end
