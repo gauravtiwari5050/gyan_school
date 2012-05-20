@@ -10,7 +10,7 @@
   <tbody>
     <% for student in students -%>
      <tr>
-     <td><%= link_to student.print_name, '/profiles/students/'+student.id.to_s %></td>
+     <td><%= link_to student.print_name, '/profiles/students/'+student.id.to_s+'/edit' %></td>
      <td>Progress</td>
      <td>Attendance</td>
      <td><i class="icon-user"></i></td>
