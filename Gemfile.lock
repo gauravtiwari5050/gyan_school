@@ -90,7 +90,6 @@ GEM
       net-ssh (>= 1.99.1)
     net-ssh (2.3.0)
     nokogiri (1.5.2)
-    pg (0.12.2)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     rack (1.4.1)
@@ -177,7 +176,6 @@ DEPENDENCIES
   jquery-ui-themes (~> 0.0.4)
   mysql2 (~> 0.3.11)
   nested_form
-  pg
   rails (= 3.2.1)
   recaptcha
   rscribd
