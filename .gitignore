@@ -16,4 +16,3 @@
 /vendor/*
 public/uploads/*
 /config/database.yml
-config/environments/*
