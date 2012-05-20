@@ -41,9 +41,9 @@ class ApplicationController < ActionController::Base
     institute = Institute.find_by_url(current_host)
     if institute.nil?
       redirect_to (GyanSchool::Application.config.landing_page.to_s)
+    else
+     session[:institute_id] = institute.id
     end
-
-    session[:institute_id] = institute.id
 
   end
   def get_home_for_user
