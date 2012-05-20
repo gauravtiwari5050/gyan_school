@@ -1,0 +1,288 @@
+  <%= render :template => 'shared/left_column_profile' ,:locals => {:active => 'edit_details'}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/classes">Student Profile</a> <span class="divider">/</span>
+   <% end -%>
+
+  <%= render :template => "shared/top_bar_new" %>
+
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> Edit student Details</h2>
+      </div>
+      <div class="content forms">
+  <%= render :template => "shared/notices" %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @student} %>
+        <%= form_for(@student,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
+          <fieldset>
+        <table class='table'>
+          <tr>
+            <td>
+          <h3 style="padding-top:15px"> Basic Details </h3>
+            <div class="control-group">
+              <%= f.label 'First Name' ,"First Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'first_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Middle Name' ,"Middle Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'middle_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Last Name' ,"Last Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'last_name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Email' ,"Email" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'email'%>
+              </div>
+            </div>
+              
+            </td>
+
+            <td>
+              
+            <h3 style="padding-top:15px"> Admission Details </h3>
+            <div id="batch_original">
+              
+              <div class="control-group">
+                <%= f.label 'Class' ,"Current Class" ,:class=>"control-label" %>
+                <table>
+                  <tbody>
+                    <tr>
+                    <td>
+                    <%= f.label 'Class' ,@student.section.batch.name + '-' + @student.section.name  %>
+                    </td>
+                    <td>
+                <%= link_to_function "Edit Class", "edit_class()",:class=> 'btb btn-primary' %>
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div id="batch_selection" style="display:none">
+              
+            <div class="control-group">
+              <%= f.label 'Class' ,"New Class" ,:class=>"control-label" %>
+              <div class="controls">
+                <%=collection_select(:batch,:batch_id,get_batches_for_institute,:id,:name,{:prompt => 'Select a Class'},{:onchange => "select_section(this)"})%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Section' ,"Section" ,:class=>"control-label" %>
+              <div class="controls">
+                <%=f.select :section_id,options_for_select([])%>
+              </div>
+            </div>
+            </div>
+            <%= f.fields_for :admission_detail do |ad| %>
+            <div class="control-group">
+              <%= ad.label 'Admission Number' ,"Admission Number" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ad.text_field :admit_number%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= ad.label 'Admission Date' ,"Admission Date" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ad.text_field :admit_date,:class=> "datepicker"%>
+              </div>
+            </div>
+              
+            <% end -%>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+            <h3 style="padding-top:15px"> Personal Details </h3>
+            <div class="control-group">
+              <%= f.label 'Date of Birth' ,"Date of birth" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field :dob,:class=> "datepicker"%>
+              </div>
+            </div>
+            <%= f.fields_for :user_detail do |ud| %>
+            <div class="control-group">
+              <%= ud.label 'Gender' ,"Gender" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ud.text_field :gender%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= ud.label 'Blood Group' ,"Blood Group" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ud.text_field :blood_group%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= ud.label 'Birth Place' ,"Birth Place" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ud.text_field :birth_place%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= ud.label 'Nationality' ,"Nationality" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ud.text_field :nationality%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= ud.label 'Category' ,"Category" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ud.text_field :category%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= ud.label 'Religion' ,"Religion" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= ud.text_field :religion%>
+              </div>
+            </div>
+              
+            <% end -%>
+              
+            </td>
+            <td>
+            <h3 style="padding-top:15px"> Address </h3>
+            <%= f.fields_for :address do |add| %>
+            <div class="control-group">
+              <%= add.label 'Address 1' ,"Address 1" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :address_1%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Address 2' ,"Address 2" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :address_2%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Address 3' ,"Address 3" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :address_2%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'City' ,"City" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :city%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'State' ,"State" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :state%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'District' ,"District" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :district%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Pincode' ,"Pincode" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :pincode%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Landmark' ,"Landmark" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :landmark%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Phone' ,"Landline" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :phone%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= add.label 'Mobile' ,"Mobile" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= add.text_field :mobile%>
+              </div>
+            </div>
+              
+            <% end -%>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <h3 style="padding-top:15px"> Parent Details </h3>
+            <%= f.fields_for :parent_detail do |pd| %>
+            <div class="control-group">
+              <%= pd.label 'Name' ,"Name" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= pd.text_field :name%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= pd.label 'Email' ,"Email" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= pd.text_field :email%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= pd.label 'Landline' ,"Landline" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= pd.text_field :phone%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= pd.label 'Mobile' ,"Mobile" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= pd.text_field :mobile%>
+              </div>
+            </div>
+              
+            <% end -%>
+            
+              
+            </td>
+
+            <td>
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+            </td>
+          </tr>
+        </table>
+          </fieldset>
+        <% end -%>
+        
+      </div>
+
+<script type="text/javascript"> 
+  function select_section(obj) {
+          var element = document.getElementById("student_section_id");
+          element.options.length=0;
+  $.read(
+        '/batch/sections/{batch_id}',
+        {batch_id:obj.options[obj.selectedIndex].value},
+        function(response) {
+          for(i=0;i<response.length;i++) {
+            element.options[element.options.length] = new Option(response[i].name, response[i].id); 
+          }
+        }
+
+  );
+  }
+ 
+ function edit_class() {
+  $('#batch_selection').toggle();
+ }
+
+</script>
+  
+<% end -%>

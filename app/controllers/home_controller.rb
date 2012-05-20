@@ -153,17 +153,6 @@ class HomeController < ApplicationController
   def student_edit
     @student = Student.find_by_id(params[:student_id])
   end
-  def student_update
-    @student = Student.find_by_id(params[:student_id])
-    respond_to do |format|
-      if @student.update_attributes(params[:student])
-        format.html{redirect_to('/student/'+@student.id.to_s+'/edit')}
-      else
-        format.html {render :action => "student_edit"}
-      end
-    end
-    
-  end
 
   def student_search
     

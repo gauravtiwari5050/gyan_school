@@ -100,6 +100,12 @@ GyanSchool::Application.routes.draw do
   match 'print/details/students' => 'print#student_details'
   match 'print/details/teachers' => 'print#teacher_details'
 
+  ##profile urls
+  match 'profiles/students/:student_id/edit' => 'profile#student_detail_edit'
+  match 'profiles/students/:student_id/update' => 'profile#student_detail_update'
+  match 'profiles/students/:student_id/reset_password' => 'profile#password_edit'
+  match 'profiles/students/:student_id/update_password' => 'profile#password_update' ,:via => :post
+
 
 
 

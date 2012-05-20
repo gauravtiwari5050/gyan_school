@@ -1,0 +1,62 @@
+<%= render :template => 'shared/sidepic_profile',:locals => {:user => @student } %>
+<% content_for :left_column do -%>
+  
+            <div class="leftcolumn">
+              <a href="/profiles/students/<%=@student.id.to_s%>/edit">
+              <% if active == 'edit_details' %>
+                <div class="rowline-active" href="www.google.com">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccihome.png' %>" class="thumbpic-small">  Edit Details
+              </div>
+              </a>
+              
+              <% if current_user.type == 'Admin'  || @student.id == current_user.id%>
+                
+              <a href="/profiles/students/<%=@student.id.to_s%>/reset_password">
+              <% if active == 'reset_password' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciuser-group.png' %>" class="thumbpic-small">  Reset Password
+              </div>
+              </a>
+
+
+              <a href="/profiles/students/<%=@student.id.to_s%>/change_picture">
+              <% if active == 'upload_picture' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciuser-green.png' %>" class="thumbpic-small">  Upload Picture
+              </div>
+              </a>
+              <% end %>
+             
+
+              <a href="/admins">
+              <% if active == 'print_report' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciuser-orange.png' %>" class="thumbpic-small">  Print Report
+              </div>
+              </a>
+             
+
+
+
+
+              
+
+
+              
+              
+
+              
+            </div>
+<% end -%>
