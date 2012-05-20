@@ -62,7 +62,7 @@ class SignupController < ApplicationController
       if persist_success
         #TODO change this
         
-        format.html {redirect_to('http://'+institute.url.to_s+'.lvh.me:3000/login')}
+        format.html {redirect_to('http://'+institute.url.to_s + GyanSchool::Application.config.url_suffix.to_s + '/login')}
       else
         flash[:error] = msg
         format.html {render :action => "signup"}
