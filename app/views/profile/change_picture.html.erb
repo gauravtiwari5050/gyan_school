@@ -1,0 +1,29 @@
+  <%= render :template => 'shared/left_column_profile' ,:locals => {:active => 'edit_details'}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/classes">Student Profile</a> <span class="divider">/</span>
+   <% end -%>
+
+  <%= render :template => "shared/top_bar_new" %>
+
+<% content_for :main_content do -%>
+      <div class="title">
+        <h3> Upload Profile Picture</h3>
+      </div>
+
+        <%= form_for(@profile,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'profile_picture_update' ,:method => :post) do |f| %>
+          <%=render :template => 'shared/notices'%>
+          <fieldset>
+            <div class="control-group">
+              
+              <%= f.label 'Picture' ,"Picture" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.file_field 'image'%> 
+              
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Upload file" ,:class => 'btn btn-medium'%>
+            </div>
+          </fieldset>
+          </fieldset>
+        <% end -%>
+<% end -%>

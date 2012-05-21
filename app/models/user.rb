@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one :admission_detail
   has_one :user_detail
   has_one :parent_detail
+  has_one :profile
   has_many :fee_collections
   has_many :exam_results
   belongs_to :institute

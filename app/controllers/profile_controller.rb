@@ -51,4 +51,34 @@ class ProfileController < ApplicationController
     
   end
 
+  def change_picture
+    @student = Student.find_by_id(params[:student_id])   
+    @profile = Profile.new
+  end
+
+  def profile_picture_update
+    success = true
+    @student = Student.find_by_id(params[:student_id])   
+    @profile = Profile.new(params[:profile])
+    success =  true
+    if @student.profile.nil?
+      @profile.user_id = @student.id
+      success = @profile.save
+    else
+      success = @student.profile.update_attributes(params[:profile])
+    end
+
+    respond_to do |format|
+      logger.info 'rendering'
+      if success
+        flash[:notice] = 'Profile Pic changed. Please alow for sometime for the changes to propagate'
+      else
+        flash[:alert] = 'Profile Pic changed. Please alow for sometime for the changes to propagate'
+      end
+      format.html {redirect_to ('/profiles/students/'+@student.id.to_s+'/change_picture')}
+    end
+
+    
+  end
+
 end
