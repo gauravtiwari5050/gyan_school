@@ -1,0 +1,49 @@
+     <% @student.section.exams.each do |exam|%>
+     <div class="row pdtop50">
+      <div class="span4">
+        <h1 style="color:#3F7FBF"> <%= exam.name %> </h1>
+        
+      </div>
+      <% results = exam.exam_results.find(:all,:conditions => {:user_id => @student.id})%>
+      <div class="span8">
+        <% if results.size > 0 %>
+          
+         <table class="table bordered">
+          <thead>
+          <th>
+            Subject
+          </th>
+          <th>
+            Performance
+          </th>
+          <th>
+            Absolute Marks
+          </th>
+          </thead>
+          <tbody>
+          <%results.each do |result|%> 
+           <tr>
+            <td>
+              <%=result.course.name%>
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: <%=(result.score * 100)/result.total%>%;"></div>
+              </div>
+            </td>
+            <td>
+              <%=result.score%> / <%=result.total%>
+            </td>
+           </tr>
+           <% end -%>
+          </tbody>
+         </table>
+        
+        <% else %>
+        <h3> Results awaited</h3>
+        <% end %>
+        
+      </div>
+       
+     </div>
+     <% end -%>
