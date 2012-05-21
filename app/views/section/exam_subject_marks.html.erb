@@ -38,8 +38,14 @@
 
   <h3 style="padding-top:25px"> Marks/Results for <%= @section.batch.name + '-' + @section.name  + ' for ' + @exam.name + '-' + @subject.name %></h3>
 
-  <%= form_tag( 'update',:method => :post) do -%>
+  <%= form_tag( 'update',:method => :post,:class => 'form-horizontal') do -%>
          <%= render :template => 'shared/notices' %>
+            <div class="control-group">
+              <%= label_tag 'total_marks' ,"Total Marks" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= text_field_tag 'total_marks' ,get_max_score(@section.id,@exam.id,@subject.id)%>
+              </div>
+            </div>
       <table class="table table-bordered">
          <thead>
           <tr>

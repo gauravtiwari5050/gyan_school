@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%= wicked_pdf_stylesheet_link_tag "print" %>
+
+
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      .border {
+          border-bottom: 3px solid #9C9898;
+      }
+      .margin50 {
+        padding:50px; 
+      }
+      .pdtop50 {
+        padding-top:50px;
+      }
+      .pdleft25 {
+        padding-left:25px;
+      }
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+
+    <div class="container border">
+    <center>
+    <!--
+    <img src="./school_logo.png" />
+    --!>
+
+
+    <h1> <%= @institute.structure_info.name %> </h1>
+    <h2> <%= @institute.structure_info.address %> </h2>
+    </center>
+
+    </div> <!-- /container -->
+
+    <div class="container border">
+      <div class="row">
+        <div class="span3">
+            <% if @student.profile.nil?  %>
+              <img src="<%= asset_path get_profile_pic_for_user(@student) %>" class="margin50">
+            <% else %>
+              <img src="<%= @student.profile.image.url %>" class="margin50">
+            <% end %>
+        </div>
+        <div class="span9">
+          <div class="student_description pdtop50">
+            <h1 style="color:#3F7FBF"> <%= @student.print_name %></h1>
+            <h2> Student of <%=@student.section.batch.name%>, Section <%= @student.section.name %></h2>
+          </div>
+          <table class="table bordered">
+            <tbody>
+            <tr>
+             <td>
+              <h2>Class Rank</h2>
+             <td>
+             <td>
+              <h2><b>11</b></h2>
+             <td>
+            </tr>
+            <tr>
+             <td>
+              <h2>Agggregate Percentage</h2>
+             <td>
+             <td>
+              <h2><b>89.2%</b></h2>
+             <td>
+            </tr>
+            <tr>
+             <td>
+              <h2>Class Teacher</h2>
+             <td>
+             <td>
+                <% teacher = get_teacher_for_section(@student.section)%>
+                <% if teacher.nil? %>
+                <h2> Not Assigned </h2>
+                <% else %>
+                <h2> <%= teacher.print_name %></h2>
+                <% end %>
+             <td>
+            </tr>
+            </tbody>
+          </table>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+
+    <div class="container pdtop50">
+     <h1 style="color:#3F7FBF"> Subject's Detailed Reports </h1>
+     <div class="row pdtop50">
+      <div class="span4">
+        <h1 style="color:#3F7FBF"> English </h1>
+        <h2> Teacher : Mr Shyam</h2>
+        
+      </div>
+      <div class="span8">
+         <table class="table bordered">
+          <thead>
+          <th>
+            Concept
+          </th>
+          <th>
+            Performance
+          </th>
+          <th>
+            Level
+          </th>
+          <th>
+            Class Average
+          </th>
+          </thead>
+          <tbody>
+            <td>
+              Writing
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 60%;"></div>
+              </div>
+            </td>
+            <td>
+              Average
+            </td>
+            <td>
+              75%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Reading
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 90%;"></div>
+              </div>
+            </td>
+            <td>
+              Excellent
+            </td>
+            <td>
+              80%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Vocabulary
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 85%;"></div>
+              </div>
+            </td>
+            <td>
+              Above Average
+            </td>
+            <td>
+              75%
+            </td>
+          </tbody>
+         </table>
+         </table>
+         </table>
+        
+      </div>
+       
+     </div>
+     <div class="row pdtop50">
+      <div class="span4">
+        <h1 style="color:#3F7FBF"> Mathematics </h1>
+        <h2> Teacher : Mr Mohan Kumar</h2>
+        
+      </div>
+      <div class="span8">
+         <table class="table bordered">
+          <thead>
+          <th>
+            Concept
+          </th>
+          <th>
+            Performance
+          </th>
+          <th>
+            Level
+          </th>
+          <th>
+            Class Average
+          </th>
+          </thead>
+          <tbody>
+            <td>
+              Trigonometry
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 70%;"></div>
+              </div>
+            </td>
+            <td>
+              Average
+            </td>
+            <td>
+              75%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Algebra
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 50%;"></div>
+              </div>
+            </td>
+            <td>
+              Below Average
+            </td>
+            <td>
+              80%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Geometry
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 85%;"></div>
+              </div>
+            </td>
+            <td>
+              Above Average
+            </td>
+            <td>
+              80%
+            </td>
+          </tbody>
+         </table>
+         </table>
+         </table>
+        
+      </div>
+       
+     </div>
+     <div class="row pdtop50">
+      <div class="span4">
+        <h1 style="color:#3F7FBF"> Science </h1>
+        <h2> Teacher : Mr Ramesh Kumar</h2>
+        
+      </div>
+      <div class="span8">
+         <table class="table bordered">
+          <thead>
+          <th>
+            Concept
+          </th>
+          <th>
+            Performance
+          </th>
+          <th>
+            Level
+          </th>
+          <th>
+            Class Average
+          </th>
+          </thead>
+          <tbody>
+            <td>
+              Physics
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 90%;"></div>
+              </div>
+            </td>
+            <td>
+              Excellent
+            </td>
+            <td>
+              75%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Chemistry
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 80%;"></div>
+              </div>
+            </td>
+            <td>
+              Good
+            </td>
+            <td>
+              60%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Biology
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 75%;"></div>
+              </div>
+            </td>
+            <td>
+              Average 
+            </td>
+            <td>
+              75%
+            </td>
+          </tbody>
+         </table>
+         </table>
+         </table>
+        
+      </div>
+       
+     </div>
+     <div class="row pdtop50">
+      <div class="span4">
+        <h1 style="color:#3F7FBF"> Social Science </h1>
+        <h2> Teacher : Mr Mohan</h2>
+        
+      </div>
+      <div class="span8">
+         <table class="table bordered">
+          <thead>
+          <th>
+            Concept
+          </th>
+          <th>
+            Performance
+          </th>
+          <th>
+            Level
+          </th>
+          <th>
+            Class Average
+          </th>
+          </thead>
+          <tbody>
+            <td>
+              History
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 80%;"></div>
+              </div>
+            </td>
+            <td>
+              Below Average
+            </td>
+            <td>
+              73%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Civics
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 88%;"></div>
+              </div>
+            </td>
+            <td>
+              Good
+            </td>
+            <td>
+              80%
+            </td>
+          </tbody>
+          <tbody>
+            <td>
+              Geography
+            </td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 77%;"></div>
+              </div>
+            </td>
+            <td>
+              Above Average
+            </td>
+            <td>
+              75%
+            </td>
+          </tbody>
+         </table>
+         </table>
+         </table>
+        
+      </div>
+       
+     </div>
+
+    </div>
+
+    <div class="container pdtop50">
+    <h1 style="color:#3F7FBF"> Attendance Reports </h1>
+
+      <table class="table bordered pdtop50">
+        <thead>
+          <th>
+            Month 
+          </th>
+          <th>
+            Attendance 
+          </th>
+          <th>
+            Percentage
+          </th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>January</td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 93%;"></div>
+              </div>
+            </td>
+            <td>
+              77%
+            </td>
+            
+          </tr>
+          <tr>
+            <td>February</td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 95%;"></div>
+              </div>
+            </td>
+            <td>
+              95%
+            </td>
+            
+          </tr>
+          <tr>
+            <td>March</td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 98%;"></div>
+              </div>
+            </td>
+            <td>
+              98%
+            </td>
+            
+          </tr>
+          <tr>
+            <td>April</td>
+            <td>
+              <div class="progress">
+              <div class="bar" style="width: 90%;"></div>
+              </div>
+            </td>
+            <td>
+              90%
+            </td>
+            
+          </tr>
+        </tbody>
+        </tbody>
+        </tbody>
+        </tbody>
+      </table>
+      
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="../assets/js/tests/vendor/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>

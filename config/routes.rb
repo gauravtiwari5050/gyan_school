@@ -99,6 +99,7 @@ GyanSchool::Application.routes.draw do
   ##print ursl
   match 'print/details/students' => 'print#student_details'
   match 'print/details/teachers' => 'print#teacher_details'
+  match 'print/report_card/:student_id' => 'print#report_card'
 
   ##profile urls
   match 'profiles/students/:student_id/edit' => 'profile#student_detail_edit'

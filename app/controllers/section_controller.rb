@@ -183,34 +183,61 @@ class SectionController < ApplicationController
 
   def exam_subject_marks_update
     #TODO 1 check for exam result update/save failure and report error in meesage for specific students
+    success = true
     @institute = Institute.find_by_id(get_institute_id)
     @section = Section.find_by_id(params[:section_id])
     @exam = Exam.find_by_id(params[:exam_id])
     @subject = Course.find_by_id(params[:course_id])
     logger.info params.inspect
-    for student in @section.students
-      exam_result = get_score(@section.id,student.id,@exam.id,@subject.id)
-      if params.has_key?(student.id.to_s) && params[student.id.to_s].size  > 0
-        logger.info  params[student.id.to_s]
-        if exam_result.nil?
-          exam_result = ExamResult.new
-          exam_result.section_id = @section.id
-          exam_result.user_id = student.id
-          exam_result.exam_id = @exam.id
-          exam_result.course_id = @subject.id
-          exam_result.score = params[student.id.to_s]
-          exam_result.save #TODO check for failure 
-        else
-          exam_result.update_attribute(:score,params[student.id.to_s])
-        end
-      elsif params.has_key?(student.id.to_s) && params[student.id.to_s].size  == 0
-        if !exam_result.nil?
-          exam_result.destroy #check for failure
+    total_marks = params[:total_marks]
+    if total_marks.nil? || total_marks.length == 0
+      success = false
+      msg = 'Please provide the total marks for this exam'
+    end
+    if success
+      for student in @section.students
+        exam_result = get_score(@section.id,student.id,@exam.id,@subject.id)
+        if params.has_key?(student.id.to_s) && params[student.id.to_s].size  > 0
+          logger.info  params[student.id.to_s]
+          if exam_result.nil?
+            exam_result = ExamResult.new
+            exam_result.section_id = @section.id
+            exam_result.user_id = student.id
+            exam_result.exam_id = @exam.id
+            exam_result.course_id = @subject.id
+            exam_result.score = params[student.id.to_s]
+            exam_result.total = total_marks
+            success = exam_result.save #TODO check for failure 
+            if !success
+                msg = 'Something went wrong while creating the record. Please try again later.'
+                logger.error exam_result.errors.inspect 
+            end
+          else
+            success = exam_result.update_attributes(:score => params[student.id.to_s],:total => total_marks)
+            if !success
+                msg = 'Something went wrong while updating the record. Please try again later.'
+                logger.error exam_result.errors.inspect 
+            end
+          end
+        elsif params.has_key?(student.id.to_s) && params[student.id.to_s].size  == 0
+          if !exam_result.nil?
+            success = exam_result.destroy #check for failure
+            if !success
+                msg = 'Something went wrong while deleting the record. Please try again later.'
+                logger.error exam_result.errors.inspect 
+            end
+          end
         end
       end
     end
 
+
     respond_to do |format|
+     if success
+      flash[:notice] = 'Marks updated successfuly'
+     else
+      flash[:alert] = msg
+     end
      format.html {redirect_to('/section/' + @section.id.to_s + '/exams/' + @exam.id.to_s + '/subjects/' + @subject.id.to_s + '/show')} 
     end
 

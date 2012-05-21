@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120521055834) do
+ActiveRecord::Schema.define(:version => 20120521101426) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_1"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20120521055834) do
     t.integer  "score"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "total"
   end
 
   create_table "exams", :force => true do |t|

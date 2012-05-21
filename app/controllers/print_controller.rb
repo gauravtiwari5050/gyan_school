@@ -15,4 +15,14 @@ class PrintController < ApplicationController
       end
     end
   end
+
+  def report_card
+    @student = Student.find_by_id(params[:student_id])
+    @institute = Institute.find_by_id(get_institute_id)
+    respond_to do |format|
+      format.pdf do
+        render :pdf => "report_card"
+      end
+    end
+  end
 end
