@@ -30,9 +30,11 @@ ssh_options[:auth_methods] = "publickey"
    task :copy_database_configuration do
      production_db_config = "/home/cchq/production.gyan.database.yml"
      production_mail_config = "/home/cchq/production.gyan.setup_mail.rb"
+     production_carrierwave_config = "/home/cchq/production.gyan.carrierwave.rb"
      production_config = "/home/cchq/production_school.rb"
      run "cp #{production_db_config} #{release_path}/config/database.yml"
      run "cp #{production_mail_config} #{release_path}/config/initializers/setup_mail.rb"
+     run "cp #{production_carrierwave_config} #{release_path}/config/initializers/carrierwave.rb"
      run "cp #{production_config} #{release_path}/config/environments/production.rb"
    end
 
