@@ -3,7 +3,8 @@ class PrintController < ApplicationController
     @students = Institute.find_by_id(get_institute_id).students
     respond_to do |format|
       format.pdf do
-        render :pdf => "student_details"
+        render :pdf => "student_details",
+                :wkhtmltopdf => '/usr/bin/wkhtmltopdf'
       end
     end
   end
@@ -11,7 +12,8 @@ class PrintController < ApplicationController
     @teachers = Institute.find_by_id(get_institute_id).teachers
     respond_to do |format|
       format.pdf do
-        render :pdf => "teacher_details"
+        render :pdf => "teacher_details",
+                :wkhtmltopdf => '/usr/bin/wkhtmltopdf'
       end
     end
   end
@@ -21,7 +23,8 @@ class PrintController < ApplicationController
     @institute = Institute.find_by_id(get_institute_id)
     respond_to do |format|
       format.pdf do
-        render :pdf => "report_card"
+        render :pdf => "report_card",
+                :wkhtmltopdf => '/usr/bin/wkhtmltopdf'
       end
     end
   end
