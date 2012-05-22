@@ -13,21 +13,36 @@ class SectionController < ApplicationController
   def mark_attendance_update
     @section = Section.find_by_id(params[:section_id])
     @date = Date.strptime(params[:date],"%Y-%m-%d")
+    @institute = Institute.find_by_id(get_institute_id)
 
     for student in @section.students
       if params.has_key?(student.id.to_s) 
          section_attendance  = SectionAttendance.find(:first,:conditions => {:date => params[:date],:section_id => @section.id,:user_id => student.id})
          if section_attendance.nil?
            section_attendance = SectionAttendance.new
+           section_attendance.institute_session_id = get_current_session.id
+
            section_attendance.section_id = @section.id
            section_attendance.user_id = student.id
            section_attendance.date = params[:date]
+           section_attendance.present = true
            section_attendance.save #TODO failure check
+         else
+            section_attendance.update_attribute(:present ,true)
          end
+         
       else
          section_attendance  = SectionAttendance.find(:first,:conditions => {:date => params[:date],:section_id => @section.id,:user_id => student.id})
          if !section_attendance.nil?
-          section_attendance.destroy #failure check
+          section_attendance.update_attribute(:present ,false)
+         else
+           section_attendance = SectionAttendance.new
+           section_attendance.institute_session_id = get_current_session.id
+           section_attendance.section_id = @section.id
+           section_attendance.user_id = student.id
+           section_attendance.date = params[:date]
+           section_attendance.present = false
+           section_attendance.save #TODO failure check
          end
       end
 

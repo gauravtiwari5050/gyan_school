@@ -33,7 +33,7 @@ function drawCalendar() {
         dragOpacity: "0.5",
         
         dayClick: function(date, allDay, jsEvent, view) {
-          window.open('/section/<%=@section.id%>/mark_attendance/'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate());
+          window.open('/section/<%=@section.id%>/mark_attendance/'+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate());
           return false;
 
         }

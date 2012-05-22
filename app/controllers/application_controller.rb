@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name,:get_section_description,:is_fee_paid,:get_score,:get_institute_id,:get_teacher_for_section,:get_profile_pic_for_user,:get_max_score
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video,:get_batches_for_institute,:create_user_name,:get_section_description,:is_fee_paid,:get_score,:get_institute_id,:get_teacher_for_section,:get_profile_pic_for_user,:get_max_score,:get_current_session,:get_attendance_report
   def login_employee_user(user)
     session[:user_institute_id] = user.institute_id
     session[:user_name] = user.username
@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
     if attendance.nil?
       return false
     else
-      return true
+      return attendance.present
     end
   end
 
@@ -124,6 +124,39 @@ class ApplicationController < ActionController::Base
       return 'employee.png'
 
     end
+  end
+
+  def get_current_session
+     current_session =  @institute.institute_sessions.find(:first,:conditions => {:current => true})
+     if current_session.nil?
+     #TODO redirect her
+     end
+
+     return current_session
+
+  end
+
+  def get_attendance_report(student,session)
+    if student.nil? || session.nil?
+      return nil
+    end
+    attendances = SectionAttendance.find(:all,:conditions => {:user_id => student.id,:institute_session_id => session.id})
+    report = Hash.new
+    attendances.each do |attendance|
+      month = attendance.date.strftime("%B")
+      if report[month].nil?
+        report[month] = Hash.new
+        report[month][:present] = 0
+        report[month][:absent] = 0
+      end
+      if attendance.present
+        report[month][:present] += 1
+      else
+        report[month][:absent] += 1
+      end
+    end
+
+    return report
   end
 
 
