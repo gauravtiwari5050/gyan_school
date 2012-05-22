@@ -5,6 +5,7 @@
       function drawCharts() {
         attendance_report();
         performance_report();
+        fees_report();
       }
       
       function attendance_report() {
@@ -86,6 +87,50 @@
         var chart = new google.visualization.BarChart(document.getElementById('performance_chart_div'));
         chart.draw(data, options);
       }
+
+      function fees_report() {
+       $.read(
+        '/ajax/fees_report/institute',
+        function(response) {
+          drawChartFees(response,"Fees Report");
+        },
+        function(errored_response) {
+          drawChartFees(null,"Sample Fees Report");
+        }
+        ); 
+      }
+      function drawChartFees(response,title) {
+        var data = null;
+        
+        if (response != null) {
+          var content_array = [];
+          content_array.push(['Month','Paid','Not Paid']);
+          for (var x in response) {
+            content_array.push([x,response[x]['paid'],response[x]['not_paid']]);
+          }
+        data = google.visualization.arrayToDataTable(content_array);
+        
+        } else {
+         data = google.visualization.arrayToDataTable([
+          ['Month', 'Paid','Not Paid'],
+          ['May',  80,60],
+          ['June',  90,50],
+          ['July',  77,43]
+        ]);
+        
+        }
+
+        
+        var options = {
+          'title': title,
+          vAxis: {title: 'Months',  titleTextStyle: {color: 'red'}},
+          hAxis: {title: 'Number of students',  titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('fees_chart_div'));
+        chart.draw(data, options);
+      }
+
 
 
       

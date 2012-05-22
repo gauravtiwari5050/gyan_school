@@ -90,4 +90,29 @@ class AjaxController < ApplicationController
       end
     
   end
+
+  def institute_fees_report
+    institute = Institute.find_by_id(get_institute_id)
+    logger.info 'Current institute_id '  + institute.id.to_s
+    number_of_students = institute.students.size
+    logger.info 'Current number of stundents '  + number_of_students.to_s
+    report = Hash.new
+    institute.fee_collection_events.each do |event|
+      month = event.due_date.strftime("%B")
+      if report[month].nil?
+        report[month]  = {}
+        report[month][:paid] = 0
+        report[month][:not_paid] = 0
+      end
+      report[month][:paid] += event.fee_collections.size
+      report[month][:not_paid] = (number_of_students - report[month][:paid])
+
+    end
+
+
+      respond_to do |format|
+        format.js {render :json => report.to_json} 
+      end
+
+  end
 end
