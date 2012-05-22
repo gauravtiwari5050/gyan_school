@@ -1,0 +1,40 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type = "text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawCharts);
+      function drawCharts() {
+        attendance_report();
+      }
+      
+      function attendance_report() {
+       $.read(
+        '/ajax/attendance_report/institute',
+        function(response) {
+          drawChartAttendance(response.Present,response.Absent,"Attendance Report");
+        },
+        function(errored_response) {
+          drawChartAttendance(67,33,"Sample Attendance Report");
+        }
+        ); 
+      }
+      
+      function drawChartAttendance(present,absent,title) {
+         // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Attendance');
+        data.addColumn('number', 'Number');
+        data.addRows([
+          ['Present', present],
+          ['Absent', absent]
+        ]);
+
+        // Set chart options
+        var options = {'title':title};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('attendance_chart_div'));
+        chart.draw(data, options);  
+      }
+
+
+</script>

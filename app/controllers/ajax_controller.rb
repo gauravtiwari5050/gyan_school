@@ -43,4 +43,17 @@ class AjaxController < ApplicationController
       format.js {render :json => @task.to_json}
     end
   end
+  def institute_attendance_report
+   absent = SectionAttendance.count(:all,:conditions => {:institute_session_id => get_current_session.id,:present => false})
+   present = SectionAttendance.count(:all,:conditions => {:institute_session_id => get_current_session.id,:present => true})
+   logger.info 'Present ' + present.to_s
+   logger.info 'Absent ' + absent.to_s
+   attendance = Hash.new
+   attendance["Present"] = present
+   attendance["Absent"] = absent
+
+   respond_to do |format|
+    format.js {render :json => attendance.to_json} 
+   end
+  end
 end

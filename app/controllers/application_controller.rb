@@ -127,6 +127,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_current_session
+     @institute = Institute.find_by_id(get_institute_id)
      current_session =  @institute.institute_sessions.find(:first,:conditions => {:current => true})
      if current_session.nil?
      #TODO redirect her
