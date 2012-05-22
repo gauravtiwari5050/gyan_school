@@ -56,4 +56,38 @@ class AjaxController < ApplicationController
     format.js {render :json => attendance.to_json} 
    end
   end
+
+  def institute_performance_report
+    report = Hash.new
+    report["A"] = 0
+    report["B"] = 0
+    report["C"] = 0
+    report["D"] = 0
+    report["E"] = 0
+    institute = Institute.find_by_id(get_institute_id)
+    institute.batches.each do |batch|
+      batch.sections.each do |section|
+        section.exam_results.each do |result|
+          percentage = (result.score * 100)/(result.total)
+          if percentage > 90
+            report["A"] +=1
+          elsif percentage > 80
+            report["B"] +=1
+          elsif percentage > 60
+            report["C"] +=1
+          elsif percentage > 40
+            report["D"] +=1
+          else
+            report["E"] +=1
+          end
+
+        end
+      end
+    end
+
+      respond_to do |format|
+        format.js {render :json => report.to_json} 
+      end
+    
+  end
 end

@@ -4,6 +4,7 @@
       google.setOnLoadCallback(drawCharts);
       function drawCharts() {
         attendance_report();
+        performance_report();
       }
       
       function attendance_report() {
@@ -17,6 +18,7 @@
         }
         ); 
       }
+
       
       function drawChartAttendance(present,absent,title) {
          // Create the data table.
@@ -36,5 +38,56 @@
         chart.draw(data, options);  
       }
 
+
+      function performance_report() {
+       $.read(
+        '/ajax/performance_report/institute',
+        function(response) {
+          drawChartPerformance(response,"Performance Report");
+        },
+        function(errored_response) {
+          drawChartPerformance(null,"Sample Performance Report");
+        }
+        ); 
+      }
+
+
+      function drawChartPerformance(response,title) {
+        var data = null;
+        if (response != null) {
+        data = google.visualization.arrayToDataTable([
+          ['Grade', 'Count'],
+          ['A',  response.A],
+          ['B',  response.B],
+          ['C',  response.C],
+          ['D',  response.D],
+          ['E',  response.E]
+        ]);
+        
+        } else {
+         data = google.visualization.arrayToDataTable([
+          ['Grade', 'Count'],
+          ['A',  80],
+          ['B',  90],
+          ['C',  77],
+          ['D',  43],
+          ['E',  77]
+        ]);
+        
+        }
+
+
+        var options = {
+          'title': title,
+          vAxis: {title: 'Grades',  titleTextStyle: {color: 'red'}},
+          hAxis: {title: 'Number of students',  titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('performance_chart_div'));
+        chart.draw(data, options);
+      }
+
+
+      
 
 </script>
