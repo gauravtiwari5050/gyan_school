@@ -56,6 +56,23 @@ class AjaxController < ApplicationController
     format.js {render :json => attendance.to_json} 
    end
   end
+  def section_attendance_report
+   section = Section.find_by_id(params[:section_id])
+   if section.nil?
+    raise 'Section not found'
+   end
+   absent = SectionAttendance.count(:all,:conditions => {:institute_session_id => get_current_session.id,:present => false,:section_id => section.id})
+   present = SectionAttendance.count(:all,:conditions => {:institute_session_id => get_current_session.id,:present => true,:section_id => section.id})
+   logger.info 'Present ' + present.to_s
+   logger.info 'Absent ' + absent.to_s
+   attendance = Hash.new
+   attendance["Present"] = present
+   attendance["Absent"] = absent
+
+   respond_to do |format|
+    format.js {render :json => attendance.to_json} 
+   end
+  end
 
   def institute_performance_report
     report = Hash.new
@@ -90,6 +107,36 @@ class AjaxController < ApplicationController
       end
     
   end
+  
+  def section_performance_report
+    report = Hash.new
+    report["A"] = 0
+    report["B"] = 0
+    report["C"] = 0
+    report["D"] = 0
+    report["E"] = 0
+    section = Section.find_by_id(params[:section_id])
+        section.exam_results.each do |result|
+          percentage = (result.score * 100)/(result.total)
+          if percentage > 90
+            report["A"] +=1
+          elsif percentage > 80
+            report["B"] +=1
+          elsif percentage > 60
+            report["C"] +=1
+          elsif percentage > 40
+            report["D"] +=1
+          else
+            report["E"] +=1
+          end
+
+        end
+
+      respond_to do |format|
+        format.js {render :json => report.to_json} 
+      end
+    
+  end
 
   def institute_fees_report
     institute = Institute.find_by_id(get_institute_id)
@@ -115,4 +162,35 @@ class AjaxController < ApplicationController
       end
 
   end
+
+  def section_fees_report
+    institute = Institute.find_by_id(get_institute_id)
+    section = Section.find_by_id(params[:section_id])
+    logger.info 'Current institute_id '  + institute.id.to_s
+    report = Hash.new
+    institute.fee_collection_events.each do |event|
+      month = event.due_date.strftime("%B")
+      if report[month].nil?
+        report[month]  = {}
+        report[month][:paid] = 0
+        report[month][:not_paid] = 0
+      end
+      event.fee_collections.each do |collection|
+        if collection.user.section.id == section.id
+          report[month][:paid] += 1;
+        end
+      end
+      number_of_students = section.students.size
+      report[month][:not_paid] = (number_of_students - report[month][:paid])
+
+    end
+
+
+      respond_to do |format|
+        format.js {render :json => report.to_json} 
+      end
+
+  end
+
+
 end

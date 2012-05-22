@@ -1,0 +1,138 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type = "text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawCharts);
+      function drawCharts() {
+        attendance_report();
+        performance_report();
+        fees_report();
+      }
+      
+      function attendance_report() {
+       $.read(
+        '/ajax/attendance_report/section/<%=@section.id%>',
+        function(response) {
+          drawChartAttendance(response.Present,response.Absent,"Attendance Report");
+        },
+        function(errored_response) {
+          drawChartAttendance(67,33,"Sample Attendance Report");
+        }
+        ); 
+      }
+
+      
+      function drawChartAttendance(present,absent,title) {
+         // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Attendance');
+        data.addColumn('number', 'Number');
+        data.addRows([
+          ['Present', present],
+          ['Absent', absent]
+        ]);
+
+        // Set chart options
+        var options = {'title':title};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('attendance_chart_div'));
+        chart.draw(data, options);  
+      }
+
+
+      function performance_report() {
+       $.read(
+        '/ajax/performance_report/section/<%=@section.id%>',
+        function(response) {
+          drawChartPerformance(response,"Performance Report");
+        },
+        function(errored_response) {
+          drawChartPerformance(null,"Sample Performance Report");
+        }
+        ); 
+      }
+
+
+      function drawChartPerformance(response,title) {
+        var data = null;
+        if (response != null) {
+        data = google.visualization.arrayToDataTable([
+          ['Grade', 'Count'],
+          ['A',  response.A],
+          ['B',  response.B],
+          ['C',  response.C],
+          ['D',  response.D],
+          ['E',  response.E]
+        ]);
+        
+        } else {
+         data = google.visualization.arrayToDataTable([
+          ['Grade', 'Count'],
+          ['A',  80],
+          ['B',  90],
+          ['C',  77],
+          ['D',  43],
+          ['E',  77]
+        ]);
+        
+        }
+
+
+        var options = {
+          'title': title,
+          vAxis: {title: 'Grades',  titleTextStyle: {color: 'red'}},
+          hAxis: {title: 'Number of students',  titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('performance_chart_div'));
+        chart.draw(data, options);
+      }
+
+      function fees_report() {
+       $.read(
+        '/ajax/fees_report/section/<%=@section.id%>',
+        function(response) {
+          drawChartFees(response,"Fees Report");
+        },
+        function(errored_response) {
+          drawChartFees(null,"Sample Fees Report");
+        }
+        ); 
+      }
+      function drawChartFees(response,title) {
+        var data = null;
+        
+        if (response != null) {
+          var content_array = [];
+          content_array.push(['Month','Paid','Not Paid']);
+          for (var x in response) {
+            content_array.push([x,response[x]['paid'],response[x]['not_paid']]);
+          }
+        data = google.visualization.arrayToDataTable(content_array);
+        
+        } else {
+         data = google.visualization.arrayToDataTable([
+          ['Month', 'Paid','Not Paid'],
+          ['May',  80,60],
+          ['June',  90,50],
+          ['July',  77,43]
+        ]);
+        
+        }
+
+        
+        var options = {
+          'title': title,
+          vAxis: {title: 'Months',  titleTextStyle: {color: 'red'}},
+          hAxis: {title: 'Number of students',  titleTextStyle: {color: 'red'}}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('fees_chart_div'));
+        chart.draw(data, options);
+      }
+
+
+
+      
+
+</script>
