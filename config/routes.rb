@@ -115,6 +115,12 @@ GyanSchool::Application.routes.draw do
   match 'profiles/students/:student_id/change_picture' => 'profile#change_picture' 
   match 'profiles/students/:student_id/profile_picture_update' => 'profile#profile_picture_update' 
 
+  ##tmp urls
+  match 'whitelist/show' => 'home#whitelist_numbers'
+  match 'whitelist/update' => 'home#whitelist_numbers_update' ,:via => :post
+  match 'whitelist/:id/delete' => 'home#whitelist_number_delete'
+
+
 
 
 

@@ -47,6 +47,12 @@ module Util
   end
 
   def send_sms(mobile_number,message)
+    ##check if number is white listed
+    whitelisted_number = TelephoneWhitelist.find(:first,:conditions => {:number => mobile_number})
+    if whitelisted_number.nil?
+      Delayed::Worker.logger.info 'Number not whitelisted not sendig sms'
+      return
+    end
     user = GyanSchool::Application.config.sms_user
     pass = GyanSchool::Application.config.sms_pass
     sender_id = GyanSchool::Application.config.sms_sender_id

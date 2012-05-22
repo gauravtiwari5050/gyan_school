@@ -486,6 +486,34 @@ class HomeController < ApplicationController
     
   end
 
+  def whitelist_numbers
+    @institute = Institute.find_by_id(get_institute_id)
+    @telephone_whitelist = TelephoneWhitelist.new
+  end
+
+  def whitelist_numbers_update
+    @telephone_whitelist = TelephoneWhitelist.new(params[:telephone_whitelist])
+    respond_to do |format|
+      if @telephone_whitelist.save
+        flash[:notice] = 'Number whitelisted'
+        format.html {redirect_to('/whitelist/show')}
+      else
+        format.html {render :action => 'whitelist_numbers'}
+      end
+    end
+  end
+
+  def whitelist_number_delete
+    @telephone_whitelist = TelephoneWhitelist.find_by_id(params[:id])
+    @telephone_whitelist.destroy
+    respond_to do |format|
+        flash[:notice] = 'Number delisted'
+        format.html {redirect_to('/whitelist/show')}
+    end
+
+
+  end
+
   
 
 end
