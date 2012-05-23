@@ -63,7 +63,7 @@ class InstituteSetupJob < Struct.new(:institute_id)
                 msg += '(First Name : ' + teacher.first_name  + ', '
                 msg += 'Middle Name : ' + teacher.middle_name + ', '
                 msg += 'Last Name : ' + teacher.last_name + ', '
-                msg += 'Email : ' + email + ', '
+                msg += 'Email : ' + teacher.email + ', '
                 msg += 'Phone : ' + row[4] + '). Please make sure the email is unique and phone is of 10 digits '
                 raise teacher.errors.inspect
               end
