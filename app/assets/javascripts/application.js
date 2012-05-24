@@ -65,12 +65,12 @@ jQuery(document).ready(function() {
       var html = '<h3> No users found with that name </h3>';
       if(response.length != 0) {
          html = '<table class=\'table table-striped\'>';
-         html += '<tr><th>User Name</th> <th>Collect Fees</th> </tr>';
+         html += '<tr><th>User Name</th> </tr>';
         for(var i = 0;i<response.length;i++) {
-         var link_to_user = '<a href="/users/'+ response[i].id +'/profile">' + response[i].first_name +' ' + response[i].middle_name + response[i].last_name + '(' + response[i].email + ')' + ' </a>';
+         html += '<tr>';
+         var link_to_user = '<a href="/users/'+ response[i].id +'/profile">' + response[i].first_name +' ' + response[i].last_name + '(' + response[i].email + ')' + ' </a>';
          html += '<td>' + link_to_user+ '</td>';
-         var collect_fees_link = '<a class=\'btn btn-primary\' href="/fees/collect/'+ response[i].id +'">' + 'Collect Fees'  +' </a>';
-         html += '<td>' + collect_fees_link+ '</td> </tr>';
+         html += '</tr>';
         }
          html += '</table>';
       }
