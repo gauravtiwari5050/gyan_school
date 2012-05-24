@@ -119,6 +119,10 @@ GyanSchool::Application.routes.draw do
   match 'whitelist/show' => 'home#whitelist_numbers'
   match 'whitelist/update' => 'home#whitelist_numbers_update' ,:via => :post
   match 'whitelist/:id/delete' => 'home#whitelist_number_delete'
+  match 'upload_video/new' => 'home#upload_video_new'
+  match 'upload_video/create' => 'home#upload_video_create' ,:via => :post
+
+  match 'video_search' => 'home#video_search'
 
 
 

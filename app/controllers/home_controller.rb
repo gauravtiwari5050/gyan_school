@@ -514,6 +514,27 @@ class HomeController < ApplicationController
 
   end
 
+  def upload_video_new
+    @helper_file = HelperFile.new
+  end
+
+  def upload_video_create
+    @helper_file = HelperFile.new(params[:helper_file])
+    respond_to do |format|
+      if @helper_file.save
+        flash[:notice] = 'Queued for processing'
+        Delayed::Job.enqueue(CreateVideoContentsFromFileJob.new(@helper_file.id))
+      else
+        flash[:alert] = 'Errored'
+      end
+      format.html{redirect_to('/upload_video/new')}
+    end
+    
+  end
+
+  def video_search
+    
+  end
   
 
 end

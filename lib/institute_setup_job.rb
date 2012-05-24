@@ -43,7 +43,7 @@ class InstituteSetupJob < Struct.new(:institute_id)
           end
         end
         for worksheet in teachers_list.worksheets
-          worksheet.each do |row|
+          worksheet.each_with_index do |row|
             if row.length > 0
               if row.length != 5
                 msg = 'The teachers file is of invalid format. Please try again'
@@ -72,10 +72,11 @@ class InstituteSetupJob < Struct.new(:institute_id)
         end
 
         for worksheet in students_list.worksheets
-          worksheet.each do |row|
+          worksheet.each_with_index do |row,i|
             if row.length > 0
               if row.length != 9
-                msg = 'The students file is of invalid format. Please try again'
+                msg = 'The students file is of invalid format. Please check row ' + i.to_s + ' and try again'
+                Delayed::Worker.logger.info 'Row length for students file is ' + row.length.to_s
                 raise 'Invalid Student File Format'
               end
               student = Student.new
