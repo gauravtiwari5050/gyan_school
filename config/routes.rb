@@ -32,6 +32,7 @@ GyanSchool::Application.routes.draw do
   match 'teacher/:teacher_id/edit' => 'home#teacher_edit'
   match 'teacher/:teacher_id/create' => 'home#teacher_update'
   match 'teacher/create' => 'home#teacher_create' ,:via => :post
+  match 'teacher/search' => 'home#teacher_search'
 
   match 'subjects/show' => 'home#subjects_show'
   match 'subjects/create' => 'home#subjects_create'
@@ -64,6 +65,7 @@ GyanSchool::Application.routes.draw do
   match 'fees/schedule/create' => 'home#fees_schedule_create' ,:via => :post
   match 'fees/collect' => 'home#fees_collect' 
   match 'search/students' => 'home#search_students' 
+  match 'search/teachers' => 'home#search_teachers' 
   match 'fees/collect/:student_id' => 'home#fees_collect_student'
   match 'fees/collect/:student_id/update' => 'home#fees_collect_student_update' ,:via => :post
 

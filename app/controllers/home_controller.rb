@@ -158,6 +158,10 @@ class HomeController < ApplicationController
     
   end
 
+  def teacher_search
+    
+  end
+
   def sections_for_batch
     @batch = Batch.find_by_id(params[:batch_id])
     @sections = @batch.sections
@@ -285,6 +289,15 @@ class HomeController < ApplicationController
     @users = []
     if !(params[:username].nil? || params[:username].size == 0)
       @users = Student.find(:all,:conditions =>['first_name like ? and institute_id = ?' , params[:username]+'%',get_institute_id])
+    end
+    respond_to do |format|
+      format.js  { render :json => @users.to_json }
+    end
+  end
+  def search_teachers
+    @users = []
+    if !(params[:username].nil? || params[:username].size == 0)
+      @users = Teacher.find(:all,:conditions =>['first_name like ? and institute_id = ?' , params[:username]+'%',get_institute_id])
     end
     respond_to do |format|
       format.js  { render :json => @users.to_json }
