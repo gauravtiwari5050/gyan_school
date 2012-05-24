@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-actions">
                    <button type="submit" class="btn btn-primary" id="<%=id%>-button">Login</button>
-                   <button class="btn">Cancel</button>
+                   <button class="cancel-btn">Cancel</button>
                  </div>
                 </fieldset>
             </div>
@@ -41,6 +41,10 @@
             var username = $("#modal-userid-<%=id%>");
             var pass = $("#modal-password-<%=id%>");
             var login_success = login_user('<%=id%>',username.val(),pass.val());
+            
 });
+            $(".cancel-btn").click(function(){
+              $.colorbox.close(); 
+            });
             </script>
 
