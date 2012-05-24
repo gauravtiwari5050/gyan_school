@@ -122,7 +122,8 @@ GyanSchool::Application.routes.draw do
   match 'upload_video/new' => 'home#upload_video_new'
   match 'upload_video/create' => 'home#upload_video_create' ,:via => :post
 
-  match 'video_search' => 'home#video_search'
+  match 'educational_videos/show' => 'home#video_search'
+  match 'educational_videos/search' => 'home#video_search' ,:via => :post
 
 
 

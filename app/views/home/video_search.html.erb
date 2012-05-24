@@ -1,0 +1,62 @@
+  <%= render :template => 'shared/left_column' ,:locals => {:active => 'dashboard'}%>
+  <%= render :template => "shared/top_bar_new" %>
+  <% content_for :main_content do -%>
+       <div style="padding-top:25px">
+
+      <div class="title">
+        <h3> Search for educational videos </h3>
+      </div>
+  <%= form_tag('search',:method => :post,:class => 'well form-search') do -%>
+  <table>
+   <tr>
+   <td> 
+   <%=text_field_tag 'query' ,nil,:class => 'input-large search-query video-search' %>
+   </td>
+   <td>
+  <div class="loading-image" style="">
+    Search results from KhanAcademy.org
+  </div>
+  </td>
+  </table>
+  <% end -%>
+
+         
+       </div>
+
+       <div style="padding-top:20px">
+         
+       </div>
+
+       <% if @videos.length == 0 %>
+         <p>No videos found for your search query on KhanAcademy.org </p>
+       <%else%>
+        <table class = 'table table-bordered table-striped'>
+          <thead>
+           <th>Video </th>  
+           <th>Description</th>  
+          </thead>
+          <tbody>
+            <% @videos.each do |video|%>
+            <tr>
+              <td>
+            <a href="http://www.youtube.com/embed/<%=video.url%>?rel=0&wmode=transparent" class="youtube">
+              <img src="http://img.youtube.com/vi/<%=video.url%>/1.jpg">
+            </a>
+              </td>
+              <td>
+                <%=video.description%>
+              </td>
+            </tr>
+            <% end -%>
+          </tbody>
+        </table>
+       <% end %>
+
+  <% end -%>
+
+  
+    <script  type="text/javascript">
+      $(document).ready(function(){
+        $(".youtube").colorbox({iframe:true, innerWidth:425, innerHeight:344});
+      }
+  </script>

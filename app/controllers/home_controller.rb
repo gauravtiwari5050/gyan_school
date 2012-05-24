@@ -533,7 +533,21 @@ class HomeController < ApplicationController
   end
 
   def video_search
-    
+
+  logger.info params.inspect
+    search_term = ''
+    if params[:query].nil?
+      search_term = 'math'
+    else
+      search_term = params[:query]
+    end
+
+    @search = EduVideo.search do
+      fulltext search_term
+    end
+
+    @videos = @search.results
+    logger.info @videos.length 
   end
   
 

@@ -18,3 +18,5 @@ public/uploads/*
 /config/database.yml
 config/environments/*
 config/initializers/*
+solr/data/**/*
+solr/pids/**/*

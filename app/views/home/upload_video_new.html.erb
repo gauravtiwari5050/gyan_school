@@ -1,0 +1,22 @@
+  <%= render :template => 'shared/left_column' ,:locals => {:active => 'dashboard'}%>
+  <%= render :template => "shared/top_bar_new" %>
+  <% content_for :main_content do -%>
+        <%= form_for(@helper_file,:html =>{:class => 'form-vertical',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+          <%= render :template => "shared/notices" %>
+          <%= render :template => "shared/form-errors",:locals => {:form => @helper_file} %>
+          <fieldset>
+            <div class="control-group">
+              
+              <%= f.label 'Video List' ,"Video List" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.file_field 'name'%> 
+              
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Upload file" ,:class => 'btn btn-medium'%>
+            </div>
+          </fieldset>
+
+        <% end -%>
+
+  <% end -%>
