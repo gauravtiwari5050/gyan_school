@@ -12,10 +12,13 @@
      <td>
       <div class="">
         <%= link_to_function "See Section Details", "toggle_sections(this)" ,:class=> 'btn'%>
+
+        <div class="toggle-section" style="display:none;padding-top:10px">
+          
         
-        <table class="table table-striped toggle-section" style="display:none">
+        <table class="table table-striped">
           <% for section in batch.sections -%>
-          <tr>
+          <tr id='section_<%=section.id.to_s%>'>
           <td>
             <%=section.name %>
           </td>
@@ -31,12 +34,20 @@
             </div>
 
           </td>
+          <td>
+            <%= link_to_function image_tag('delete.png',:height => '16',:width => '16'), "delete_section(this," + section.id.to_s+ ")" %>
+          <td>
+
           </tr>
 
             
           <% end -%>
 
         </table>
+
+        <%= link_to "Add more sections", '/batch/'+batch.id.to_s+'/edit',:class=> 'btn btn-primary' %>
+
+        </div>
       </div>
      </td>
      </tr>
@@ -49,6 +60,27 @@
 function toggle_sections(obj) {
   $(".toggle-section").toggle(false);
   $(obj).parent().find(".toggle-section").toggle(true);
+}
+
+function delete_section(obj,section_id) {
+  if(confirm('Are you sure you want to delete this section ?')) {
+  
+
+
+  $.read(
+    '/ajax/delete/section/{id}',
+    {id:section_id},
+    function() {
+      $('#section_'+section_id).remove();
+      
+    },
+    function() {
+      alert('Errored');
+    }
+
+  );
+
+  }
 }
   
 </script>

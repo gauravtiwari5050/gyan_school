@@ -192,5 +192,14 @@ class AjaxController < ApplicationController
 
   end
 
+  def delete_section
+      section = Section.find_by_id(params[:section_id])
+      section.destroy
+      respond_to do |format|
+        format.js {render :json => nil} 
+      end
+    
+  end
+
 
 end

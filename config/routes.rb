@@ -37,6 +37,7 @@ GyanSchool::Application.routes.draw do
   match 'subjects/create' => 'home#subjects_create'
 
   match 'section/:section_id/show' => 'section#show'
+  match 'section/:section_id/delete' => 'section#show'
   match 'section/:section_id/attendance' => 'section#attendance_home'
   match 'section/:section_id/mark_attendance/:date' => 'section#mark_attendance'
   match 'section/:section_id/mark_attendance/:date/update' => 'section#mark_attendance_update' ,:via => :post
@@ -101,6 +102,7 @@ GyanSchool::Application.routes.draw do
   match 'ajax/fees_report/institute' => 'ajax#institute_fees_report'
   match 'ajax/fees_report/section/:section_id' => 'ajax#section_fees_report'
   match 'section/:section_id/update_teacher/:teacher_id' => 'ajax#section_update_teacher' ,:via => :put
+  match 'ajax/delete/section/:section_id' => 'ajax#delete_section' 
 
   ##print ursl
   match 'print/details/students' => 'print#student_details'
