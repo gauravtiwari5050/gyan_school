@@ -18,7 +18,7 @@
         
         <table class="table table-striped">
           <% for section in batch.sections -%>
-          <tr id='section_<%=section.id.to_s%>'>
+          <tr id='section_<%=section.id.to_s%>_row'>
           <td>
             <%=section.name %>
           </td>
@@ -29,9 +29,11 @@
               
               <%=teacher.print_name%>
             <% else %>
-                      <%=collection_select(:teacher,:teacher_id,@institute.teachers,:id,:print_name,{:prompt => 'Select a Teacher'},{:onchange => "update_teacher(this,"+section.id.to_s+")"})%>
+              Not Assigned
             <% end %>
             </div>
+
+                      <%=collection_select(:teacher,:teacher_id,@institute.teachers,:id,:print_name,{:prompt => 'Select a Teacher'},{:onchange => "update_teacher(this,"+section.id.to_s+")"})%>
 
           </td>
           <td>
@@ -71,7 +73,7 @@ function delete_section(obj,section_id) {
     '/ajax/delete/section/{id}',
     {id:section_id},
     function() {
-      $('#section_'+section_id).remove();
+      $('#section_'+section_id+'_row').remove();
       
     },
     function() {
