@@ -120,7 +120,7 @@ class SectionController < ApplicationController
 
   def attendance_report_show
     @section = Section.find_by_id(params[:section_id])
-    section_attendances = SectionAttendance.find(:all,:conditions => {:section_id => @section.id,:date => params[:date]}) 
+    section_attendances = SectionAttendance.find(:all,:conditions => {:section_id => @section.id,:date => params[:date],:present => true}) 
     user_ids = section_attendances.map(&:user_id)
     @absent_students = []
     @section.students.each do |student|
