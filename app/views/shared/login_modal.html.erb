@@ -11,7 +11,7 @@
                 <div class="control-group">
                   <label class="control-label" for="title">UserId/EmailId</label>
                   <div class="controls">
-                    <input type="text" name="userid" id="modal-userid-<%=id%>" class="input-xlarge" />
+                    <input type="text" name="userid" id="modal-userid-<%=id%>" class="input-xlarge keystroke" />
                   </div>
                 </div>
                 <div class="control-group">
@@ -27,12 +27,27 @@
                 </fieldset>
             </div>
             <script type="text/javascript">
+            $('#modal-password-<%=id%>').bind('keypress', function(e) {
+               var code = (e.keyCode ? e.keyCode : e.which);
+                if(code == 13) { //Enter keycode
+                    $(".loading-image").show();
+                    $('.validateTips').text('Logging in');
+                    var username = $("#modal-userid-<%=id%>");
+                    var pass = $("#modal-password-<%=id%>");
+                    var login_success = login_user('<%=id%>',username.val(),pass.val());
+
+                }
+            });
   $(function() {
+    
    $(".login").colorbox({ inline:true, 
                           width:"400px",
-                          height:"400px",
+                          height:"420px",
                           top:"200px",
-                          onOpen:function(){ $('.validateTips').text(''); }  
+                          onComplete:function(){ 
+                                  $(".keystroke").focus();
+                                  $('.validateTips').text(''); 
+                                }  
                           });
     });
   $("#<%=id%>-button").click(function(){
