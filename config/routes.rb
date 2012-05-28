@@ -116,7 +116,7 @@ GyanSchool::Application.routes.draw do
   match 'profiles/students/:student_id/update' => 'profile#student_detail_update'
   match 'profiles/students/:student_id/reset_password' => 'profile#password_edit'
   match 'profiles/students/:student_id/update_password' => 'profile#password_update' ,:via => :post
-  match 'profiles/students/:student_id/change_picture' => 'profile#change_picture' 
+  match 'profiles/students/:student_id/change_picture' => 'iframe#change_picture' 
   match 'profiles/students/:student_id/profile_picture_update' => 'profile#profile_picture_update' 
 
   ##tmp urls

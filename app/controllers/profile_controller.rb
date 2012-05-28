@@ -51,10 +51,6 @@ class ProfileController < ApplicationController
     
   end
 
-  def change_picture
-    @student = Student.find_by_id(params[:student_id])   
-    @profile = Profile.new
-  end
 
   def profile_picture_update
     success = true

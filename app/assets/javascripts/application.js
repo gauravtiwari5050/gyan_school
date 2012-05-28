@@ -127,3 +127,10 @@ $(function() {
                           changeYear:true
                           });
 });
+
+$(function(){
+  $(".iframe").colorbox({iframe:true, width:"80%", height:"80%",
+                        onComplete : function() { 
+                                 }
+                        });
+});

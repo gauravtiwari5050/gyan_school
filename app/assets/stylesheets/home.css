@@ -2,6 +2,7 @@
 *= require_self 
 *= require jquery-ui
 *= require fullcalendar 
+*= require colorbox 
 *= require myboot 
 
 */  

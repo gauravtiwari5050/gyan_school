@@ -1,6 +1,7 @@
 <%= render :template => 'shared/sidepic_profile',:locals => {:user => @student } %>
 <% content_for :left_column do -%>
   
+  
             <div class="leftcolumn">
               <a href="/profiles/students/<%=@student.id.to_s%>/edit">
               <% if active == 'edit_details' %>
@@ -25,7 +26,7 @@
               </a>
 
 
-              <a href="/profiles/students/<%=@student.id.to_s%>/change_picture">
+              <a href="/profiles/students/<%=@student.id.to_s%>/change_picture" class="iframe">
               <% if active == 'upload_picture' %>
                 <div class="rowline-active">
               <% else %>
