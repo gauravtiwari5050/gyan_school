@@ -130,8 +130,10 @@ GyanSchool::Application.routes.draw do
   match 'educational_videos/show' => 'home#video_search'
   match 'educational_videos/search' => 'home#video_search' ,:via => :post
 
-  ##iframe close route
+  ##iframe routes
   match 'iframe/close' => 'iframe#close'
+  match 'iframe/:student_id/attendance' => 'iframe#student_attendance'
+  match 'iframe/:student_id/fees' => 'iframe#student_fees
 
 
 

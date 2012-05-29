@@ -1,0 +1,35 @@
+
+      <div class="title">
+        <h3> Fee Collection Report for <%=@student.print_name%></h3>
+                        <%report = get_fees_report(@student,get_current_session)%>
+                        <% if !report.nil? && report.size > 0 %>
+                         <table class="table table-bordered table-striped">
+                          <thead>
+                            <th> Month </th>
+                            <th> Fee Status  </th>
+                          </thead>
+                          <tbody>
+                                <%report.keys.each do |month|%> 
+          
+                                   <tr>
+                                    <td><%=month%></td>
+                                  <td>
+                                    <% if report[month] == true %>
+                                      Paid
+                                    <%else%>
+                                      Not Paid
+                                    <% end %>
+                                  </td>
+            
+                                  </tr>
+                              <% end -%>
+
+                          </tbody>
+
+                         </table>
+                          
+                        <% else %>
+                          No Data Available.
+                        <% end %>
+      </div>
+

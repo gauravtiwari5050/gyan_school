@@ -3,17 +3,18 @@
 <table class="table table-bordered table-striped">
   <thead>
     <th>Name</th>
-    <th>Progress</th>
     <th>Attendance</th>
+    <th>Fees</th>
     <th>Settings</th>
   </thead>
   <tbody>
     <% for student in students -%>
      <tr>
-     <td><%= link_to student.print_name, '/profiles/students/'+student.id.to_s+'/edit' %></td>
-     <td>Progress</td>
-     <td>Attendance</td>
-     <td><i class="icon-user"></i></td>
+     <td><%= link_to student.print_name, '/profiles/'+student.id.to_s+'/show' %></td>
+     <td><a href = "/iframe/<%=student.id.to_s%>/attendance" class="iframe"> <i class="icon-th-list"></i> Attendance</a> </td>
+     <td><a href = "/iframe/<%=student.id.to_s%>/fees" class="iframe"> <i class="icon-barcode"></i> Fees</a> </td>
+     <td><a href = "/profiles/<%=student.id.to_s%>/edit"> <i class="icon-asterisk"></i> Settings</a> </td>
+     
      </tr>
     <% end -%>
   </tbody>

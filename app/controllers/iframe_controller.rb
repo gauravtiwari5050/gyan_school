@@ -28,6 +28,15 @@ class IframeController < ApplicationController
     
   end
 
+  def student_attendance
+    @student = User.find_by_id(params[:student_id])   
+    
+  end
+
+  def student_fees
+    @student = User.find_by_id(params[:student_id])   
+  end  
+
   def close
 
   end
