@@ -1,0 +1,22 @@
+
+                  <div class="reporting-box">
+                    <div class="title">
+                      Employee Overview
+                    </div>
+                    <div class="report-content" style="padding:3px;">
+                      <h1><%= @user.print_name %></h1>
+                      <table class="table table-bordered table-striped">
+                        <tbody>
+                          <tr>
+                          <td> Email </td>
+                          <td> <%= @user.email %> </td>
+                          </tr>
+                          <tr>
+                          <td> Employee Type </td>
+                          <td> <%= @user.type %> </td>
+                          </tr>
+
+                         </tbody>
+                      </table>
+                    </div>
+                  </div>

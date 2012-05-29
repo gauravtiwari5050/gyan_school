@@ -8,8 +8,9 @@
   <tbody>
     <% for teacher in teachers -%>
      <tr>
-     <td><%= link_to teacher.print_name, '/profiles/teachers/'+teacher.id.to_s %></td>
-     <td><i class="icon-user"></i></td>
+     <td><%= link_to teacher.print_name, '/profiles/'+teacher.id.to_s+'/show' %></td>
+     <td><a href = "/profiles/<%=teacher.id.to_s%>/edit"> <i class="icon-asterisk"></i> Settings</a> </td>
+
      </tr>
     <% end -%>
   </tbody>

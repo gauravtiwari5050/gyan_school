@@ -133,8 +133,7 @@ GyanSchool::Application.routes.draw do
   ##iframe routes
   match 'iframe/close' => 'iframe#close'
   match 'iframe/:student_id/attendance' => 'iframe#student_attendance'
-  match 'iframe/:student_id/fees' => 'iframe#student_fees
-
-
+  match 'iframe/:student_id/fees' => 'iframe#student_fees'
 
 end
+

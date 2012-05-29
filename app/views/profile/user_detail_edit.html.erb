@@ -11,7 +11,8 @@
       </div>
       <% if @user.type == 'Student' %>
         <%=render 'student_detail_form'%>
-        
+      <% else %>
+        <%=render 'employee_detail_form'%>
       <% end %>
 
 <script type="text/javascript"> 

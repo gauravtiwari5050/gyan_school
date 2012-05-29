@@ -20,7 +20,7 @@
           <% for section in batch.sections -%>
           <tr id='section_<%=section.id.to_s%>_row'>
           <td>
-            <%=section.name %>
+           <%= link_to section.name, 'section/'+section.id.to_s+'/show' ,:class => 'btn btn-large btn-primary' %>
           </td>
           <td>
             <% teacher = get_teacher_for_section(section)%>

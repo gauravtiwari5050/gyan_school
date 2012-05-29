@@ -1,6 +1,12 @@
 class ProfileController < ApplicationController
   def user_detail_edit
     @user = User.find_by_id(params[:user_id])
+    if @user.address.nil?
+      @user.build_address
+    end
+    if @user.type == 'Student' && @user.user_detail.nil?
+      @user.build_user_detail
+    end
   end
   def user_detail_update
     logger.info params.inspect
