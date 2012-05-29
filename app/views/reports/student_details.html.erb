@@ -1,0 +1,37 @@
+
+                  <div class="reporting-box">
+                    <div class="title">
+                      Student Overview
+                    </div>
+                    <div class="report-content" style="padding:3px;">
+                      <h1><%= @user.print_name %></h1>
+                      <table class="table table-bordered table-striped">
+                        <tbody>
+                          <tr>
+                          <td> Class </td>
+                          <td> <%= @user.section.batch.name %> </td>
+                          </tr>
+                          <tr>
+                          <td> Section </td>
+                          <td> <%= @user.section.name %> </td>
+                          </tr>
+                          <tr>
+                          <td> Admission Number </td>
+                          <% if  !@user.admission_detail.nil? && !@user.admission_detail.admit_number.nil?%>
+                            <td> <%= @user.admission_detail.admit_number%> </td>
+                          <% else %>
+                            <td> Not Assigned </td>
+                          <% end %>
+                          </tr>
+                          <td> Member Since </td>
+                          <% if  !@user.admission_detail.nil? && !@user.admission_detail.admit_date.nil?%>
+                            <td> <%= @user.admission_detail.admit_date%> </td>
+                          <% else %>
+                            <td> Not known </td>
+                          <% end %>
+                          </tr>
+
+                         </tbody>
+                      </table>
+                    </div>
+                  </div>

@@ -1,0 +1,80 @@
+
+                  <div class="reporting-box">
+                    <div class="title">
+                      Personal Details
+                    </div>
+                    <div class="report-content" style="padding:3px;">
+                      <table class="table table-bordered table-striped">
+                        <tbody>
+                          
+                          <tr>
+                          <td> DOB </td>
+                          <% if  !@user.dob.nil? %>
+                          <td> <%= @user.dob %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+                          
+                          <tr>
+                          <td> Gender </td>
+                          <% if  !@user.user_detail.nil?  && !@user.user_detail.gender.nil? %>
+                          <td> <%= @user.user_detail.gender %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+                          <tr>
+                          <td> Blood Group </td>
+                          <% if  !@user.user_detail.nil?  && !@user.user_detail.blood_group.nil? %>
+                          <td> <%= @user.user_detail.blood_group %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+                          <tr>
+
+                          <td> Birth Place </td>
+                          <% if  !@user.user_detail.nil?  && !@user.user_detail.birth_place.nil? %>
+                          <td> <%= @user.user_detail.birth_place %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+
+                          <tr>
+                          <td> Nationality </td>
+                          <% if  !@user.user_detail.nil?  && !@user.user_detail.nationality.nil? %>
+                          <td> <%= @user.user_detail.nationality %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+
+                          <tr>
+                          <td> Category </td>
+                          <% if  !@user.user_detail.nil?  && !@user.user_detail.category.nil? %>
+                          <td> <%= @user.user_detail.category %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+
+                          <tr>
+                          <td> Religion </td>
+                          <% if  !@user.user_detail.nil?  && !@user.user_detail.religion.nil? %>
+                          <td> <%= @user.user_detail.religion %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+
+                         </tbody>
+                      </table>
+                    </div>
+                   </div>

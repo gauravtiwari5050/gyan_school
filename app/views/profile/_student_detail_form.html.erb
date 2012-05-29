@@ -1,23 +1,12 @@
-  <%= render :template => 'shared/left_column_profile' ,:locals => {:active => 'edit_details'}%>
-   <% content_for :breadcrumb do -%>
-       <a href="/classes">Student Profile</a> <span class="divider">/</span>
-   <% end -%>
-
-  <%= render :template => "shared/top_bar_new" %>
-
-<% content_for :main_content do -%>
-      <div class="title">
-        <h2> Edit student Details</h2>
-      </div>
       <div class="content forms">
   <%= render :template => "shared/notices" %>
-  <%= render :template => "shared/form-errors",:locals => {:form => @student} %>
-        <%= form_for(@student,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @user} %>
+        <%= form_for(@user,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
           <fieldset>
         <table class='table'>
           <tr>
             <td>
-          <h3 style="padding-top:15px"> Basic Details </h3>
+          <h3 style="padding-top:15px"> Basic Details  </h3>
             <div class="control-group">
               <%= f.label 'First Name' ,"First Name" ,:class=>"control-label" %>
               <div class="controls">
@@ -56,7 +45,7 @@
                   <tbody>
                     <tr>
                     <td>
-                    <%= f.label 'Class' ,@student.section.batch.name + '-' + @student.section.name  %>
+                    <%= f.label 'Class' ,@user.section.batch.name + '-' + @user.section.name  %>
                     </td>
                     <td>
                 <%= link_to_function "Edit Class", "edit_class()",:class=> 'btb btn-primary' %>
@@ -262,27 +251,3 @@
         <% end -%>
         
       </div>
-
-<script type="text/javascript"> 
-  function select_section(obj) {
-          var element = document.getElementById("student_section_id");
-          element.options.length=0;
-  $.read(
-        '/batch/sections/{batch_id}',
-        {batch_id:obj.options[obj.selectedIndex].value},
-        function(response) {
-          for(i=0;i<response.length;i++) {
-            element.options[element.options.length] = new Option(response[i].name, response[i].id); 
-          }
-        }
-
-  );
-  }
- 
- function edit_class() {
-  $('#batch_selection').toggle();
- }
-
-</script>
-  
-<% end -%>

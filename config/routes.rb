@@ -112,12 +112,13 @@ GyanSchool::Application.routes.draw do
   match 'print/report_card/:student_id' => 'print#report_card'
 
   ##profile urls
-  match 'profiles/students/:student_id/edit' => 'profile#student_detail_edit'
-  match 'profiles/students/:student_id/update' => 'profile#student_detail_update'
-  match 'profiles/students/:student_id/reset_password' => 'profile#password_edit'
-  match 'profiles/students/:student_id/update_password' => 'profile#password_update' ,:via => :post
-  match 'profiles/students/:student_id/change_picture' => 'iframe#change_picture' 
-  match 'profiles/students/:student_id/profile_picture_update' => 'profile#profile_picture_update' 
+  match 'profiles/:user_id/show' => 'profile#user_profile'
+  match 'profiles/:user_id/edit' => 'profile#user_detail_edit'
+  match 'profiles/:user_id/update' => 'profile#user_detail_update'
+  match 'profiles/:user_id/reset_password' => 'profile#password_edit'
+  match 'profiles/:user_id/update_password' => 'profile#password_update' ,:via => :post
+  match 'profiles/:user_id/change_picture' => 'iframe#change_user_picture' 
+  match 'profiles/:user_id/profile_picture_update' => 'iframe#profile_picture_update' 
 
   ##tmp urls
   match 'whitelist/show' => 'home#whitelist_numbers'
@@ -128,6 +129,9 @@ GyanSchool::Application.routes.draw do
 
   match 'educational_videos/show' => 'home#video_search'
   match 'educational_videos/search' => 'home#video_search' ,:via => :post
+
+  ##iframe close route
+  match 'iframe/close' => 'iframe#close'
 
 
 

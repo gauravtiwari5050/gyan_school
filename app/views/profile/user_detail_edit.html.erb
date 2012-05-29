@@ -1,0 +1,39 @@
+  <%= render :template => 'shared/left_column_profile' ,:locals => {:active => 'edit_details'}%>
+   <% content_for :breadcrumb do -%>
+       <a href="/classes">Student Profile</a> <span class="divider">/</span>
+   <% end -%>
+
+  <%= render :template => "shared/top_bar_new" %>
+
+<% content_for :main_content do -%>
+      <div class="title">
+        <h2> Edit user Details</h2>
+      </div>
+      <% if @user.type == 'Student' %>
+        <%=render 'student_detail_form'%>
+        
+      <% end %>
+
+<script type="text/javascript"> 
+  function select_section(obj) {
+          var element = document.getElementById("student_section_id");
+          element.options.length=0;
+  $.read(
+        '/batch/sections/{batch_id}',
+        {batch_id:obj.options[obj.selectedIndex].value},
+        function(response) {
+          for(i=0;i<response.length;i++) {
+            element.options[element.options.length] = new Option(response[i].name, response[i].id); 
+          }
+        }
+
+  );
+  }
+ 
+ function edit_class() {
+  $('#batch_selection').toggle();
+ }
+
+</script>
+  
+<% end -%>

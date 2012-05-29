@@ -129,7 +129,7 @@ $(function() {
 });
 
 $(function(){
-  $(".iframe").colorbox({iframe:true, width:"80%", height:"80%",
+  $(".iframe").colorbox({iframe:true, width:"50%", height:"50%",
                         onComplete : function() { 
                                  }
                         });

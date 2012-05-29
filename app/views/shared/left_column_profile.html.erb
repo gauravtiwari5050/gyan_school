@@ -1,9 +1,22 @@
-<%= render :template => 'shared/sidepic_profile',:locals => {:user => @student } %>
+<%= render :template => 'shared/sidepic_profile',:locals => {:user => @user } %>
 <% content_for :left_column do -%>
   
   
             <div class="leftcolumn">
-              <a href="/profiles/students/<%=@student.id.to_s%>/edit">
+              
+              
+              <a href="/profiles/<%=@user.id.to_s%>/show">
+              <% if active == '' %>
+                <div class="rowline-active" href="www.google.com">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccihome.png' %>" class="thumbpic-small">  User Profile
+              </div>
+              </a>
+              
+              <% if current_user.type == 'Admin'  || @user.id == current_user.id%>
+              <a href="/profiles/<%=@user.id.to_s%>/edit">
               <% if active == 'edit_details' %>
                 <div class="rowline-active" href="www.google.com">
               <% else %>
@@ -13,9 +26,8 @@
               </div>
               </a>
               
-              <% if current_user.type == 'Admin'  || @student.id == current_user.id%>
                 
-              <a href="/profiles/students/<%=@student.id.to_s%>/reset_password">
+              <a href="/profiles/<%=@user.id.to_s%>/reset_password">
               <% if active == 'reset_password' %>
                 <div class="rowline-active">
               <% else %>
@@ -26,7 +38,7 @@
               </a>
 
 
-              <a href="/profiles/students/<%=@student.id.to_s%>/change_picture" class="iframe">
+              <a href="/profiles/<%=@user.id.to_s%>/change_picture" class="iframe">
               <% if active == 'upload_picture' %>
                 <div class="rowline-active">
               <% else %>
@@ -38,7 +50,7 @@
               <% end %>
              
 
-              <a href="/print/report_card/<%=@student.id.to_s%>.pdf" target="_blank">
+              <a href="/print/report_card/<%=@user.id.to_s%>.pdf" target="_blank">
               <% if active == 'print_report' %>
                 <div class="rowline-active">
               <% else %>

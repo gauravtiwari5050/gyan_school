@@ -1,0 +1,78 @@
+
+                  <div class="reporting-box">
+                    <div class="title">
+                      Address Details
+                    </div>
+                    <div class="report-content" style="padding:3px;">
+                      <table class="table table-bordered table-striped">
+                        <tbody>
+                          <tr>
+                          <td> Address </td>
+                          <% if !@user.address.nil? && !@user.address.address_1.nil? %>
+                          <td> <%= @user.address.address_1  %> </td>
+                          <% else %>
+                          <td> Not Assigned </td>
+                          <% end %>
+                          </tr>
+
+                          <tr>
+                          <td> District </td>
+                          <% if !@user.address.nil? && !@user.address.district.nil? %>
+                          <td> <%= @user.address.district %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+                          <tr>
+                          <td> City </td>
+                          <% if !@user.address.nil? && !@user.address.city.nil? %>
+                          <td> <%= @user.address.city %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+
+                          <tr>
+                          <td> Landmark </td>
+                          <% if !@user.address.nil? && !@user.address.landmark.nil? %>
+                          <td> <%= @user.address.landmark %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+                          <tr>
+                          <td> Phone/Mobile </td>
+                          <% if !@user.address.nil? && !@user.address.mobile.nil? %>
+                          <td> <%= @user.address.mobile %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+                          <tr>
+                          <td> Landline </td>
+                          <% if !@user.address.nil? && !@user.address.phone.nil? %>
+                          <td> <%= @user.address.phone %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+
+
+                          <tr>
+                          <td> Pincode </td>
+                          <% if !@user.address.nil? && !@user.address.pincode.nil? %>
+                          <td> <%= @user.address.pincode %> </td>
+                          <% else %>
+                          <td> - </td>
+                          <% end %>
+                          </tr>
+                          
+                         </tbody>
+                      </table>
+
+                    </div>
+                   </div>

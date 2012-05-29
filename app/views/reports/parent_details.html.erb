@@ -1,0 +1,42 @@
+
+                  <div class="reporting-box">
+                    <div class="title">
+                      Parent Details
+                    </div>
+                    <div class="report-content" style="padding:3px;">
+                      <table class="table table-bordered table-striped">
+                        <tbody>
+                          <tr>
+                          <td> Name </td>
+                          <td> <%= @user.parent_detail.name %> </td>
+                          </tr>
+                          <tr>
+                          <td> Email </td>
+                          <% if !@user.parent_detail.email.nil? %>
+                          <td> <%= @user.parent_detail.email %> </td>
+                          <% else %>
+                          <td> Not Assigned </td>
+                          <% end %>
+                          </tr>
+
+                          <tr>
+                          <td> Landline </td>
+                          <% if !@user.parent_detail.phone.nil? %>
+                          <td> <%= @user.parent_detail.phone %> </td>
+                          <% else %>
+                          <td> Not Assigned </td>
+                          <% end %>
+                          </tr>
+                          <tr>
+                          <td> Mobile </td>
+                          <% if !@user.parent_detail.mobile.nil? %>
+                          <td> <%= @user.parent_detail.mobile %> </td>
+                          <% else %>
+                          <td> Not Assigned </td>
+                          <% end %>
+                          </tr>
+
+                         </tbody>
+                      </table>
+                    </div>
+                   </div>

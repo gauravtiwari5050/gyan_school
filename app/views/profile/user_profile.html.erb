@@ -1,0 +1,15 @@
+  <%= render :template => 'shared/left_column_profile' ,:locals => {:active => 'user_profile'}%>
+   <% content_for :breadcrumb do -%>
+       <a href="#">User Profile</a> <span class="divider">/</span>
+   <% end -%>
+
+  <%= render :template => "shared/top_bar_new" %>
+
+<% content_for :main_content do -%>
+  <% if @user.type == 'Student' %>
+    <%=render 'student_profile'%> 
+  <% else %>
+    <%=render 'employee_profile'%> 
+  <% end %>
+
+<% end -%>

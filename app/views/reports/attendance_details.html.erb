@@ -1,0 +1,41 @@
+
+                  <div class="reporting-box">
+                    <div class="title">
+                      Attendance Details
+                    </div>
+                    <div class="report-content" style="padding:3px;">
+                        <%report = get_attendance_report(@user,get_current_session)%>
+                        <% if !report.nil? && report.size > 0 %>
+                         <table class="table table-bordered table-striped">
+                          <thead>
+                            <th> Month </th>
+                            <th> Percentage  </th>
+                            <th> Total </th>
+                          </thead>
+                          <tbody>
+                                <%report.keys.each do |month|%> 
+          
+                                   <tr>
+                                    <td><%=month%></td>
+                                    <td>
+                                    <div class="progress">
+                                      <div class="bar" style="width: <%=(report[month][:present] *100)/(report[month][:present]+report[month][:absent])%>%;"></div>
+                                    </div>
+                                    </td>
+                                  <td>
+                                    <%= report[month][:present] %> / <%= report[month][:present]+report[month][:absent]%>
+                                  </td>
+            
+                                  </tr>
+                              <% end -%>
+
+                          </tbody>
+
+                         </table>
+                          
+                        <% else %>
+                          No Data Available.
+                        <% end %>
+                      
+                    </div>
+                   </div>
