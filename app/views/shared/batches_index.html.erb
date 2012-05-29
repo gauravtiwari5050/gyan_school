@@ -4,10 +4,12 @@
   <thead>
     <th>Name</th>
     <th>Sections|Class Teacher</th>
+    <th>Settings</th>
+    <th>Delete</th>
   </thead>
   <tbody>
     <% for batch in batches -%>
-     <tr>
+     <tr id="batch_<%=batch.id.to_s%>_row">
      <td><%= link_to batch.name, '/batch/'+batch.id.to_s+'/show' %></td>
      <td>
       <div class="">
@@ -55,6 +57,9 @@
      <td>
        <%= link_to "Edit Class", '/batch/'+batch.id.to_s+'/edit',:class => 'btn btn-warning' %>
      </td>
+     <td>
+            <%= link_to_function image_tag('delete.png',:height => '16',:width => '16'), "delete_class(this,"+ batch.id.to_s+")" %>
+     </td>
      </tr>
     <% end -%>
   </tbody>
@@ -77,6 +82,27 @@ function delete_section(obj,section_id) {
     {id:section_id},
     function() {
       $('#section_'+section_id+'_row').remove();
+      
+    },
+    function() {
+      alert('Errored');
+    }
+
+  );
+
+  }
+}
+
+function delete_class(obj,batch_id) {
+  if(confirm('All class information would be lost. Are you sure you want to delete this class ?')) {
+  
+
+
+  $.read(
+    '/ajax/delete/batch/{id}',
+    {id:batch_id},
+    function() {
+      $('#batch_'+batch_id+'_row').remove();
       
     },
     function() {

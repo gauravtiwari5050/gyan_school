@@ -201,5 +201,13 @@ class AjaxController < ApplicationController
     
   end
 
+  def delete_batch
+    batch = Batch.find_by_id(params[:batch_id])
+    batch.destroy
+      respond_to do |format|
+        format.js {render :json => nil} 
+      end
+  end
+
 
 end

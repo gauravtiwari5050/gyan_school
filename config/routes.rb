@@ -105,6 +105,7 @@ GyanSchool::Application.routes.draw do
   match 'ajax/fees_report/section/:section_id' => 'ajax#section_fees_report'
   match 'section/:section_id/update_teacher/:teacher_id' => 'ajax#section_update_teacher' ,:via => :put
   match 'ajax/delete/section/:section_id' => 'ajax#delete_section' 
+  match 'ajax/delete/batch/:batch_id' => 'ajax#delete_batch' 
 
   ##print ursl
   match 'print/details/students' => 'print#student_details'
