@@ -63,12 +63,21 @@
           <% end %>
             <tr id="student_<%=student.id.to_s%>"style="background-color:<%=bgcolor%>" onclick="toggle_attendance(this);">
             <td><%= student.print_name%></td>   
+            <td>
             <% if  present%>
-              <td><%=check_box_tag student.id ,student.id,true %></td>
+              <%=check_box_tag student.id ,student.id,true,:style => 'display:none' %>
               
             <% else %>
-              <td><%=check_box_tag student.id%></td>
+              <%=check_box_tag student.id,student.id,false,:style => 'display:none'%>
             <% end %>
+            <% if present %>
+              <%= image_tag('checked.jpg',:height => '24',:width => '24',:class => 'checked') %>
+              <%= image_tag('unchecked.jpg',:height => '24',:width => '24',:class => 'unchecked' ,:style => 'display:none') %>
+            <%else%>   
+              <%= image_tag('checked.jpg',:height => '24',:width => '24',:class => 'checked' ,:style => 'display:none') %>
+              <%= image_tag('unchecked.jpg',:height => '24',:width => '24',:class => 'unchecked') %>
+            <% end %>
+            </td>
           </tr> 
     <% end -%>   
          </tbody>
@@ -82,8 +91,12 @@
     var $checkbox = $(obj).find(':checkbox');
     if($checkbox.attr('checked')) {
       $(obj).attr('style','background-color:#F2DEDE');
+      $(obj).find('.unchecked').attr('style','display:visible');
+      $(obj).find('.checked').attr('style','display:none');
     } else {
       $(obj).attr('style','background-color:#D6E9C6');
+      $(obj).find('.unchecked').attr('style','display:none');
+      $(obj).find('.checked').attr('style','display:visible');
     }
 
     $checkbox.attr('checked', !$checkbox.attr('checked'));
