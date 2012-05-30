@@ -1,5 +1,5 @@
 <% content_for :sidepic do -%>
-            <a href="/profile/<%=current_user.id.to_s%>"> 
+            <a href="/profiles/<%=current_user.id.to_s%>/show"> 
             <img src="<%= asset_path get_profile_pic_for_user(current_user) %>" class="sidepic">
             </a>
             </br>

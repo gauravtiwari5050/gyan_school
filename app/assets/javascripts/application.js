@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
          html = '<table class=\'table table-striped\'>';
          html += '<tr><th>User Name</th> <th>Collect Fees</th> </tr>';
         for(var i = 0;i<response.length;i++) {
-         var link_to_user = '<a href="/users/'+ response[i].id +'/profile">' + response[i].first_name +' ' + response[i].middle_name + response[i].last_name + '(' + response[i].email + ')' + ' </a>';
+         var link_to_user = '<a href="/profiles/'+ response[i].id +'/show">' + response[i].first_name +' ' + response[i].middle_name + response[i].last_name + '(' + response[i].email + ')' + ' </a>';
          html += '<td>' + link_to_user+ '</td>';
          var collect_fees_link = '<a class=\'btn btn-primary\' href="/fees/collect/'+ response[i].id +'">' + 'Collect Fees'  +' </a>';
          html += '<td>' + collect_fees_link+ '</td> </tr>';
@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
          html += '<tr><th>User Name</th> </tr>';
         for(var i = 0;i<response.length;i++) {
          html += '<tr>';
-         var link_to_user = '<a href="/users/'+ response[i].id +'/profile">' + response[i].first_name +' ' + response[i].last_name + '(' + response[i].email + ')' + ' </a>';
+         var link_to_user = '<a href="/profiles/'+ response[i].id +'/show">' + response[i].first_name +' ' + response[i].last_name + '(' + response[i].email + ')' + ' </a>';
          html += '<td>' + link_to_user+ '</td>';
          html += '</tr>';
         }

@@ -57,6 +57,21 @@
 </form>
 
 <div id="user-search-results">
+  <table class="table table-striped">
+  <thead>
+    <th>User Name </th>
+  </thead>
+  <tbody>
+    <%@teachers.each do |teacher|%>
+      <tr>
+      <td>
+        <%= link_to teacher.first_name+' ' +teacher.last_name + '(' +teacher.email + ')', '/profiles/'+teacher.id.to_s+'/show' %>
+      </td>
+      </tr>
+    <% end -%>
+  </tbody>
+    
+  </table>
   
 </div>
          

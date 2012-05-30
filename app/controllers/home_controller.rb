@@ -159,6 +159,7 @@ class HomeController < ApplicationController
   end
 
   def teacher_search
+   @teachers = Institute.find_by_id(get_institute_id).teachers 
     
   end
 
