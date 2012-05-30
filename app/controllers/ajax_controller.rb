@@ -209,5 +209,31 @@ class AjaxController < ApplicationController
       end
   end
 
+  def student_attendance_report
+    attendances = SectionAttendance.find(:all,:conditions => {:user_id => params[:student_id],:institute_session_id => get_current_session.id})
+    report = []
+    attendances.each do |attendance|
+      obj = Hash.new
+      obj["id"] = attendance.id
+      if attendance.present == true
+        obj["title"] = "Present"
+        obj["color"] = 'green'
+        obj["textColor"] = 'white'
+      else
+        obj["title"] = "Absent"
+        obj["color"] = 'red'
+        obj["textColor"] = 'white'
+      end
+      obj["allDay"] = true
+      obj["start"] = attendance.date.rfc822
+      report.push(obj)
+    end
+      respond_to do |format|
+        format.js {render :json => report.to_json} 
+      end
+  end
+
+
+
 
 end

@@ -99,6 +99,7 @@ GyanSchool::Application.routes.draw do
   match 'ajax/task_status/:task_id' => 'ajax#task_status'
   match 'ajax/attendance_report/institute' => 'ajax#institute_attendance_report'
   match 'ajax/attendance_report/section/:section_id' => 'ajax#section_attendance_report'
+  match 'ajax/attendance_report/student/:student_id' => 'ajax#student_attendance_report'
   match 'ajax/performance_report/institute' => 'ajax#institute_performance_report'
   match 'ajax/performance_report/section/:section_id' => 'ajax#section_performance_report'
   match 'ajax/fees_report/institute' => 'ajax#institute_fees_report'
