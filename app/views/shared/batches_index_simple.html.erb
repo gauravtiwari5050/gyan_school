@@ -1,0 +1,33 @@
+<div class="batches_index" style="padding-top:25px">
+  
+<table class="table table-condensed">
+  <thead>
+    <th>Name</th>
+    <th>Sections</th>
+  </thead>
+  <tbody>
+    <% for batch in batches -%>
+     <tr id="batch_<%=batch.id.to_s%>_row">
+     <td><%= link_to batch.name, '/batch/'+batch.id.to_s+'/show' %></td>
+     <td>
+      <table class="table table-bordered">
+      <tbody>
+      <tr>
+     <%batch.sections.each do |section|%>
+
+          <td>
+           <%= link_to section.name, 'section/'+section.id.to_s+'/show' ,:class => 'btn btn-small btn-primary' %>
+          </td>
+     <% end -%>
+     </tr>
+     </tbody>
+     </table>
+     <td>
+     <td>
+     </td>
+     </tr>
+    <% end -%>
+  </tbody>
+</table>
+</div>
+

@@ -477,6 +477,11 @@ class HomeController < ApplicationController
     @institute = Institute.find_by_id(get_institute_id)
     @batches = @institute.batches
   end
+  
+  def classes_index_simple
+    @institute = Institute.find_by_id(get_institute_id)
+    @batches = @institute.batches
+  end
 
   def fees_reminder
     @institute = Institute.find_by_id(get_institute_id)

@@ -90,7 +90,7 @@ GyanSchool::Application.routes.draw do
   match 'teachers/upload_file/new' => 'home#teachers_upload_file'
   match 'teachers/upload_file/create' => 'home#teachers_upload_file_create' ,:via => :post
 
-  match 'classes' => 'home#classes_index'
+  match 'classes' => 'home#classes_index_simple'
 
 
 
