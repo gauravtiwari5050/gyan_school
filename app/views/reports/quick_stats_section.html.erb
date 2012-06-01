@@ -25,8 +25,10 @@
                               <% teacher = get_teacher_for_section(@section)%>
                               <% if !teacher.nil? %>
                                   <%=teacher.print_name%>
-                              <% else %>
+                              <% elsif current_user.type == 'Admin' %>
                                 <%=collection_select(:teacher,:teacher_id,@section.batch.institute.teachers,:id,:print_name,{:prompt => 'Select a Teacher'},{:onchange => "update_teacher(this,"+@section.id.to_s+")",:style=>"width:100%"})%>
+                              <%else%>
+                                Not Assigned
                               <% end %>
                             </div>
                           </div>

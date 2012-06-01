@@ -39,6 +39,29 @@
               
               
             <% end -%>
+            <% if current_user.type == 'Teacher' %>
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Classes <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <%get_sections_for_teacher(current_user).each do |teacher_section|%>
+                        <%section = Section.find_by_id(teacher_section.section_id)%>
+                        <% if !section.nil? && !section.batch.nil?%>
+                          <li><a href="/section/<%=teacher_section.section_id%>/show"><%= section.batch.name + '-' + section.name%></a></li>
+                        <% end %>
+                      <% end -%>
+                    </ul>
+               </li>
+              <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My School <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/students">Students</a></li>
+                      <li><a href="/teachers">Teachers</a></li>
+                      <li><a href="/classes">Classes</a></li>
+                    </ul>
+               </li>
+              
+            <% end %>
+
             </ul>
             <%=render :template => 'shared/user_status'%>
           </div><!--/.nav-collapse -->

@@ -9,7 +9,11 @@
     <% for teacher in teachers -%>
      <tr>
      <td><%= link_to teacher.print_name, '/profiles/'+teacher.id.to_s+'/show' %></td>
-     <td><a href = "/profiles/<%=teacher.id.to_s%>/edit"> <i class="icon-asterisk"></i> Settings</a> </td>
+     <% if current_user.type == 'Admin' %>
+      <td><a href = "/profiles/<%=teacher.id.to_s%>/edit"> <i class="icon-asterisk"></i> Settings</a> </td>
+     <%else%>
+      <td><a href = "/profiles/<%=teacher.id.to_s%>/show"> <i class="icon-asterisk"></i> Profile</a> </td>
+     <% end %>
 
      </tr>
     <% end -%>

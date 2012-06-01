@@ -13,7 +13,12 @@
      <td><%= link_to student.print_name, '/profiles/'+student.id.to_s+'/show' %></td>
      <td><a href = "/iframe/<%=student.id.to_s%>/attendance" class="iframe"> <i class="icon-th-list"></i> Attendance</a> </td>
      <td><a href = "/iframe/<%=student.id.to_s%>/fees" class="iframe"> <i class="icon-barcode"></i> Fees</a> </td>
+     <% if current_user.type == 'Admin' %>
      <td><a href = "/profiles/<%=student.id.to_s%>/edit"> <i class="icon-asterisk"></i> Settings</a> </td>
+     <%else%>
+     <td><a href = "/profiles/<%=student.id.to_s%>/show"> <i class="icon-asterisk"></i> Profile</a> </td>
+      
+     <% end %>
      
      </tr>
     <% end -%>

@@ -102,6 +102,13 @@
         
       }
       function login_user(user_type,userid,pass) {
+        if(user_type == null || userid == null || pass == null) {
+          $('.validateTips').text('Unable to Login. Please check username password and try again');
+          $('.loading-image').hide();
+          return;
+        }
+        userid = userid.replace("@","_AT_");
+        userid = userid.replace(".","_DOT_");
         //TODO clean input before using
         $.read(
         '/ajax_login/{user_type}/{user_name}/{password}',

@@ -7,6 +7,8 @@
        <div class="container">
         <div class="row">
           <div class="span3">
+            <% if current_user.type == 'Admin' %>
+              
             <div class="btn-group">
             <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
               <i class="icon-user"></i> Add Students
@@ -19,6 +21,7 @@
             </ul>
           </div>
             
+            <% end %>
           </div>
           <div class="span3">
             <div class="btn-group">

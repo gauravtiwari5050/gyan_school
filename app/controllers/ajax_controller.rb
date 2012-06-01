@@ -194,7 +194,7 @@ class AjaxController < ApplicationController
 
   def delete_section
       section = Section.find_by_id(params[:section_id])
-      section.destroy
+      section_delete(section)  
       respond_to do |format|
         format.js {render :json => nil} 
       end
@@ -203,6 +203,9 @@ class AjaxController < ApplicationController
 
   def delete_batch
     batch = Batch.find_by_id(params[:batch_id])
+    batch.sections.each do |section|
+      section_delete(section)
+    end
     batch.destroy
       respond_to do |format|
         format.js {render :json => nil} 
