@@ -7,4 +7,8 @@ class StaticController < ApplicationController
   end
   def privacy
   end
+  def about
+  end
+  def contact
+  end
 end

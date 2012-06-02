@@ -3,6 +3,8 @@ GyanSchool::Application.routes.draw do
   match "demo" => 'static#demo'
   match "terms" => 'static#terms'
   match "privacy" => 'static#privacy'
+  match "about" => 'static#about'
+  match "contact" => 'static#contact'
   match '/signup' => 'signup#signup'
   match '/institute/create' => 'signup#register' ,:via => :post
   match 'login' => 'login#login'

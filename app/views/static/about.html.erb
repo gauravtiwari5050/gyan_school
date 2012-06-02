@@ -22,38 +22,37 @@
 		<!--body content wrapper starts -->
 		<div class="mainWrapper">
 			<!--body content starts -->
-			<div class="bodyWrapper">
+			<div class="bodyWrapper" style="min-height:600px;">
 				   <div class="bodyPlaceholder">
-					<!--content left panel starts -->
-					<div class="bodyLeft">
-            <div class="launch-image">
-                   <img class="rounded" src="<%= asset_path "course-home-1.jpg"%>" alt="" width="400px">
+           <h1><b>About us</b></h1>
+           <p align= "justify" style="font-size:18px">
+            CloudClass is an online campus for all forms of educational institutions viz., schools, colleges and universities. At CloudClass we address the issues of Administration, Parents, Teachers and Students on an integrated platform.  It combines essential tools like grade books, attendance, calendars supported by a good communication system.  Management can cut down on stationery and operational expenses. Teachers can spend less time on paper work and more time on teaching. Parents can keep in regular track of student’s progress.  All the data is securely stored online. So people can access data from anywhere anytime. 
+           </p>
+           <div style="padding-top:25px">
+             
+           </div>
+           <p align= "justify" style="font-size:18px">
+            Institutions who have subscribed to our product have seen : </p>
+           <div style="padding-top:15px">
+           </div>
+            <ul style="font-size:18px;padding-left:25px;list-style-type:square">
+              <li>20% rise in admission strength</li>
+              <li>80% of the parents have acknowledged the schools for their novel initiative</li>
+              <li>Conversion ratio of admissions input has improved over 50%.</li>
+            </ul>
+           <div style="padding-top:25px">
+             
+           </div>
+           <p align= "justify" style="font-size:18px">
+              If you are an institution trying to make experience of learning better you are looking for the right product. Please click here to contact us
+             </p>
+            <div style="padding:25px"> 
+            <%= link_to "Contact Us" ,'/contact' ,:class => 'btn btn-large'%>    
             </div>
-            <div class="launch">
-              <a class="btn btn-large btn-warning" href="http://ccdemo.cloudclass.co.in/login">Launch the demo</a>   
-            </div>
 
-					</div>
-					<!--content left panel ends -->
-					<!--content right panel starts -->
-					<div class="bodyRight">
-						<div class="bodyRightContainer">
-						<h2> Login Details </h2>
-            <h3>Administrator</h3>
-            <p>email: admin@ccdemo.com </p>
-            <p>password: admin </p>
 
-            <h3>Teacher</h3>
-            <p>email: teacher@ccdemo.com </p>
-            <p>password: teacher </p>
+          </br>
 
-            <h3>Student</h3>
-            <p>email: student@ccdemo.com </p>
-            <p>password: student </p>
-
-						</div>
-					</div>
-					<!--content right panel ends -->
 					<div class="spacer"></div>
 				</div>
 			</div>
@@ -86,7 +85,7 @@
 					</div>
 					<div class="footerRight">
 						<h2>Try Our Online Demo Now</h2>
-						<p class="footertrytheBtn"><a href="#" title="Try the Demo">Try the Demo</a></p>
+						<p class="footertrytheBtn"><a href="/demo" title="Try the Demo">Try the Demo</a></p>
 					</div>
 					
 				
