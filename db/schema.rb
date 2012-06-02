@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523155329) do
+ActiveRecord::Schema.define(:version => 20120602071119) do
 
   create_table "addresses", :force => true do |t|
     t.string   "address_1"
@@ -118,6 +118,33 @@ ActiveRecord::Schema.define(:version => 20120523155329) do
     t.integer  "fee_collection_event_id"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+  end
+
+  create_table "help_steps", :force => true do |t|
+    t.integer  "help_subtopic_id"
+    t.integer  "order"
+    t.string   "title"
+    t.text     "content"
+    t.string   "support_file"
+    t.string   "support_image"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "help_subtopics", :force => true do |t|
+    t.integer  "help_topic_id"
+    t.integer  "order"
+    t.text     "content"
+    t.string   "support_file"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "help_topics", :force => true do |t|
+    t.integer  "order"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "helper_files", :force => true do |t|

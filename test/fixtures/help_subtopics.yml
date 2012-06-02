@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  help_topic_id: 1
+  order: 1
+  content: MyText
+  support_file: MyString
+
+two:
+  help_topic_id: 1
+  order: 1
+  content: MyText
+  support_file: MyString

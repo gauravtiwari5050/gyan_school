@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  help_subtopic_id: 1
+  order: 1
+  title: MyString
+  content: MyText
+  support_file: MyString
+  support_image: MyString
+
+two:
+  help_subtopic_id: 1
+  order: 1
+  title: MyString
+  content: MyText
+  support_file: MyString
+  support_image: MyString
