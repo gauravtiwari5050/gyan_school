@@ -29,6 +29,10 @@
         </div>
          
        </div>
-        <%= render :template => 'shared/batches_index_simple',:locals => {:batches => @batches} %>
+        <% if current_user.type == 'Teacher' %>
+          <%= render :template => 'shared/teacher_sections',:locals => {:teacher => current_user} %>
+        <%else%>
+          <%= render :template => 'shared/batches_index_simple',:locals => {:batches => @batches} %>
+        <% end %>
 
   <% end -%>

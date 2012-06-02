@@ -41,7 +41,12 @@
               <% else %>
                 <div class="rowline">
               <% end %>
-                <img src="<%= asset_path 'ccipaste.png' %>" class="thumbpic-small">  Classes
+                <% if current_user.type == 'Teacher' %>
+                  <img src="<%= asset_path 'ccipaste.png' %>" class="thumbpic-small">  My Classes
+                <% else %>
+                  <img src="<%= asset_path 'ccipaste.png' %>" class="thumbpic-small">  Classes
+                <% end %>
+                
               </div>
               </a>
               <a href="/educational_videos/show">

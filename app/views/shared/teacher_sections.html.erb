@@ -1,0 +1,24 @@
+
+<div class="batches_index" style="padding-top:25px">
+
+<h2> All classes managed by <%= teacher.print_name%> </h3>
+  
+<table class="table table-bordered table-striped">
+  <thead>
+    <th>Class</th>
+    <th>Section</th>
+  </thead>
+  <tbody>
+                      <%get_sections_for_teacher(teacher).each do |teacher_section|%>
+                        <%section = Section.find_by_id(teacher_section.section_id)%>
+                        <% if !section.nil? && !section.batch.nil?%>
+                          <tr>
+                          <td><a href="/section/<%=teacher_section.section_id%>/show"><%= section.batch.name %> </td></a>
+                          <td><a href="/section/<%=teacher_section.section_id%>/show"><%= section.name %> </td></a>
+                          </tr>
+                        <% end %>
+                      <% end -%>
+  </tbody>
+</table>
+</div>
+
