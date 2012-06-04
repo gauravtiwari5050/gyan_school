@@ -1,0 +1,126 @@
+
+<% content_for :sidepic do -%>
+            <a href="/help"> 
+            <img src="<%= asset_path 'help_image.jpg' %>" class="sidepic">
+            </a>
+            </br>
+            <div class="sidepic-spacer">
+            </div>
+<% end -%>
+
+<% content_for :left_column do -%>
+  
+            <div class="leftcolumn">
+              <a href="/home">
+              <% if active == 'dashboard' %>
+                <div class="rowline-active" href="www.google.com">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccihome.png' %>" class="thumbpic-small">  Dashboard
+              </div>
+              </a>
+
+              <a href="/students">
+              <% if active == 'students' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciuser-group.png' %>" class="thumbpic-small">  Students
+              </div>
+              </a>
+
+
+              <a href="/teachers">
+              <% if active == 'teachers' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciuser-green.png' %>" class="thumbpic-small">  Teachers
+              </div>
+              </a>
+             
+             
+
+              <a href="/classes">
+              <% if active == 'classes' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <% if current_user.type == 'Teacher' %>
+                  <img src="<%= asset_path 'ccipaste.png' %>" class="thumbpic-small">  My Classes
+                <% else %>
+                  <img src="<%= asset_path 'ccipaste.png' %>" class="thumbpic-small">  Classes
+                <% end %>
+                
+              </div>
+              </a>
+              <a href="/educational_videos/show">
+              <% if active == 'admins' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciuser-orange.png' %>" class="thumbpic-small"> Videos
+              </div>
+              </a>
+
+              <!--
+              <a href="#">
+              <% if active == 'performance' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccistats.png' %>" class="thumbpic-small">  Performance
+              </div>
+              </a>
+
+              
+              <a href="#">
+              <% if active == 'attendance' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccicontact.png' %>" class="thumbpic-small">  Attendance
+              </div>
+              </a>
+
+
+              <a href="#">
+              <% if active == 'grading' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciphoto-album.png' %>" class="thumbpic-small">  Grading
+              </div>
+              </a>
+              
+              
+              <a href="#">
+              <% if active == 'reports' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'cciprint.png' %>" class="thumbpic-small">  Print Reports
+              </div>
+              </a>
+
+              !-->
+              <a href="#">
+              <% if active == 'help' %>
+                <div class="rowline-active">
+              <% else %>
+                <div class="rowline">
+              <% end %>
+                <img src="<%= asset_path 'ccilight-bulb.png' %>" class="thumbpic-small">  Help
+              </div>
+              </a>
+            </div>
+<% end -%>

@@ -1,0 +1,33 @@
+  <%= render :template => 'shared/left_column_help' ,:locals => {:active => 'dashboard'}%>
+  <%= render :template => "shared/top_bar_new" %>
+  <% content_for :main_content do -%>
+
+        <h3> Edit Topic </h3> 
+  <%= render :template => "shared/form-errors",:locals => {:form => @help_topic} %>
+        <%= nested_form_for(@help_topic,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
+            <div class="control-group">
+              <%= f.label 'Order' ,"Order" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'order'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Title' ,"Title" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'name'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+            <%= f.fields_for :help_subtopics do |builder| -%>
+              <%= render 'help_subtopic_fields',:f=>builder %>
+            <% end -%>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+
+        <% end -%>
+
+  <% end -%>

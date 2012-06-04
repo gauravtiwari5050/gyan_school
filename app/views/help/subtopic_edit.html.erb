@@ -1,0 +1,23 @@
+  <%= render :template => 'shared/left_column_help' ,:locals => {:active => 'dashboard'}%>
+  <%= render :template => "shared/top_bar_new" %>
+  <%=tinymce%>
+  <% content_for :main_content do -%>
+
+        <h3> <%=@sub_topic.content%> </h3> 
+  <%= render :template => "shared/form-errors",:locals => {:form => @sub_topic} %>
+        <%= nested_form_for(@sub_topic,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'update' ,:method => :post) do |f| %>
+            <div class="control-group">
+              <div class="controls">
+            <%= f.fields_for :help_steps do |builder| -%>
+              <%= render 'help_step_fields',:f=>builder %>
+            <% end -%>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+
+        <% end -%>
+
+  <% end -%>

@@ -1,0 +1,54 @@
+  <%= render :template => 'shared/left_column_help' ,:locals => {:active => 'dashboard'}%>
+  <%= render :template => "shared/top_bar_new" %>
+  <% content_for :main_content do -%>
+
+        <h3> Create a new Help Topic </h3> 
+  <%= render :template => "shared/form-errors",:locals => {:form => @help_topic} %>
+        <%= form_for(@help_topic,:html =>{:class => 'form-horizontal',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+            <div class="control-group">
+              <%= f.label 'Order' ,"Order" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'order'%>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label 'Title' ,"Title" ,:class=>"control-label" %>
+              <div class="controls">
+              <%= f.text_field 'name'%>
+              </div>
+            </div>
+            <div class="form-actions">
+              <%= f.submit "Submit" ,:class => 'btn btn-primary'%>
+            </div>
+
+        <% end -%>
+      <%topics = HelpTopic.all%>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <th>
+            Order
+          </th>
+          <th>
+            Title
+          </th>
+          <th>
+            Edit 
+          </th>
+          <th>
+            Delete
+          </th>
+
+        </thead>
+        <tbody>
+        <%topics.each do |topic|%>
+          <tr>
+            <td><%=topic.order%></td>
+            <td><%= link_to topic.name, '/help/topics/'+topic.id.to_s+'/show' %></td>
+            <td><%= link_to "Edit", '/help/topics/'+topic.id.to_s+'/edit' %></td>
+            <td><%= link_to "Delete", '/help/topics/'+topic.id.to_s+'/delete',:confirm => "Are you sure ?" %></td>
+          </tr> 
+        <% end -%>
+        </tbody>
+      </table>
+
+  <% end -%>
