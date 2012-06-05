@@ -139,14 +139,18 @@ GyanSchool::Application.routes.draw do
   match 'iframe/:student_id/attendance' => 'iframe#student_attendance'
   match 'iframe/:student_id/fees' => 'iframe#student_fees'
 
-  match 'help' => 'help#home'
+  ##edit links for help
   match 'help/topics/list' => 'help#topics'
   match 'help/topics/create' => 'help#topic_create' ,:via => :post
   match 'help/topics/:topic_id/edit' => 'help#topic_edit'
   match 'help/topics/:topic_id/update' => 'help#topic_update',:via => :post
-  match 'help/topics/:topic_id/show' => 'help#topic_show'
+  match 'help/topics/:topic_id/show' => 'help#topic_edit_show'
   match 'help/subtopics/:subtopic_id/edit' => 'help#subtopic_edit'
   match 'help/subtopics/:subtopic_id/update' => 'help#subtopic_update' ,:via => :post
+  ## display links for password
+  match 'help' => 'help#home'
+  match '/help/show/topic/:topic_id' => 'help#topic_show'
+  match '/help/show/subtopic/:subtopic_id' => 'help#subtopic_show'
 
 
 end

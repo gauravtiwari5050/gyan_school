@@ -1,12 +1,17 @@
-  <%= render :template => 'shared/left_column_help' ,:locals => {:active => 'dashboard'}%>
+  <%= render :template => 'shared/left_column_help' ,:locals => {:active => @help_topic.name}%>
   <%= render :template => "shared/top_bar_new" %>
   <% content_for :main_content do -%>
 
-        <h3> <%=@help_topic.name%> </h3> 
-        <ul>
+        <h1> <%=@help_topic.name%> </h1>
+        
+        <div style="padding-top:25px">
+          
+        </div>
+        <h4>Select a topic below</h4>
+        <ol>
           <%@help_topic.help_subtopics.each do |subtopic|%>
-            <li> <%= link_to subtopic.content, "/help/subtopics/"+subtopic.id.to_s+'/edit' %> </li>
+            <li> <h4><%= link_to subtopic.content, "/help/show/subtopic/"+subtopic.id.to_s %> </h4></li>
           <% end -%>
-        </ul>
+        </ol>
 
   <% end -%>

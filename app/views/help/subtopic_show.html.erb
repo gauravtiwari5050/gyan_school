@@ -1,0 +1,28 @@
+  <%= render :template => 'shared/left_column_help' ,:locals => {:active => @subtopic.help_topic.name}%>
+  <%= render :template => "shared/top_bar_new" %>
+  <% content_for :main_content do -%>
+
+        <h1> <%=@subtopic.content%> </h1>
+        
+        <div style="padding-top:25px">
+          
+        </div>
+        <h4>Please follow the steps below </h4>
+        <div style="padding-top:14px">
+        </div>
+         
+        <ol>
+          <%@subtopic.help_steps.each do |step|%>
+          <li>
+              <div style="padding:15px">
+                  
+                  <%=step.content.html_safe%> 
+                  <% if !step.support_image.nil? %>
+                    <img src = '<%=step.support_image.url%>'>
+                  <% end %>
+              </div>
+          </li>
+          <% end -%>
+        </ol>
+
+  <% end -%>

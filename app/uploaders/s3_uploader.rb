@@ -29,12 +29,8 @@ class S3Uploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-    process :resize_to_fit => [128, 128]    
-   #:process :scale => [128, 128]
+       process :resize_to_fit => [128, 128]    
   #
-  #def scale(width, height)
-   # process :resize_to_limit => [200, 200]    
-  #end
 
   # Create different versions of your uploaded files:
   # version :thumb do

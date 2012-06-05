@@ -35,7 +35,7 @@ class HelpController < ApplicationController
       end
     end
   end
-  def topic_show
+  def topic_edit_show
     @help_topic = HelpTopic.find_by_id(params[:topic_id])
   end
 
@@ -48,7 +48,8 @@ class HelpController < ApplicationController
   def subtopic_update
     logger.info params.inspect
     @sub_topic = HelpSubtopic.find_by_id(params[:subtopic_id])
-    persist_success = @sub_topic.update_attributes(params[:sub_topic])
+    persist_success = @sub_topic.update_attributes(params[:help_subtopic])
+    logger.info "Sub topic is = " + @sub_topic.inspect
     respond_to do |format|
       if persist_success
       format.html {redirect_to('/help/subtopics/'+@sub_topic.id.to_s+'/edit')}
@@ -56,6 +57,14 @@ class HelpController < ApplicationController
       format.html {render :action => 'subtopic_edit'}
       end
     end
+  end
+
+  def topic_show
+    @help_topic = HelpTopic.find_by_id(params[:topic_id])
+  end
+
+  def subtopic_show
+    @subtopic = HelpSubtopic.find_by_id(params[:subtopic_id])
   end
 
 end

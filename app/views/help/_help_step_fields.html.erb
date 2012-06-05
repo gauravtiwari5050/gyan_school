@@ -1,11 +1,12 @@
   
-  <%= f.label :order, "Order" %>
+  <%= f.label :order, "Step Rank" %>
   <%= f.text_field :order %>
-  <%= f.label :title, "Title" %>
-  <%= f.text_field :title %>
   <%= f.label :content, "Content" %>
   <%= f.text_area :content ,:style => 'width:100%',:class => 'tinymce' %>
+  <%= f.label :support_image, "Image" %>
+  <%= f.file_field :support_image %>
+  
   <%= f.hidden_field :_destroy %>
-  <%= f.link_to_remove "Remove Subtopic" %>
+  <%= f.link_to_remove "Remove Step" %>
   </p>
   <br/>
