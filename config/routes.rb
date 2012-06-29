@@ -152,6 +152,5 @@ GyanSchool::Application.routes.draw do
   match '/help/show/topic/:topic_id' => 'help#topic_show'
   match '/help/show/subtopic/:subtopic_id' => 'help#subtopic_show'
 
-
 end
 
